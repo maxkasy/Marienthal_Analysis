@@ -1,0 +1,863 @@
+variable_name,variable_content,question_number,likert,valuation_signing,grouping_variable,variable_type,comment_1,comment_2,grouping_variable_detailed,grouping_variable_aggregate2,scale_value,scale_value_2022,variable_name_previously,grouping_variable_aggregate_PAP,grouping_variable_disaggregate_PAP,grouping_variable_name_aggregate2,grouping_variable_name_detailed,binary_classification_1,binary_classification_0,include,grouping_variable_very_detailed
+label,,,"(yes=1, no=0)","(+1 if higher is better, -1 if higher is worse, 0 if it does not apply)","(string, e.g. ""health outcome"", ""economic outcome"")",,(grey filled is solved),(grey filled is solved),"(string, e.g. ""health outcome"", ""economic outcome"")","(string, e.g. ""health outcome"", ""economic outcome"")",(e.g. 7=scale 1-7; 4=scale 1-4),(e.g. 7=scale 1-7; 4=scale 1-4),,,,,,,,"(yes=1, no=0)","(string, e.g. ""health outcome"", ""economic outcome"")"
+StartDate,Start Date,1,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+EndDate,End Date,2,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Status,Response Type,3,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+IPAddress,IP Address,4,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Progress,Progress,5,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Duration (in seconds),Duration (in seconds),6,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Finished,Finished,7,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+RecordedDate,Recorded Date,8,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+ResponseId,Response ID,9,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+RecipientLastName,Recipient Last Name,10,0,0,contact,,,,,contact,,,,,,,,,,0,contact
+RecipientFirstName,Recipient First Name,11,0,0,contact,,,,,contact,,,,,,,,,,0,contact
+RecipientEmail,Recipient Email,12,0,0,contact,,,,,contact,,,,,,,,,,0,contact
+ExternalReference,External Data Reference,13,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+LocationLatitude,Location Latitude,14,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+LocationLongitude,Location Longitude,15,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+DistributionChannel,Distribution Channel,16,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+UserLanguage,User Language,17,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q94,"Consent form
+
+Oxford University Research Ethics Committee (CUREC)
+
+
+
+
+
+ 
+
+Accompanying research on the Job Guarantee (MAGMA) project - University of Oxford
+
+
+
+
+
+ 
+
+Purpose of the study: The study will independently assess the social and economic impact of the project on participants and the rest of the population. To do this, participants will be interviewed several times throughout the course of the programme in order to visualise what changes over the course of their participation. The personal data and information of the interviewed persons will be treated confidentially, anonymised, and changed in such a way that no one can trace back who they are.
+
+ 
+
+
+	I have read the information sheet for the accompanying research and have had the opportunity to review the information and ask questions, which have been adequately answered.
+	I understand that my participation is voluntary and that I may discontinue my continued participation at any time without giving a reason and without adverse consequences or penalties. My previously collected data will be deleted with the exception of those data that have already been anonymised in the study and whose omission would therefore alter the study results. 
+	I understand that only researchers have access to my personal data and that this data will not be passed on to the AMS (except in anonymised form for data linkage), it.works or others. 
+	I understand that the data will be stored securely. I understand how this accompanying research will be conducted and what participation will mean for me.
+	I understand how to express my concerns or make a complaint.
+	Yes, I agree to the terms of this accompanying research and am taking part.
+
+
+ 
+
+Please type your full name in the field below as a signature.",18,0,0,consent,string,,,,consent,,,,,,,,,,0,consent
+Q101_First Click,Timing - First Click,19,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q101_Last Click,Timing - Last Click,20,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q101_Page Submit,Timing - Page Submit,21,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q101_Click Count,Timing - Click Count,22,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q102_Browser,Click to write the question text - Browser,23,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q102_Version,Click to write the question text - Version,24,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q102_Operating System,Click to write the question text - Operating System,25,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q102_Resolution,Click to write the question text - Resolution,26,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q54,Name,27,0,0,personal,string,,,,personal,,,,,,,,,,0,personal
+Q82,Date of Birth,28,0,0,personal,string,,,,personal,,,,,,,,,,0,personal
+Q93,What is your sex?,29,0,0,demographic,categorical,,,,demographic,,,,,,,,,,0,demographic
+Q96,E-mail,30,0,0,contact,string,,,,contact,,,,,,,,,,0,contact
+Q97,Telephone number,31,0,0,contact,string,,,,contact,,,,,,,,,,0,contact
+Q103_First Click,Timing - First Click,32,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q103_Last Click,Timing - Last Click,33,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q103_Page Submit,Timing - Page Submit,34,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q103_Click Count,Timing - Click Count,35,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q56,"Compared to 6 months ago before the start of MAGMA, would you say that you are doing better, the same, or worse?",36,1,-1,magma,ordinal,,,,wellbeing_direct,7,7,,social_outcomes,wellbeing,Wellbeing change, Wellbeing change,"1,2,3","4,5,6,7",1,wellbeing_direct
+Q57,Can you mention in 1-2 sentences if there is anything you particularly like about the MAGMA programme?,37,0,0,magma,string,,,,magma,,,,,,,,,,0,magma
+Q84,Can you mention in 1-2 sentences if there is anything you particularly dislike about the MAGMA programme?,38,0,0,magma,string,,,,magma,,,,,,,,,,0,magma
+Q104_First Click,Timing - First Click,39,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q104_Last Click,Timing - Last Click,40,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q104_Page Submit,Timing - Page Submit,41,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q104_Click Count,Timing - Click Count,42,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q10_1,Please select whether you agree or disagree with the following statements. - There is usually not enough spare time in my day.,43,1,-1,lamb,ordinal,values 5 and 6 were swaped,time categories were included in matrix as carry forward and could not be removed.,lamb_activity,lamb,7,7,,social_outcomes,wellbeing,Latent and manifest benefits,LAMB: activity,"1,2,3","4,5,6,7",1,lamb_activity
+Q10_2,Please select whether you agree or disagree with the following statements. - I often have nothing to do.,44,1,1,lamb,ordinal,values 5 and 6 were swaped,time categories were included in matrix as carry forward and could not be removed.,lamb_activity,lamb,7,7,,social_outcomes,wellbeing,Latent and manifest benefits,LAMB: activity,"1,2,3","4,5,6,7",1,lamb_activity
+Q10_3,Please select whether you agree or disagree with the following statements. - I usually have a lot of opportunities to mix with people.,45,1,-1,lamb,ordinal,values 5 and 6 were swaped,time categories were included in matrix as carry forward and could not be removed.,lamb_social_interaction,lamb,7,7,,social_outcomes,wellbeing,Latent and manifest benefits,LAMB: social interaction,"1,2,3","4,5,6,7",1,lamb_social_interaction
+Q10_4,Please select whether you agree or disagree with the following statements. - I seldom meet new people.,46,1,1,lamb,ordinal,values 5 and 6 were swaped,time categories were included in matrix as carry forward and could not be removed.,lamb_social_interaction,lamb,7,7,,social_outcomes,wellbeing,Latent and manifest benefits,LAMB: social interaction,"1,2,3","4,5,6,7",1,lamb_social_interaction
+Q10_5,Please select whether you agree or disagree with the following statements. - I rarely feel that I make a meaningful contribution to society.,47,1,1,lamb,ordinal,values 5 and 6 were swaped,time categories were included in matrix as carry forward and could not be removed.,lamb_collective_purpose,lamb,7,7,,social_outcomes,wellbeing,Latent and manifest benefits,LAMB: collective purpose,"1,2,3","4,5,6,7",1,lamb_collective_purpose
+Q10_6,Please select whether you agree or disagree with the following statements. - I often feel a valuable part of society.,48,1,-1,lamb,ordinal,values 5 and 6 were swaped,time categories were included in matrix as carry forward and could not be removed.,lamb_collective_purpose,lamb,7,7,,social_outcomes,wellbeing,Latent and manifest benefits,LAMB: collective purpose,"1,2,3","4,5,6,7",1,lamb_collective_purpose
+Q10_7,Please select whether you agree or disagree with the following statements. - My days are usually well organized.,49,1,-1,lamb,ordinal,values 5 and 6 were swaped,time categories were included in matrix as carry forward and could not be removed.,lamb_time_structure,lamb,7,7,,social_outcomes,wellbeing,Latent and manifest benefits,LAMB: time structure,"1,2,3","4,5,6,7",1,lamb_time_structure
+Q10_8,Please select whether you agree or disagree with the following statements. - I rarely catch up with the things I need to do.,50,1,1,lamb,ordinal,values 5 and 6 were swaped,time categories were included in matrix as carry forward and could not be removed.,lamb_time_structure,lamb,7,7,,social_outcomes,wellbeing,Latent and manifest benefits,LAMB: time structure,"1,2,3","4,5,6,7",1,lamb_time_structure
+Q10_9,Please select whether you agree or disagree with the following statements. - I am usually important to my friends.,51,1,-1,lamb,ordinal,values 5 and 6 were swaped,time categories were included in matrix as carry forward and could not be removed.,lamb_status,lamb,7,7,,social_outcomes,wellbeing,Latent and manifest benefits,LAMB: status,"1,2,3","4,5,6,7",1,lamb_status
+Q10_10,Please select whether you agree or disagree with the following statements. - My friends rarely value my company.,52,1,1,lamb,ordinal,values 5 and 6 were swaped,time categories were included in matrix as carry forward and could not be removed.,lamb_status,lamb,7,7,,social_outcomes,wellbeing,Latent and manifest benefits,LAMB: status,"1,2,3","4,5,6,7",1,lamb_status
+Q10_11,Please select whether you agree or disagree with the following statements. - My income usually allows me to do the things I want.,53,1,-1,lamb,ordinal,values 5 and 6 were swaped,time categories were included in matrix as carry forward and could not be removed.,lamb_financial_strain,lamb,7,7,,social_outcomes,wellbeing,Latent and manifest benefits,LAMB: financial strain,"1,2,3","4,5,6,7",1,lamb_financial_strain
+Q10_12,Please select whether you agree or disagree with the following statements. - My income usually does not allow me to socialise as often as I like.,54,1,1,lamb,ordinal,values 5 and 6 were swaped,time categories were included in matrix as carry forward and could not be removed.,lamb_financial_strain,lamb,7,7,,social_outcomes,wellbeing,Latent and manifest benefits,LAMB: financial strain,"1,2,3","4,5,6,7",1,lamb_financial_strain
+Q105_First Click,Timing - First Click,55,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q105_Last Click,Timing - Last Click,56,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q105_Page Submit,Timing - Page Submit,57,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q105_Click Count,Timing - Click Count,58,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q14,"Imagine a ladder showing where people stand in the society. At the top are the people who are the best off â€” those who have the most money, the most education, and the most respected jobs. At the bottom are the people who are the worst off â€” those who have the least money, the least education, and the least respected jobs or no job. Where would you place yourself on this ladder?",59,1,-1,status,ordinal,,,,status,10,10,,social_outcomes,status,Social status,Social status,"1,2,3,4,5","6,7,8,9,10",1,status_present_ladder
+Q15,Over the past half year did your status in societyâ€¦,60,1,-1,status,ordinal,,,,status,7,7,,social_outcomes,status,Social status,Social status,"1,2,3","4,5,6,7",1,status_past
+Q12,"Thinking of the future, do you expect your status to...",61,1,-1,status,ordinal,,,,status,7,7,Q22,social_outcomes,status,Social status,Social status,"1,2,3","4,5,6,7",1,status_future
+Q106_First Click,Timing - First Click,62,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q106_Last Click,Timing - Last Click,63,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q106_Page Submit,Timing - Page Submit,64,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q106_Click Count,Timing - Click Count,65,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q18,How many new people have you met in the past month? Please type the approximate number.,66,0,1,social_inclusion,continuous,,,,social_inclusion,10,10,,social_outcomes,social_inclusion,Social inclusion,Social inclusion,>3,"1,2,3",1,social_inclusion
+Q19,Which of the following statements best describes your current relationship status?,67,0,-1,social_inclusion,ordinal,,,,social_inclusion,4,4,,social_outcomes,social_inclusion,Social inclusion,Social inclusion,"1,2","3,4",1,social_inclusion_relationship
+Q107_First Click,Timing - First Click,68,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q107_Last Click,Timing - Last Click,69,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q107_Page Submit,Timing - Page Submit,70,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q107_Click Count,Timing - Click Count,71,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q11_1,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 1",72,0,0,social_network,string,,,,social_network,,,,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_2,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 2",73,0,0,social_network,string,,,,social_network,,,,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_3,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 3",74,0,0,social_network,string,,,,social_network,,,,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_4,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 4",75,0,0,social_network,string,,,,social_network,,,,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_5,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 5",76,0,0,social_network,string,,,,social_network,,,,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_6,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 6",77,0,0,social_network,string,,,,social_network,,,,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_7,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 7",78,0,0,social_network,string,,,,social_network,,,,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_8,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 8",79,0,0,social_network,string,,,,social_network,,,,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_9,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 9",80,0,0,social_network,string,,,,social_network,,,,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_10,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 11",81,0,0,social_network,string,,,,social_network,,,,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_11,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 11",82,0,0,social_network,string,,,,social_network,,,Q11_10,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_12,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 12",83,0,0,social_network,string,,,,social_network,,,Q11_11,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_13,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 13",84,0,0,social_network,string,,,,social_network,,,Q11_12,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_14,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 14",85,0,0,social_network,string,,,,social_network,,,Q11_13,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_15,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 15",86,0,0,social_network,string,,,,social_network,,,Q11_14,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_16,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 16",87,0,0,social_network,string,,,,social_network,,,Q11_15,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_17,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 17",88,0,0,social_network,string,,,,social_network,,,Q11_16,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_18,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 18",89,0,0,social_network,string,,,,social_network,,,Q11_17,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q11_19,"From time to time, most people discuss work-related and job-search
+issues with other people. Looking back over the last 6 months, who are the
+people with whom you discussed work-related and job-search issues with?
+
+
+In the boxes below, please list the FIRST NAME and LAST NAME INITIAL of
+the people with whom you discuss important matters. E.g., Maria Maier would be
+recorded as ""Maria M"".
+
+
+Please list only one name per box. If two people on your list share the
+same first name and last initial, use numbers to distinguish them (e.g.,
+""Maria M"" and ""Maria M2"").
+If you don't discuss important matters with anyone, just leave the fields blank. - Person 19",90,0,0,social_network,string,,,,social_network,,,Q11_18,social_outcomes,social_inclusion,Social network,Social network,"6,7,8,9,10,11,12,13,14,15,16,17,18,19","1,2,3,4,5",1,social_network_names
+Q108_First Click,Timing - First Click,92,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q108_Last Click,Timing - Last Click,93,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q108_Page Submit,Timing - Page Submit,94,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q108_Click Count,Timing - Click Count,95,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q13_1,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 1",96,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 10,,social_network,7,7,Q13_x1,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_2,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 2",97,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 11,,social_network,7,7,Q13_x2,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_3,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 3",98,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 12,,social_network,7,7,Q13_x3,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_4,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 4",99,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 13,,social_network,7,7,Q13_x4,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_5,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 5",100,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 14,,social_network,7,7,Q13_x5,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_6,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 6",101,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 15,,social_network,7,7,Q13_x6,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_7,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 7",102,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 16,,social_network,7,7,Q13_x7,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_8,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 8",103,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 17,,social_network,7,7,Q13_x8,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_9,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 9",104,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 18,,social_network,7,7,Q13_x9,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_10,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 11",105,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 19,,social_network,7,7,Q13_x10,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_11,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 11",106,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 20,,social_network,7,7,Q13_x10,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_12,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 12",107,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 21,,social_network,7,7,Q13_x11,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_13,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 13",108,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 22,,social_network,7,7,Q13_x12,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_14,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 14",109,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 23,,social_network,7,7,Q13_x13,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_15,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 15",110,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 24,,social_network,7,7,Q13_x14,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_16,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 16",111,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 25,,social_network,7,7,Q13_x15,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_17,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 17",112,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 26,,social_network,7,7,Q13_x16,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_18,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 18",113,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 27,,social_network,7,7,Q13_x17,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_19,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 19",114,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 28,,social_network,7,7,Q13_x18,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q13_20,"Below is a list of the names you provided on the prior page. Please answer the questions below about each person you named.
+How frequently are you in contact with each person? - Person 19",114,1,-1,social_network,ordinal,,Only 19 persons due to person 11 included twice instead of person 28,,social_network,7,7,,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_frequency
+Q14_1,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 1",116,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 30,,social_network,7,7,Q14_x1,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_2,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 2",117,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 31,,social_network,7,7,Q14_x2,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_3,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 3",118,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 32,,social_network,7,7,Q14_x3,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_4,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 4",119,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 33,,social_network,7,7,Q14_x4,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_5,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 5",120,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 34,,social_network,7,7,Q14_x5,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_6,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 6",121,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 35,,social_network,7,7,Q14_x6,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_7,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 7",122,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 36,,social_network,7,7,Q14_x7,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_8,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 8",123,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 37,,social_network,7,7,Q14_x8,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_9,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 9",124,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 38,,social_network,7,7,Q14_x9,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_10,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 11",125,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 39,,social_network,7,7,Q14_x10,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_11,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 11",126,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 40,,social_network,7,7,Q14_x10,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_12,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 12",127,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 41,,social_network,7,7,Q14_x11,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_13,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 13",128,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 42,,social_network,7,7,Q14_x12,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_14,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 14",129,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 43,,social_network,7,7,Q14_x13,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_15,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 15",130,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 44,,social_network,7,7,Q14_x14,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_16,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 16",131,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 45,,social_network,7,7,Q14_x15,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_17,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 17",132,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 46,,social_network,7,7,Q14_x16,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_18,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 18",133,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 47,,social_network,7,7,Q14_x17,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_19,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 19",134,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 48,,social_network,7,7,Q14_x18,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q14_20,"Please select whether you agree or disagree with the following statements.
+This person is close to you. - Person 19",134,1,-1,social_network,ordinal,"numbers 2,3,4 are missing. scale consists of 1, 5,6,7,8,9,10.",Only 19 persons due to person 11 included twice instead of person 48,,social_network,7,7,,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_closeness
+Q15_1,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 1",136,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 50,,social_network,7,7,Q15_x1,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_2,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 2",137,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 51,,social_network,7,7,Q15_x2,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_3,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 3",138,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 52,,social_network,7,7,Q15_x3,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_4,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 4",139,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 53,,social_network,7,7,Q15_x4,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_5,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 5",140,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 54,,social_network,7,7,Q15_x5,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_6,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 6",141,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 55,,social_network,7,7,Q15_x6,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_7,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 7",142,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 56,,social_network,7,7,Q15_x7,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_8,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 8",143,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 57,,social_network,7,7,Q15_x8,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_9,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 9",144,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 58,,social_network,7,7,Q15_x9,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_10,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 11",145,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 59,,social_network,7,7,Q15_x10,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_11,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 11",146,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 60,,social_network,7,7,Q15_x10,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_12,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 12",147,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 61,,social_network,7,7,Q15_x11,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_13,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 13",148,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 62,,social_network,7,7,Q15_x12,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_14,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 14",149,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 63,,social_network,7,7,Q15_x13,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_15,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 15",150,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 64,,social_network,7,7,Q15_x14,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_16,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 16",151,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 65,,social_network,7,7,Q15_x15,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_17,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 17",152,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 66,,social_network,7,7,Q15_x16,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_18,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 18",153,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 67,,social_network,7,7,Q15_x17,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_19,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 19",154,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 68,,social_network,7,7,Q15_x18,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q15_20,"Please select whether you agree or disagree with the following statements.
+Compared to other people you know, this person is very valuable to you. - Person 19",154,1,-1,social_network,ordinal,"numbers 2,3,4,5 are missing. scale consists of 1,6,7,8,9,10,11.",Only 19 persons due to person 11 included twice instead of person 68,,social_network,7,7,,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_valuable
+Q16_1,Which of the following best describes your relationship to each person? - Person 1,156,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 70,,social_network,5,5,Q16_x1,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_2,Which of the following best describes your relationship to each person? - Person 2,157,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 71,,social_network,5,5,Q16_x2,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_3,Which of the following best describes your relationship to each person? - Person 3,158,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 72,,social_network,5,5,Q16_x3,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_4,Which of the following best describes your relationship to each person? - Person 4,159,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 73,,social_network,5,5,Q16_x4,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_5,Which of the following best describes your relationship to each person? - Person 5,160,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 74,,social_network,5,5,Q16_x5,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_6,Which of the following best describes your relationship to each person? - Person 6,161,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 75,,social_network,5,5,Q16_x6,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_7,Which of the following best describes your relationship to each person? - Person 7,162,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 76,,social_network,5,5,Q16_x7,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_8,Which of the following best describes your relationship to each person? - Person 8,163,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 77,,social_network,5,5,Q16_x8,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_9,Which of the following best describes your relationship to each person? - Person 9,164,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 78,,social_network,5,5,Q16_x9,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_10,Which of the following best describes your relationship to each person? - Person 11,165,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 79,,social_network,5,5,Q16_x10,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_11,Which of the following best describes your relationship to each person? - Person 11,166,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 80,,social_network,5,5,Q16_x10,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_12,Which of the following best describes your relationship to each person? - Person 12,167,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 81,,social_network,5,5,Q16_x11,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_13,Which of the following best describes your relationship to each person? - Person 13,168,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 82,,social_network,5,5,Q16_x12,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_14,Which of the following best describes your relationship to each person? - Person 14,169,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 83,,social_network,5,5,Q16_x13,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_15,Which of the following best describes your relationship to each person? - Person 15,170,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 84,,social_network,5,5,Q16_x14,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_16,Which of the following best describes your relationship to each person? - Person 16,171,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 85,,social_network,5,5,Q16_x15,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_17,Which of the following best describes your relationship to each person? - Person 17,172,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 86,,social_network,5,5,Q16_x16,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_18,Which of the following best describes your relationship to each person? - Person 18,173,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 87,,social_network,5,5,Q16_x17,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_19,Which of the following best describes your relationship to each person? - Person 19,174,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 88,,social_network,5,5,Q16_x18,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q16_20,Which of the following best describes your relationship to each person? - Person 19,174,0,0,social_network,categorical,,Only 19 persons due to person 11 included twice instead of person 88,,social_network,5,5,,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_relationship
+Q17_1,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 1",176,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 90,,social_network,7,7,Q17_x1,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_2,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 2",177,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 91,,social_network,7,7,Q17_x2,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_3,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 3",178,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 92,,social_network,7,7,Q17_x3,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_4,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 4",179,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 93,,social_network,7,7,Q17_x4,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_5,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 5",180,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 94,,social_network,7,7,Q17_x5,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_6,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 6",181,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 95,,social_network,7,7,Q17_x6,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_7,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 7",182,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 96,,social_network,7,7,Q17_x7,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_8,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 8",183,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 97,,social_network,7,7,Q17_x8,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_9,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 9",184,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 98,,social_network,7,7,Q17_x9,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_10,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 11",185,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 99,,social_network,7,7,Q17_x10,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_11,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 11",186,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 100,,social_network,7,7,Q17_x10,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_12,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 12",187,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 101,,social_network,7,7,Q17_x11,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_13,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 13",188,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 102,,social_network,7,7,Q17_x12,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_14,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 14",189,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 103,,social_network,7,7,Q17_x13,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_15,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 15",190,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 104,,social_network,7,7,Q17_x14,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_16,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 16",191,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 105,,social_network,7,7,Q17_x15,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_17,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 17",192,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 106,,social_network,7,7,Q17_x16,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_18,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 18",193,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 107,,social_network,7,7,Q17_x17,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_19,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 19",194,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 108,,social_network,7,7,Q17_x18,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q17_20,"Please select whether you agree or disagree with the following statements.
+This contact is someone who looks up to me. - Person 19",194,1,-1,social_network,ordinal,"numbers 2,3, are missing. scale consists of 1,4,5,6,7,8,9.",Only 19 persons due to person 11 included twice instead of person 108,,social_network,7,7,,social_outcomes,social_inclusion,Social network,Social network,"1,2,3","4,5,6,7",1,social_network_status
+Q20,"Overall, which one of the following best describes how well
+you are managing financially these days:",196,1,-1,income_security,ordinal,,,,income_security,4,4,,economic_outcomes,income,Economic security,Economic security,"1,2","3,4",1,income_security_present
+Q21,"Compared to 6 months ago before the start of MAGMA, would you say that you are better off, the same, or worse off financially?",197,1,-1,income_security,ordinal,"numbers are mixed up and not in oder. Currently: Much better off  (1) , 	Better off  (6) 
+o	Somewhat better off  (2) 
+o	About the same  (3) 
+o	Somewhat worse off  (4) 
+o	Worse off  (7) 
+o	Much worse off  (5) ",,,income_security,7,7,,economic_outcomes,income,Economic security,Economic security,"1,2,3","4,5,6,7",1,income_security_past
+Q22,How much is your monthly income?,198,0,1,income_security,continuous,,,,income_security,2000,2000,,economic_outcomes,income,Economic security,Economic security,>1290,<1290,1,income_security
+Q109_First Click,Timing - First Click,199,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q109_Last Click,Timing - Last Click,200,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q109_Page Submit,Timing - Page Submit,201,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q109_Click Count,Timing - Click Count,202,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q23,"Can you try to guess in which category your monthly income
+falls approximately?",203,0,1,income_security,,,,,income_security,7,7,,economic_outcomes,income,Economic security,Economic security,"1,2,3","4,5,6,7",1,income_security_cat
+Q24,"Are you in arrears with a regular payment such as rent,
+phone bill, loan installment or the like?",204,1,1,income_security,ordinal,,,,income_security,4,4,,social_outcomes,material_deprivation,Economic security,Economic security,"1,2,3",4,1,income_security_arrears
+Q25,"Are you able to make an unexpected expense such as X for a
+repair?",205,1,1,income_security,ordinal,,,,income_security,7,7,,social_outcomes,material_deprivation,Economic security,Economic security,"1,2,3,4","5,6,7",1,income_security_savings
+Q110_First Click,Timing - First Click,206,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q110_Last Click,Timing - Last Click,207,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q110_Page Submit,Timing - Page Submit,208,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q110_Click Count,Timing - Click Count,209,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q26,"Would you
+prefer to receive 100 â‚¬ today, or 300 â‚¬ in 1 month?",210,0,1,social_capital_time,ordinal,,,social_capital_time,social_capital,2,2,,social_capital,preferences_time,Preferences,Preferences: time,1,2,1,social_capital_time
+Q28,"Would you
+prefer to receive 100 â‚¬ today, or 300 â‚¬ in 12 months?",211,0,1,social_capital_time,ordinal,,,social_capital_time,social_capital,2,2,,social_capital,preferences_time,Preferences,Preferences: time,1,2,1,social_capital_time
+Q27,"Would you
+prefer to receive 100 â‚¬ today, or 300 â‚¬ in 6 months?",212,0,1,social_capital_time,ordinal,,,social_capital_time,social_capital,2,2,,social_capital,preferences_time,Preferences,Preferences: time,1,2,1,social_capital_time
+Q29,"Suppose you
+have some money to do business, and you have a choice between 2 options. Which
+option would you choose?",213,0,-1,social_capital_risk2,ordinal,,,social_capital_risk_economical,social_capital,2,2,,social_capital,preferences_time,Preferences,Preferences: financial risk,1,2,1,social_capital_risk2
+Q30,"Imagine you have saved 10'000 â‚¬ from working at a job. You receive
+the following offer from a good bank: If you invest with them there is a chance
+that you will double the money you invested immediately, or lose half of the
+money you invested. How much do you want to invest? You only have 10'000 â‚¬.",214,0,1,social_capital_risk2,ordinal,,,social_capital_risk_economical,social_capital,5,5,,social_capital,preferences_time,Preferences,Preferences: financial risk,"1,2","3,4,5",1,social_capital_risk2
+Q111_First Click,Timing - First Click,215,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q111_Last Click,Timing - Last Click,216,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q111_Page Submit,Timing - Page Submit,217,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q111_Click Count,Timing - Click Count,218,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q31_1,"We are
+interested in your risk taking behavior. Please select how risky you find the
+respective behavior.
+Don't worry, your answers don't tell us anything about how you actually live your life. The questions are only about your theoretical, general willingness to take risks in life. - Admitting that your tastes are different from those of a friend.",219,1,-1,social_capital_risk1,ordinal,,,social_capital_risk_nonecon,social_capital,7,7,,social_capital,preferences_risk,Preferences,Preferences: risk,"1,2","3,4,5,6,7",1,social_capital_risk1
+Q31_2,"We are
+interested in your risk taking behavior. Please select how risky you find the
+respective behavior.
+Don't worry, your answers don't tell us anything about how you actually live your life. The questions are only about your theoretical, general willingness to take risks in life. - Drinking heavily at a social function.",220,1,-1,social_capital_risk1,ordinal,,,social_capital_risk_nonecon,social_capital,7,7,,social_capital,preferences_risk,Preferences,Preferences: risk,"1,2","3,4,5,6,7",1,social_capital_risk1
+Q31_3,"We are
+interested in your risk taking behavior. Please select how risky you find the
+respective behavior.
+Don't worry, your answers don't tell us anything about how you actually live your life. The questions are only about your theoretical, general willingness to take risks in life. - Disagreeing with an authority figure on a major issue.",221,1,-1,social_capital_risk1,ordinal,,,social_capital_risk_nonecon,social_capital,7,7,,social_capital,preferences_risk,Preferences,Preferences: risk,"1,2","3,4,5,6,7",1,social_capital_risk1
+Q31_4,"We are
+interested in your risk taking behavior. Please select how risky you find the
+respective behavior.
+Don't worry, your answers don't tell us anything about how you actually live your life. The questions are only about your theoretical, general willingness to take risks in life. - Having an affair with a married man/woman.",222,1,-1,social_capital_risk1,ordinal,,,social_capital_risk_nonecon,social_capital,7,7,,social_capital,preferences_risk,Preferences,Preferences: risk,"1,2","3,4,5,6,7",1,social_capital_risk1
+Q31_5,"We are
+interested in your risk taking behavior. Please select how risky you find the
+respective behavior.
+Don't worry, your answers don't tell us anything about how you actually live your life. The questions are only about your theoretical, general willingness to take risks in life. - Passing off somebody else's work as your own.",223,1,-1,social_capital_risk1,ordinal,,,social_capital_risk_nonecon,social_capital,7,7,,social_capital,preferences_risk,Preferences,Preferences: risk,"1,2","3,4,5,6,7",1,social_capital_risk1
+Q31_6,"We are
+interested in your risk taking behavior. Please select how risky you find the
+respective behavior.
+Don't worry, your answers don't tell us anything about how you actually live your life. The questions are only about your theoretical, general willingness to take risks in life. - Betting a day's income on the outcome of a sporting event.",224,1,-1,social_capital_risk1,ordinal,,,social_capital_risk_nonecon,social_capital,7,7,,social_capital,preferences_risk,Preferences,Preferences: risk,"1,2","3,4,5,6,7",1,social_capital_risk1
+Q31_7,"We are
+interested in your risk taking behavior. Please select how risky you find the
+respective behavior.
+Don't worry, your answers don't tell us anything about how you actually live your life. The questions are only about your theoretical, general willingness to take risks in life. - Engaging in unprotected sex.",225,1,-1,social_capital_risk1,ordinal,,,social_capital_risk_nonecon,social_capital,7,7,,social_capital,preferences_risk,Preferences,Preferences: risk,"1,2","3,4,5,6,7",1,social_capital_risk1
+Q31_8,"We are
+interested in your risk taking behavior. Please select how risky you find the
+respective behavior.
+Don't worry, your answers don't tell us anything about how you actually live your life. The questions are only about your theoretical, general willingness to take risks in life. - Revealing a friend's secret to someone else.",226,1,-1,social_capital_risk1,ordinal,,,social_capital_risk_nonecon,social_capital,7,7,,social_capital,preferences_risk,Preferences,Preferences: risk,"1,2","3,4,5,6,7",1,social_capital_risk1
+Q31_9,"We are
+interested in your risk taking behavior. Please select how risky you find the
+respective behavior.
+Don't worry, your answers don't tell us anything about how you actually live your life. The questions are only about your theoretical, general willingness to take risks in life. - Speaking your mind about an unpopular issue in a meeting at work.",227,1,-1,social_capital_risk1,ordinal,,,social_capital_risk_nonecon,social_capital,7,7,,social_capital,preferences_risk,Preferences,Preferences: risk,"1,2","3,4,5,6,7",1,social_capital_risk1
+Q31_10,"We are
+interested in your risk taking behavior. Please select how risky you find the
+respective behavior.
+Don't worry, your answers don't tell us anything about how you actually live your life. The questions are only about your theoretical, general willingness to take risks in life. - Not returning a wallet you found that contains â‚¬200.",228,1,-1,social_capital_risk1,ordinal,,,social_capital_risk_nonecon,social_capital,7,7,,social_capital,preferences_risk,Preferences,Preferences: risk,"1,2","3,4,5,6,7",1,social_capital_risk1
+Q112_First Click,Timing - First Click,229,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q112_Last Click,Timing - Last Click,230,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q112_Page Submit,Timing - Page Submit,231,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q112_Click Count,Timing - Click Count,232,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q32,"In general terms, most people can be trusted.",233,1,-1,social_capital_traits,ordinal,,,social_capital_traits,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: personality traits,"1,2,3","4,5,6,7",1,social_capital_traits_trust
+Q34,You are willing to give up something that is beneficial for you today in order to benefit more from it in the future.,234,1,-1,social_capital_traits,ordinal,,,social_capital_traits,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: personality traits,"1,2,3","4,5,6,7",1,social_capital_traits_patience
+Q36,When someone does me a favor I am willing to return it.,235,1,-1,social_capital_traits,ordinal,,,social_capital_traits,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: personality traits,"1,2,3","4,5,6,7",1,social_capital_traits_reciprocity_positive
+Q37,"If I am treated very unjustly, I will take revenge at the first occasion, even if there is a cost to do so.",236,1,1,social_capital_traits,ordinal,,,social_capital_traits,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: personality traits,"1,2,3","4,5,6,7",1,social_capital_traits_reciprocity_negative
+Q38,"I am willing to punish someone who treats me unfairly, even if there may be costs for me.",237,1,1,social_capital_traits,ordinal,,,social_capital_traits,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: personality traits,"1,2,3","4,5,6,7",1,social_capital_traits_reciprocity_negative
+Q39_1,"Imagine the following situation: Today you unexpectedly received 1,000 Euros. How much of this amount would you donate to a good cause?",238,0,1,social_capital_traits,continuous,,,social_capital_traits,social_capital,1000,1000,,social_capital,personality_traits,Preferences,Preferences: personality traits,0-10,>10,1,social_capital_traits_altruism
+Q41,"Generally, I am willing to give to a good causes without expecting anything in return.",239,1,-1,social_capital_traits,ordinal,,,social_capital_traits,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: personality traits,"1,2,3","4,5,6,7",1,social_capital_traits_altruism
+Q113_First Click,Timing - First Click,240,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q113_Last Click,Timing - Last Click,241,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q113_Page Submit,Timing - Page Submit,242,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q113_Click Count,Timing - Click Count,243,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q89_1,"The following statements relate to your well-being in the
+past two weeks. For each statement, please mark the number that you think best
+describes how you have felt over the past two weeks.
+In the last two weeks ... - â€¦ I was happy and in a good mood",244,1,-1,wellbeing,ordinal,"numbers are mixed up and not in oder. Currently: All the time (1)	Most of the time (4)	A little more than half the time (5)	About half the time (9)	A little less than half the time (6)	Now and then (7)	At no time (8)",,,wellbeing,7,7,,social_outcomes,wellbeing,Wellbeing scale,Wellbeing scale,"1,2,3","4,5,6,7",1,wellbeing
+Q89_2,"The following statements relate to your well-being in the
+past two weeks. For each statement, please mark the number that you think best
+describes how you have felt over the past two weeks.
+In the last two weeks ... - â€¦ I felt calm and relaxed",245,1,-1,wellbeing,ordinal,"numbers are mixed up and not in oder. Currently: All the time (1)	Most of the time (4)	A little more than half the time (5)	About half the time (9)	A little less than half the time (6)	Now and then (7)	At no time (8)",,,wellbeing,7,7,,social_outcomes,wellbeing,Wellbeing scale,Wellbeing scale,"1,2,3","4,5,6,7",1,wellbeing
+Q89_3,"The following statements relate to your well-being in the
+past two weeks. For each statement, please mark the number that you think best
+describes how you have felt over the past two weeks.
+In the last two weeks ... - ... I felt energetic and active",246,1,-1,wellbeing,ordinal,"numbers are mixed up and not in oder. Currently: All the time (1)	Most of the time (4)	A little more than half the time (5)	About half the time (9)	A little less than half the time (6)	Now and then (7)	At no time (8)",,,wellbeing,7,7,,social_outcomes,wellbeing,Wellbeing scale,Wellbeing scale,"1,2,3","4,5,6,7",1,wellbeing
+Q89_4,"The following statements relate to your well-being in the
+past two weeks. For each statement, please mark the number that you think best
+describes how you have felt over the past two weeks.
+In the last two weeks ... - â€¦ I felt fresh and rested when I woke up",247,1,-1,wellbeing,ordinal,"numbers are mixed up and not in oder. Currently: All the time (1)	Most of the time (4)	A little more than half the time (5)	About half the time (9)	A little less than half the time (6)	Now and then (7)	At no time (8)",,,wellbeing,7,7,,social_outcomes,wellbeing,Wellbeing scale,Wellbeing scale,"1,2,3","4,5,6,7",1,wellbeing
+Q89_5,"The following statements relate to your well-being in the
+past two weeks. For each statement, please mark the number that you think best
+describes how you have felt over the past two weeks.
+In the last two weeks ... - â€¦ my everyday life was full of things that interest me",248,1,-1,wellbeing,ordinal,"numbers are mixed up and not in oder. Currently: All the time (1)	Most of the time (4)	A little more than half the time (5)	About half the time (9)	A little less than half the time (6)	Now and then (7)	At no time (8)",,,wellbeing,7,7,,social_outcomes,wellbeing,Wellbeing scale,Wellbeing scale,"1,2,3","4,5,6,7",1,wellbeing
+Q114_First Click,Timing - First Click,249,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q114_Last Click,Timing - Last Click,250,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q114_Page Submit,Timing - Page Submit,251,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q114_Click Count,Timing - Click Count,252,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q45,Would you say your health generally is...,253,1,-1,health_subjective,ordinal,,,,health_subjective,5,5,,health,health_subjective,Subjective health,Subjective health,"1,2,3","4,5",1,health_subjective_present
+Q46,"Over the past 6 months, would you say your health generally has...",254,1,-1,health_subjective,ordinal,,,,health_subjective,7,7,,health,health_subjective,Subjective health,Subjective health,"1,2,3","4,5,6,7",1,health_subjective_past
+Q115_First Click,Timing - First Click,255,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q115_Last Click,Timing - Last Click,256,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q115_Page Submit,Timing - Page Submit,257,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q115_Click Count,Timing - Click Count,258,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q48_1,"During the past month, how
+much have you been bothered by any of the following problems? - belly",259,1,-1,health_physical_women,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_women
+Q48_2,"During the past month, how
+much have you been bothered by any of the following problems? - back",260,1,-1,health_physical_women,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_women
+Q48_3,"During the past month, how
+much have you been bothered by any of the following problems? - limbs",261,1,-1,health_physical_women,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_women
+Q48_4,"During the past month, how
+much have you been bothered by any of the following problems? - menstruation",262,1,-1,health_physical_women,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_women
+Q48_5,"During the past month, how
+much have you been bothered by any of the following problems? - sexual intercourse",263,1,-1,health_physical_women,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_women
+Q48_6,"During the past month, how
+much have you been bothered by any of the following problems? - head",264,1,-1,health_physical_women,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_women
+Q48_7,"During the past month, how
+much have you been bothered by any of the following problems? - chest",265,1,-1,health_physical_women,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_women
+Q48_8,"During the past month, how
+much have you been bothered by any of the following problems? - dizziness",266,1,-1,health_physical_women,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_women
+Q48_9,"During the past month, how
+much have you been bothered by any of the following problems? - passed out",267,1,-1,health_physical_women,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_women
+Q48_10,"During the past month, how
+much have you been bothered by any of the following problems? - heart",268,1,-1,health_physical_women,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_women
+Q48_11,"During the past month, how
+much have you been bothered by any of the following problems? - breath",269,1,-1,health_physical_women,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_women
+Q48_12,"During the past month, how
+much have you been bothered by any of the following problems? - intestine",270,1,-1,health_physical_women,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_women
+Q48_13,"During the past month, how
+much have you been bothered by any of the following problems? - digestion",271,1,-1,health_physical_women,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_women
+Q48_14,"During the past month, how
+much have you been bothered by any of the following problems? - sleep",272,1,-1,health_physical_women,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_women
+Q48_15,"During the past month, how
+much have you been bothered by any of the following problems? - energy",273,1,-1,health_physical_women,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_women
+Q92_1,"During the past month, how
+much have you been bothered by any of the following problems? - belly",274,1,-1,health_physical_men,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_men
+Q92_2,"During the past month, how
+much have you been bothered by any of the following problems? - back",275,1,-1,health_physical_men,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_men
+Q92_3,"During the past month, how
+much have you been bothered by any of the following problems? - limbs",276,1,-1,health_physical_men,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_men
+Q92_4,"During the past month, how
+much have you been bothered by any of the following problems? - sexual intercourse",277,1,-1,health_physical_men,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_men
+Q92_5,"During the past month, how
+much have you been bothered by any of the following problems? - head",278,1,-1,health_physical_men,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_men
+Q92_6,"During the past month, how
+much have you been bothered by any of the following problems? - chest",279,1,-1,health_physical_men,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_men
+Q92_7,"During the past month, how
+much have you been bothered by any of the following problems? - dizziness",280,1,-1,health_physical_men,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_men
+Q92_8,"During the past month, how
+much have you been bothered by any of the following problems? - passed out",281,1,-1,health_physical_men,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_men
+Q92_9,"During the past month, how
+much have you been bothered by any of the following problems? - heart",282,1,-1,health_physical_men,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_men
+Q92_10,"During the past month, how
+much have you been bothered by any of the following problems? - breath",283,1,-1,health_physical_men,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_men
+Q92_11,"During the past month, how
+much have you been bothered by any of the following problems? - intestine",284,1,-1,health_physical_men,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_men
+Q92_12,"During the past month, how
+much have you been bothered by any of the following problems? - digestion",285,1,-1,health_physical_men,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_men
+Q92_13,"During the past month, how
+much have you been bothered by any of the following problems? - sleep",286,1,-1,health_physical_men,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_men
+Q92_14,"During the past month, how
+much have you been bothered by any of the following problems? - energy",287,1,-1,health_physical_men,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_men
+Q49_1,"Over the last 2 weeks, how
+much does the statement describe your feelings? - I feel I cannot shake off the blues, even with help from my family and my friends.",288,1,1,health_depression,ordinal,"numbers 2-10, are missing. scale consists of 1,11,12,13,14,15,16.",,,health_depression,7,7,,health,health_psychological,Depression symptoms (-),Depression symptoms (-),"1,2,3","4,5,6,7",1,health_depression
+Q49_2,"Over the last 2 weeks, how
+much does the statement describe your feelings? - I feel sad.",289,1,1,health_depression,ordinal,"numbers 2-10, are missing. scale consists of 1,11,12,13,14,15,16.",,,health_depression,7,7,,health,health_psychological,Depression symptoms (-),Depression symptoms (-),"1,2,3","4,5,6,7",1,health_depression
+Q49_3,"Over the last 2 weeks, how
+much does the statement describe your feelings? - I feel happy.",290,1,-1,health_depression,ordinal,"numbers 2-10, are missing. scale consists of 1,11,12,13,14,15,16.",,,health_depression,7,7,,health,health_psychological,Depression symptoms (-),Depression symptoms (-),"1,2,3","4,5,6,7",1,health_depression
+Q49_4,"Over the last 2 weeks, how
+much does the statement describe your feelings? - I feel life is not worth living.",291,1,1,health_depression,ordinal,"numbers 2-10, are missing. scale consists of 1,11,12,13,14,15,16.",,,health_depression,7,7,,health,health_psychological,Depression symptoms (-),Depression symptoms (-),"1,2,3","4,5,6,7",1,health_depression
+Q49_5,"Over the last 2 weeks, how
+much does the statement describe your feelings? - I feel depressed.",292,1,1,health_depression,ordinal,"numbers 2-10, are missing. scale consists of 1,11,12,13,14,15,16.",,,health_depression,7,7,,health,health_psychological,Depression symptoms (-),Depression symptoms (-),"1,2,3","4,5,6,7",1,health_depression
+Q50_1,"Over the last 2 weeks, how often have you been bothered by the following problems? - Feeling nervous, anxious or on edge",293,1,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,Anxiety symptoms (-),Anxiety symptoms (-),1,"2,3,4",1,health_anxiety
+Q50_2,"Over the last 2 weeks, how often have you been bothered by the following problems? - Not being able to stop or control worrying",294,2,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,Anxiety symptoms (-),Anxiety symptoms (-),1,"2,3,4",1,health_anxiety
+Q50_3,"Over the last 2 weeks, how often have you been bothered by the following problems? - Worrying too much about different things",295,3,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,Anxiety symptoms (-),Anxiety symptoms (-),1,"2,3,4",1,health_anxiety
+Q50_4,"Over the last 2 weeks, how often have you been bothered by the following problems? - Trouble relaxing",296,4,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,Anxiety symptoms (-),Anxiety symptoms (-),1,"2,3,4",1,health_anxiety
+Q50_5,"Over the last 2 weeks, how often have you been bothered by the following problems? - Being so restless that it is hard to sit still",297,5,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,Anxiety symptoms (-),Anxiety symptoms (-),1,"2,3,4",1,health_anxiety
+Q50_6,"Over the last 2 weeks, how often have you been bothered by the following problems? - Becoming easily annoyed or irritable",298,6,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,Anxiety symptoms (-),Anxiety symptoms (-),1,"2,3,4",1,health_anxiety
+Q50_7,"Over the last 2 weeks, how often have you been bothered by the following problems? - Feeling afraid as if something awful might happen",299,7,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,Anxiety symptoms (-),Anxiety symptoms (-),1,"2,3,4",1,health_anxiety
+Q116_First Click,Timing - First Click,300,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q116_Last Click,Timing - Last Click,301,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q116_Page Submit,Timing - Page Submit,302,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q116_Click Count,Timing - Click Count,303,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q52_1,"Please tell us whether the following statements apply to
+you. - Thinking about the coronavirus (COVID-19) makes me feel threatened.",304,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,Covid stress (-),Covid stress (-),0-20,20-100,1,covid
+Q52_2,"Please tell us whether the following statements apply to
+you. - I am afraid of the coronavirus (COVID-19).",305,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,Covid stress (-),Covid stress (-),0-20,20-100,1,covid
+Q52_3,"Please tell us whether the following statements apply to
+you. - I am stressed around other people because I worry Iâ€™ll catch the coronavirus (COVID-19).",306,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,Covid stress (-),Covid stress (-),0-20,20-100,1,covid
+Q52_4,"Please tell us whether the following statements apply to
+you. - The Coronavirus (COVID-19) has impacted me negatively from a financial point of view.",307,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,Covid stress (-),Covid stress (-),0-20,20-100,1,covid
+Q52_5,"Please tell us whether the following statements apply to
+you. - I have lost job-related income due to the Coronavirus (COVID-19).",308,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,Covid stress (-),Covid stress (-),0-20,20-100,1,covid
+Q52_6,"Please tell us whether the following statements apply to
+you. - I have become depressed because of the Coronavirus (COVID-19).",309,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,Covid stress (-),Covid stress (-),0-20,20-100,1,covid
+Q52_7,"Please tell us whether the following statements apply to
+you. - The Coronavirus (COVID-19) outbreak has impacted my psychological health negatively.",310,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,Covid stress (-),Covid stress (-),0-20,20-100,1,covid
+Q117_First Click,Timing - First Click,311,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q117_Last Click,Timing - Last Click,312,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q117_Page Submit,Timing - Page Submit,313,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q117_Click Count,Timing - Click Count,314,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q118_First Click,Timing - First Click,315,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q118_Last Click,Timing - Last Click,316,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q118_Page Submit,Timing - Page Submit,317,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q118_Click Count,Timing - Click Count,318,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q83_First Click,Timing - First Click,319,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q83_Last Click,Timing - Last Click,320,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q83_Page Submit,Timing - Page Submit,321,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q83_Click Count,Timing - Click Count,322,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q72,"You have been assigned to Role A.
+ 
+
+Your task is to allocate [Field-total] Euros between you and B.
+
+ 
+
+Please use the box below to indicate how many Euros (0-100) to offer to B. B will then make a decision whether to accept or reject this offer.
+
+
+If B accepts your offer, he or she will get the Euros you offered to them, and you will keep the rest of the [Field-total] Euros.
+
+If B rejects your offer, both of you will get 0 Euros.Your offer to B (0-100):",323,0,1,ultimatum_game,continuous,,,,ultimatum_game,100,100,,social_capital,ultimatum_game,Ultimatum game,Ultimatum game,0-49,50-100,0,ultimatum_game
+Q86_First Click,Timing - First Click,324,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q86_Last Click,Timing - Last Click,325,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q86_Page Submit,Timing - Page Submit,326,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q86_Click Count,Timing - Click Count,327,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q74,"A has offered you [Field-offer] Euros.
+
+A would keep $e{e://Field/total - e://Field/offer} Euros.
+
+
+
+Do you accept or reject this offer?",328,0,-1,ultimatum_game,categorical,,,,ultimatum_game,2,2,,social_capital,ultimatum_game,Ultimatum game,Ultimatum game,1,2,0,ultimatum_game
+Q119_First Click,Timing - First Click,329,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q119_Last Click,Timing - Last Click,330,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q119_Page Submit,Timing - Page Submit,331,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q119_Click Count,Timing - Click Count,332,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q98_1,How do the following statements apply to your experience of the Cyberball game. - I enjoyed playing the game.,333,1,-1,cyberball,ordinal,"number 3 is missing. scale consists of 1,2,4,5,6,7,8.",,,cyberball,7,7,,social_capital,cyberball,Cyberball,Cyberball,"1,2,3","4,5,6,7",0,cyberball_happy
+Q98_2,How do the following statements apply to your experience of the Cyberball game. - I felt angry during the game.,334,1,1,cyberball,ordinal,"number 3 is missing. scale consists of 1,2,4,5,6,7,8.",,,cyberball,7,7,,social_capital,cyberball,Cyberball,Cyberball,"1,2,3","4,5,6,7",0,cyberball_angry
+Q98_3,How do the following statements apply to your experience of the Cyberball game. - I was included by other participants during the game.,335,1,-1,cyberball,ordinal,"number 3 is missing. scale consists of 1,2,4,5,6,7,8.",,,cyberball,7,7,,social_capital,cyberball,Cyberball,Cyberball,"1,2,3","4,5,6,7",0,cyberball_ostracism
+Q98_4,How do the following statements apply to your experience of the Cyberball game. - I felt like an outsider during the game.,336,1,1,cyberball,ordinal,"number 3 is missing. scale consists of 1,2,4,5,6,7,8.",,,cyberball,7,7,,social_capital,cyberball,Cyberball,Cyberball,"1,2,3","4,5,6,7",0,cyberball_ostracism
+Q98_5,How do the following statements apply to your experience of the Cyberball game. - I felt that I was able to throw the ball as often as I wanted during the game.,337,1,-1,cyberball,ordinal,"number 3 is missing. scale consists of 1,2,4,5,6,7,8.",,,cyberball,7,7,,social_capital,cyberball,Cyberball,Cyberball,"1,2,3","4,5,6,7",0,cyberball_satisfaction
+Q98_6,How do the following statements apply to your experience of the Cyberball game. - I felt that the other participants failed to perceive me as a worthy and likeable person.,338,1,1,cyberball,ordinal,"number 3 is missing. scale consists of 1,2,4,5,6,7,8.",,,cyberball,7,7,,social_capital,cyberball,Cyberball,Cyberball,"1,2,3","4,5,6,7",0,cyberball_resilience
+Q98_7,How do the following statements apply to your experience of the Cyberball game. - I felt as though my existence was meaningless during the game.,339,1,1,cyberball,ordinal,"number 3 is missing. scale consists of 1,2,4,5,6,7,8.",,,cyberball,7,7,,social_capital,cyberball,Cyberball,Cyberball,"1,2,3","4,5,6,7",0,cyberball_resilience
+Q120_First Click,Timing - First Click,340,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q120_Last Click,Timing - Last Click,341,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q120_Page Submit,Timing - Page Submit,342,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q120_Click Count,Timing - Click Count,343,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q87,What advice would you have for a person like you who is about to start the MAGMA programme?,344,0,0,magma,string,,,,magma,,,,magma,magma,Job guarantee support,Job guarantee support,,,0,magma
+Q88,Would you advise the person to take the MAGMA programme?,345,1,-1,magma,ordinal,,,,magma,7,7,,magma,magma,Job guarantee support,Job guarantee support,"1,2,3","4,5,6,7",0,magma
+Q121_First Click,Timing - First Click,346,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q121_Last Click,Timing - Last Click,347,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q121_Page Submit,Timing - Page Submit,348,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+Q121_Click Count,Timing - Click Count,349,0,0,meta,,,,,meta,,,,,,,,,,0,meta
+researcherID,researcherID,350,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+studyID,studyID,351,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+groupID,groupID,352,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+participantID,participantID,353,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+groupSize,groupSize,354,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+numStages,numStages,355,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+roles,roles,356,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+participantRole,participantRole,357,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+timeOutLog,timeOutLog,358,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+maxWaitTime,maxWaitTime,359,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+botMatch,botMatch,360,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+total,total,361,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+offer,offer,362,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+decision,decision,363,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+payoff,payoff,364,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+sendStage,sendStage,365,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+sendData,sendData,366,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+getStage,getStage,367,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+getData,getData,368,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+defaultData,defaultData,369,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+saveData,saveData,370,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+randomPercent,randomPercent,371,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
+benefit_level_post_intervention,Average level of benefits after JG start,,0,1,income_admin,continuous,,,,benefits,61,61,,economic_outcomes,benefit_level_post_intervention,Benefits,Benefits,,,0,income_admin
+days_unemployed_sv,Days in unemployment since program start (SV data),,0,-1,unemployment_admin_sv,continuous,,,,unemployment_sv,151,516,,economic_outcomes,days_unemployed_sv,Unemployment (sv) (-),Unemployment (sv) (-),,,0,unemployment_admin_sv
+days_employed_sv,Days in employment since program start (SV data),,0,1,employment_admin_sv,continuous,,,,employment_sv,151,516,,economic_outcomes,days_employed_sv,Employment (sv),Employment (sv),,,0,employment_admin_sv
+spells_unemployed_sv,Number of unemployment spells since program start (SV data),,0,-1,unemployment_spells_admin_sv,continuous,,,,unemployment_spells,6,6,,economic_outcomes,spells_unemployed_sv,Unemployment spells,Unemployment spells,,,0,unemployment_spells_admin_sv
+employment_days_since_2020_ams,Days in employment since program start (AMS data),,0,1,employment_admin_ams,continuous,,,,employment_ams,151,516,,economic_outcomes,employment_days_since_2020_ams,Employment,Employment,,,1,employment_admin_ams
+non_employment_days_since_2020_ams,Days not in employment since program start (AMS data),,0,-1,non_employment_admin_ams,continuous,,,,non_employment_ams,151,516,,economic_outcomes,non_employment_days_since_2020_ams,Non employment,Non employment,,,0,non_employment_admin_ams
+unemployment_registered_days_since_2020_ams,Days in registered unemployment since program start (AMS data),,0,-1,unemployment_registered_admin_ams,continuous,,,,unemployment_ams,151,516,,economic_outcomes,unemployment_registered_days_since_2020_ams,Unemployment (-),Unemployment (-),,,1,unemployment_registered_admin_ams
+TAGE_BESCHAEFTIGUNG_GEF,Days in subsidized employment since program start (AMS data),,0,1,employment_subsidized_admin_ams,continuous,,,,subsidized_employment,151,516,,economic_outcomes,TAGE_BESCHAEFTIGUNG_GEF,Subsidized employment,Subsidized employment,,,0,employment_subsidized_admin_ams
+TAGE_BESCHAEFTIGUNG_UNGEF,Days in unsubsidized (regular) employment since program start (AMS data),,0,1,employment_regular_admin_ams,continuous,,,,dependent_regular_employment,151,516,,economic_outcomes,TAGE_BESCHAEFTIGUNG_UNGEF,Dependent regular employment,Dependent regular employment,,,0,employment_regular_admin_ams
+TAGE_BESCHAEFTIGUNG_SELBST,Days in self-employment since program start (AMS data),,0,1,employment_selfemployed_admin_ams,continuous,,,,self_employment,151,516,,economic_outcomes,TAGE_BESCHAEFTIGUNG_SELBST,Self employment,Self employment,,,0,employment_selfemployed_admin_ams
