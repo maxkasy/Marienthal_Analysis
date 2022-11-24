@@ -8,8 +8,7 @@ This complements the replication files for the experimental design, which can be
 
   
 Data protection regulations prohibit us from sharing any of the data directly.
-The AMS (Austrian labor market serrvice) has, however, agreed to handle data access requests. 
-Such requests should be directed to: [daniel.riegler@ams.at](mailto:daniel.riegler@ams.at).
+The AMS (Austrian labor market serrvice) has, however, agreed to handle data access requests. The contact address will be posted here soon. 
 Data will be shared in the form of an archive with sub-folders.
 
 
