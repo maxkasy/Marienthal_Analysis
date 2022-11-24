@@ -16,7 +16,6 @@ files_used = c(
   "AL_NOE_LZBL.dsv",
   "AL_NOE_MIGRATIONSHINTERGRUND.dsv")
 
-
 # loop over AL cross-section variables
 length(files_used)
 year_vec <- 2019:2020
@@ -337,21 +336,10 @@ data_LZBL_AL <- data_LZBL_AL[myvars]
 data_LZBL_AL = data_LZBL_AL %>%
   spread(LZBL, n)
 
-# only 11 very small municipalities have remaining NAs for long term
-# ue because there were no long term ue registered at that year
-# replace NA with 0 to create a balanced panel
+# replace NA with 0 to create a balanced panel since NAs indicate 0
 data_LZBL_AL = data_LZBL_AL %>%
   mutate(ue_long = replace_na(J, 0),
          ue_short = replace_na(N, 0))
-
-# # create annual averages
-# data_LZBL_AL$year <- data_LZBL_AL$STICHTAG %>%
-#   format("%Y")
-# 
-# mean_LZBL_AL <- data_LZBL_AL %>%
-#   group_by(GKZ, year) %>%
-#   summarize(ue_long = mean(ue_long),
-#             ue_short = mean(ue_short))
 
 # create monthly averages
 data_LZBL_AL$month <- data_LZBL_AL$STICHTAG %>%
@@ -470,15 +458,6 @@ health_AL_wide <- health_AL_wide %>%
             healthy_AL = sum(healthy_AL)
             )
 
-# # create annual averages
-# health_AL_wide$year <- health_AL_wide$STICHTAG %>%
-#   format("%Y")
-# 
-# mean_health_AL_wide <- health_AL_wide %>%
-#   group_by(GKZ, year) %>%
-#   summarize(health_condition_AL = mean(health_condition_AL),
-#             healthy_AL = mean(healthy_AL))
-
 # create monthly averages
 health_AL_wide$month <- health_AL_wide$STICHTAG %>%
   format("%Y-%m") 
@@ -486,10 +465,7 @@ health_AL_wide$month <- health_AL_wide$STICHTAG %>%
 mean_health_AL_wide <- health_AL_wide %>%
   select(-"STICHTAG")
 
-
-
 # Link municipalities that changed GKZ over time (2017 reform)
-
 oldGKZ <-
   c(
     32401,
@@ -626,7 +602,6 @@ mean_age_POP_tmp <- mean_age_POP_tmp %>%
 mean_age_POP_list[[y]] <-
   mean_age_POP_tmp
 names(mean_age_POP_tmp)[y] <- names_list[[y]]
-
 
 
 ### firmsize ####
@@ -800,7 +775,6 @@ mig_POP_list[[y]] <-
 names(mig_POP_list)[y] <- names_list[[y]]
 
 
-
 ### care responsibility ####
 # indicates whether the person has a care responsibility for a child <15 "Versorgungspflicht"
 file_path[[y]] = paste(data_path,  path_list[[y]], files_used_pop[7], sep = "")
@@ -839,7 +813,6 @@ care_POP_wide_tmp <- care_POP_wide_tmp %>%
 care_POP_list[[y]] <-
   care_POP_wide_tmp
 names(care_POP_list)[y] <- names_list[[y]]
-
 
 }
 
@@ -950,9 +923,6 @@ data_pop = data_pop_2020 %>%
          n = "SUM(XT.REEMPLOYEES)--,COUNT(XT.PENR)ASANZAHL_PERSONEN--REEMPLOYEESBESTAND--*/") %>%
   bind_rows(data_pop_2015) # merge datasets
 
-# create year variable
-# data_pop$year <- data_pop$STICHTAG %>%
-#   format("%Y")
 
 # create month variable
  data_pop$month <- data_pop$STICHTAG %>%
@@ -964,7 +934,6 @@ pop_status_annual <- data_pop %>%
   summarize(status_n = mean(n))
 
 # aggregate status
-
 pop_status_annual <- pop_status_annual %>%
   mutate(
     status = replace(status, status == "AQ", "AM"),
@@ -1000,10 +969,6 @@ pop_status_annual <- pop_status_annual %>%
 pop_status_broad_wide = pop_status_annual %>%
   spread(status, status_n)
 
-
-# Added later after Talk to AMS Jan 2022
-# add AL as a narrower definition of unemployment to dataset 
-# (in addition to the broader definition AM)
 pop_status_fine_summed <- data_pop %>%
   group_by(GKZ, month, status) %>%
   summarize(n = sum(n))
@@ -1018,17 +983,13 @@ pop_status_wide =
   group_by(GKZ, month) %>%
   left_join(pop_status_fine_wide, by = c("GKZ", "month")) 
 
-
-
-
-# only 5 tiny municipalities have NAs for AM & BE in 2011/12 (Bergland, Weinburg, Hofamt Priel)
-# replace NA with 0 to create a balanced panel
+# replace NA with 0 to create a balanced panel since NAs indicate 0
 pop_status_wide = pop_status_wide %>%
   mutate(AM = replace_na(AM, 0),
          BE = replace_na(BE, 0),
          AL = replace_na(AL, 0))
 
-# sum up to total population workingage
+# sum up to total population working age
 pop_status_wide <- pop_status_wide %>%
   mutate(POP_workingage = AM + BE + SO)
 
@@ -1065,16 +1026,6 @@ data_wage_POP = data_wage_POP %>%
 # create annual averages
 data_wage_POP <- data_wage_POP %>%
   mutate(STICHTAG = dmy(STICHTAG))
-
-# data_wage_POP$year <- data_wage_POP$STICHTAG %>%
-#   format("%Y")
-# 
-# # create 2 summary variables: 1: mean wage for 2019; 2: mean wage for first 5 months 2020
-# mean_wage_POP <- data_wage_POP %>%
-#   group_by(GKZ, month) %>%
-#   summarize(mean_wage = weighted.mean(wage_mean, n)) %>% # weighted average
-#   mutate(GKZ = as.numeric(GKZ)) 
-
 
 data_wage_POP$month <- data_wage_POP$STICHTAG %>%
   format("%Y-%m")
@@ -1180,16 +1131,10 @@ municipalities = municipalities %>%
          ue_short_by_pop = ue_short / (BE + AM + SO),
          communal_tax_by_pop = communal_tax / POP_workingage)
 
-# # drop municipality name to avoid parsing issues
-#  municipalities = municipalities %>%
-#   select(-GEMEINDE)
-
 # export
- data_out = "A:/jobguarantee/2020-09-municipal-data-processed/" #Lukas
+ data_out = "A:/jobguarantee/2020-09-municipal-data-processed/" # Lukas
 # data_out = "/Volumes/MARIENTHAL/jobguarantee/2020-09-municipal-data-processed/" # Max
 
-# municipalities_print <- municipalities ("municipalities_merged_monthly_design.csv",encoding="utf8")
- 
 municipalities %>%
   write_csv(paste(data_out,
                   "municipalities_merged_monthly_design.csv",

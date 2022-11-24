@@ -17,13 +17,6 @@ files_used = c("AL_NOE_ALTER.dsv",
                "AL_NOE_MIGRATIONSHINTERGRUND.dsv")
 
 
-#sub_paths = c("2021-07_AL_NOE/2021-07_")
-#file_paths = paste(data_path, sub_paths, files_used, sep="")
-#data_list_al = map(file_paths, function(path) read_delim(path, delim=";",
-#                                                         locale = locale(encoding = "latin1", decimal_mark = ",")))
-
-
-
 # loop over AL cross-section variables
 length(files_used)
 year_vec <- 2020:2021
@@ -79,11 +72,7 @@ data_edu_AL_tmp = read_delim(
   locale = locale(encoding = "latin1", decimal_mark = ",")
 )
 
-# aggregate edu status
-# ISCED 5-6 = edu_high_AL
-# ISCED 3-4 = edu_middle_AL
-# ISCED 1-2 = edu_low_AL
-# -- = edu_NA_AL
+
 data_edu_AL_tmp <- data_edu_AL_tmp %>%
   mutate(
     AUSBILDUNG = replace(AUSBILDUNG, AUSBILDUNG == "AK", "edu_high_AL"),
@@ -251,7 +240,6 @@ sex_AL_list[[y]] <-
 names(sex_AL_list)[y] <- names_list[[y]]
 
 
-
 ### migration ####
 file_path[[y]] = paste(data_path,  path_list[[y]], files_used[5], sep = "")
 names(file_path)[y] <- names_list[[y]]
@@ -292,11 +280,9 @@ mig_AL_wide_tmp = data_mig_AL_tmp %>%
 mig_AL_wide_tmp = mig_AL_wide_tmp %>%
   mutate(GKZ = as.double(GKZ))
 
-
 mig_AL_list[[y]] <-
   mig_AL_wide_tmp
 names(mig_AL_list)[y] <- names_list[[y]]
-
 
 }
 
@@ -352,7 +338,6 @@ data_LZBL_AL = read_delim(
   locale = locale(encoding = "latin1", decimal_mark = ",")
 )
 
-# drop X1 (var for number of row)
 myvars <- c("GKZ", "STICHTAG", "LZBL", "n")
 data_LZBL_AL <- data_LZBL_AL[myvars]
 
@@ -360,19 +345,11 @@ data_LZBL_AL <- data_LZBL_AL[myvars]
 data_LZBL_AL = data_LZBL_AL %>%
   spread(LZBL, n)
 
-# replace NA with 0 to create a balanced panel
+# replace NA with 0 to create a balanced panel since NAs stand for 0
 data_LZBL_AL = data_LZBL_AL %>%
   mutate(ue_long = replace_na(J, 0),
          ue_short = replace_na(N, 0))
 
-# create annual averages
-# data_LZBL_AL$year <- data_LZBL_AL$STICHTAG %>%
-#   format("%Y")
-# 
-# mean_LZBL_AL <- data_LZBL_AL %>%
-#   group_by(GKZ, month) %>%
-#   summarize(ue_long = mean(ue_long),
-#             ue_short = mean(ue_short))
 
 # create monthly averages
  data_LZBL_AL$month <- data_LZBL_AL$STICHTAG %>%
@@ -381,7 +358,6 @@ data_LZBL_AL = data_LZBL_AL %>%
  mean_LZBL_AL <- data_LZBL_AL %>%
    select(-"J",-"N",-"STICHTAG")
 
- 
 
 # Link municipalities that changed GKZ over time (2017 reform)
 oldGKZ <-
@@ -491,15 +467,6 @@ health_AL_wide <- health_AL_wide %>%
   summarize(health_condition_AL = sum(health_condition_AL),
             healthy_AL = sum(healthy_AL)
             )
-
-# create annual averages
-# health_AL_wide$year <- health_AL_wide$STICHTAG %>%
-#   format("%Y")
-# 
-# mean_health_AL_wide <- health_AL_wide %>%
-#   group_by(GKZ, year) %>%
-#   summarize(health_condition_AL = mean(health_condition_AL),
-#             healthy_AL = mean(healthy_AL))
 
 # create monthly averages
 health_AL_wide$month <- health_AL_wide$STICHTAG %>%
@@ -817,15 +784,6 @@ mig_POP_list[[y]] <-
   mig_POP_wide_tmp
 names(mig_POP_list)[y] <- names_list[[y]]
 
-# ### sector tbd####
-# file_path = paste(file_paths_pop[10], sep = "")
-# 
-# data_sector_POP = read_delim(
-#   file_path,
-#   delim = ";",
-#   locale = locale(encoding = "latin1", decimal_mark = ",")
-# ) %>%
-# select( -1) # drop first column X1
 
 ### care responsibility ####
 # indicates whether the person has a care responsibility for a child <15 "Versorgungspflicht"
@@ -889,51 +847,6 @@ firmsize_POP =
 mean_age_POP =
   do.call(rbind, mean_age_POP_list)
 
-### education #### - exclude because file contains only "keine Angabe" and no other data.
-# excluded of loop because 2020 file contains only "keine Angabe" for education
-#file_path = paste(file_paths_pop[5], sep = "")
-
-#data_edu_POP = read_delim(
-#  file_path,
-#  delim = ";",
-#  locale = locale(encoding = "latin1", decimal_mark = ",")
-#)
-
-# aggregate edu status
-# ISCED 5-6 = edu_high_POP
-# ISCED 3-4 = edu_middle_POP
-# ISCED 1-2 = edu_low_POP
-# -- = edu_NA_POP
-#data_edu_POP <- data_edu_POP %>%
-#  rename(education = GESCHAETZTE_AUSBILDUNG) %>%
-#  mutate(
-#    education = replace(education, education == "Uni/FH", "edu_high_POP"),
-#    education = replace(education, education == "AHS", "edu_middle_POP"),
-#    education = replace(education, education == "BHS", "edu_middle_POP"),
-#    education = replace(education, education == "BMS", "edu_middle_POP"),
-#    education = replace(education, education == "Lehre", "edu_middle_POP"),
-#    education = replace(education, education == "Pflichtschule", "edu_low_POP"),
-#    education = replace(education, education == "keine Angabe", "edu_NA_POP")
-#  )
-
-# sum rows of same category
-#data_edu_POP <- data_edu_POP %>%
-#  group_by(GKZ, education) %>%
-#  summarize(n = sum(n))
-
-# reshape dataset to wide
-#edu_POP_wide = data_edu_POP %>%
-#  spread(education, n)
-
-# compute rates
-#edu_POP_wide = edu_POP_wide %>%
-#  mutate(
-#    edu_high_POP_by_tot_POP = edu_high_POP / (edu_high_POP + edu_middle_POP + edu_low_POP + edu_NA_POP),
-#    edu_middle_POP_by_tot_POP = edu_middle_POP / (edu_high_POP + edu_middle_POP + edu_low_POP + edu_NA_POP),
-#    edu_low_POP_by_tot_POP = edu_low_POP / (edu_high_POP + edu_middle_POP + edu_low_POP + edu_NA_POP)
-#  ) %>%
-#  mutate(year = 2019 %>% # add year for merging
-#           as.character()) # change variable type for merging
 
 #### 4) Population - longitudinal ####
 
@@ -947,7 +860,7 @@ read_data_NOE = function(path, filename) {
 
 ### labor market status ####
 
-# Pop every status - ONLY AL AVAILABLE IN DATA FOR NOW - CHECK WITH AMS
+# Pop labor market status
 
 data_pop_2021 = read_data_NOE(data_path, 
                               "Bev_Uni_Status_GKZ_Stichtag.dsv")
@@ -958,20 +871,6 @@ data_pop = data_pop_2021 %>%
   rename(status = PK_E_L3 ,
          n = "SUM(XT.REEMPLOYEES)")
 
-
-
-#Disable commands below to keep monthly rates.
-
-# create annual averages
-# # create year variable for annual rates
-# data_pop$year <- data_pop$STICHTAG %>%
-#   format("%Y")
-# 
-# # collapse by GKZ, (=Gemeinde), year, status (computing annual averages)
-# pop_status_annual <- data_pop %>%
-#   group_by(GKZ, year, status) %>%
-#   summarize(status_n = mean(n))
-
 # create monthly averages
 data_pop$month <- data_pop$STICHTAG %>%
   format("%Y-%m") 
@@ -979,10 +878,7 @@ data_pop$month <- data_pop$STICHTAG %>%
 data_pop <- data_pop %>%
   select("GKZ", "month", "status", "n")
 
-
-
 # aggregate status
-
 pop_status_summed <- data_pop %>%
   mutate(
     status_fine = status,
@@ -1020,9 +916,6 @@ pop_status_broad_wide = pop_status_summed %>%
   spread(status, n)
 
 
-# Added later after Talk to AMS Jan 2022
-# add AL as a narrower definition of unemployment to dataset 
-# (in addition to the broader definition AM)
 pop_status_fine_summed <- data_pop %>%
   group_by(GKZ, month, status) %>%
   summarize(n = sum(n))
@@ -1031,22 +924,18 @@ pop_status_fine_summed <- data_pop %>%
 pop_status_fine_wide = pop_status_fine_summed %>%
   spread(status, n)
 
-# merge dataset with narrower status definition with dataset with broader status definition
 pop_status_wide =
   pop_status_broad_wide %>%  # long & short term UE longitudinal LM status longitudinal
   group_by(GKZ, month) %>%
   left_join(pop_status_fine_wide, by = c("GKZ", "month")) 
 
-
-
-# no municipalities have NAs for AM & BE
-# replace NA with 0 to create a balanced panel
+# replace NA with 0 to create a balanced panel since NAs indicate 0
 pop_status_wide = pop_status_wide %>%
   mutate(AM = replace_na(AM, 0),
          BE = replace_na(BE, 0),
          AL = replace_na(AL, 0))
 
-# sum up to total population workingage
+# sum up to total population working age
 pop_status_wide <- pop_status_wide %>%
   mutate(POP_workingage = AM + BE + SO)
 
@@ -1093,44 +982,12 @@ data_wage_POP = data_wage_POP %>%
 data_wage_POP <- data_wage_POP %>%
   mutate(STICHTAG = ymd(STICHTAG))
 
-# # create annual averages
-# data_wage_POP$year <- data_wage_POP$STICHTAG %>%
-#   format("%Y")
-# 
-# # create 2 summary variables: 1: mean wage for 2020; 2: mean wage for first half of 2021
-# mean_wage_POP <- data_wage_POP %>%
-#   group_by(GKZ, year) %>%
-#   summarize(mean_wage = weighted.mean(wage_mean, n)) %>% # weighted average
-#   mutate(GKZ = as.numeric(GKZ))
-
 # create monthly averages
 data_wage_POP$month <- data_wage_POP$STICHTAG %>%
   format("%Y-%m") 
 
 mean_wage_POP <- data_wage_POP %>%
   select("GKZ", "month", "wage_mean")
-
-
-### 6) Communal tax ####
-#file_path = paste(data_path, "20-597_STATcube_Kommunalsteuer_NOE-Gem_j00-19.csv", sep = "")
-
-#data_communal_tax = read_csv(file_path)
-
-# reshape dataset to long
-#data_tax_long = data_communal_tax %>%
-#  gather(key = year, value = communal_tax, -GEMEINDE)
-
-# seperate GEMEINDE & GKZ
-#data_tax_long_sep = data_tax_long %>%
-#  separate(GEMEINDE, sep="<", into=c("GEMEINDE", "GKZ"))
-
-# remove >
-#data_tax_long_sep = data_tax_long_sep %>%
-#  separate(GKZ, sep=">", into=c("GKZ", "GKZ2")) %>%
-#     select(-"GKZ2", - "GEMEINDE") %>%
- #       mutate(GKZ = as.numeric(GKZ),
-#               communal_tax = as.numeric(communal_tax) # change variable type for merging
-#               ) 
 
 #### 7) Merge ####
 #align GKZ variable type from character to double
@@ -1164,26 +1021,16 @@ municipalities =
   left_join(mean_health_AL_wide, by = c("GKZ", "month")) %>%  # health AL longitudinal
   left_join(mean_age_POP, by = c("GKZ", "month")) %>%  # age POP cross-section  
   left_join(firmsize_POP, by = c("GKZ", "month")) %>%  # firmsize POP cross-section
-#  left_join(edu_POP_wide, by = c("GKZ", "year")) %>%  # edu POP cross-section - excluded because 2020 files contain only NAs
   left_join(sex_POP, by = c("GKZ", "month")) %>%  # sex POP cross-section    
   left_join(nationality_POP, by = c("GKZ", "month")) %>%  # nationality POP cross-section   
   left_join(mig_POP, by = c("GKZ", "month")) %>%  # migration background POP cross-section   
   left_join(care_POP, by = c("GKZ", "month")) %>%  # care responsibility POP cross-section  
   left_join(mean_wage_POP, by = c("GKZ", "month")) # mean wage cross-section for 2019 & 2020
-#  left_join(data_tax_long_sep, by = c("GKZ", "year")) # communal tax
 
-  
-  
+
 # drop Pop without GKZ (GKZ = 0)
 municipalities <- municipalities %>%
   filter(GKZ != 0)
-
-# compute rates for long & short UE
-#municipalities = municipalities %>%
-#  mutate(ue_long_by_pop = ue_long / (BE + AM + SO),
-#         ue_short_by_pop = ue_short / (BE + AM + SO),
-#         communal_tax_by_pop = communal_tax / POP_workingage)
-
 
 # export
  data_out = "A:/jobguarantee/2021-09-municipal-data-processed/" # Lukas

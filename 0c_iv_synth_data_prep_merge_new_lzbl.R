@@ -1,25 +1,10 @@
-###### Data preparation for corrected AMS Data: - 2022-02
+###### Data preparation for new AMS Data: - 2022-02
 # New SV data are now splitted into long and short term unemployed
 # Source: AMS Erwerbskarrieremonitoring
-# Diese Daten basieren auf der SV Datenbank und damit der geographischen PLZ Zuordnung.
-# Die PLZ Zuordnung überschneidet sich mit anderen Gemeinden und 
-# entspricht nicht ausschließlich Gramatneusiedl.
-# Tatsächlich verwenden wir diese SV Daten aber weiterhin, auch für den split zwischen
-# langzeit und kurzzeit Arbeitslosigkeit, um eine einheitliche Evaluierung konsistent
-# mit den anderen Quellen zu gewährleisten.
-# Würden wir nur die - geographisch korrekten - AMS Daten verwenden, und die SV Daten 
-# nicht verwenden, hätten wir keine Daten zu Beschäftigung und könnten somit keine AL Raten 
-# oder Wages etc berechnen und auch nicht für unsere Outcomes evaluieren.
-
 
 home <- getwd()
 
 #### Prep new SV data #### 
-# from AMS Erwerbskarrieremonitoring - split between long and short term unemployed
-# weird that it is in the AL_NOE subfolder instead of the BEV_NOE subfolder
-# but the data corresponds to the previous SV data
-# long- and short term ue sum up to total ue based on SV from previous deliveries
-
 read_data_NOE = function(path, filename) {
   paste(path, filename, sep = "") %>%
     read_delim(delim = ";",
@@ -92,7 +77,6 @@ admin_data_towns =
 
 
 # change variable type for merging
-
 data_ams_wide <- data_ams_wide %>%
   mutate(GKZ = as.double(GKZ))
 
@@ -101,12 +85,6 @@ municipalities =
   admin_data_towns %>%  # long & short term UE longitudinal LM status longitudinal
   group_by(GKZ, month) %>%
   left_join(data_ams_wide, by = c("GKZ", "month"))
-
-
-# sum up to total population working-age using new unemployment variable
-# that excludes AMS course participants
-# municipalities <- municipalities %>%
-#  mutate(POP_workingage_revised = ue_tot_ams + BE + SO)
 
 # compute long-term ue rates with SV long term ue data
 municipalities = municipalities %>%
@@ -117,8 +95,6 @@ mutate(
 # EMP_rate_tot_sv = BE / POP_workingage_revised,
 #  Inactive_rate_tot_sv = SO / POP_workingage_revised 
 ) 
-
-
 
 # export
 municipalities %>%
