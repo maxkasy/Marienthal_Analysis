@@ -53,9 +53,7 @@ data_ams_wide$month <- data_ams_wide$STICHTAG %>%
   format("%Y-%m") 
 
 # export
-data_out = "A:/jobguarantee/2022-02-municipal-data-processed/" # Lukas
-# data_out = "/Volumes/MARIENTHAL/jobguarantee/2021-09-municipal-data-processed/" # Max
-
+data_out = paste0(veracrypt_path, "jobguarantee/2022-02-municipal-data-processed/") 
 data_ams_wide %>%
   write_csv(paste(data_out,
                   "municipalities_ams_ue.csv",
@@ -63,10 +61,6 @@ data_ams_wide %>%
 
 
 #### Merge to municipalities_merged_monthly ####
-
- veracrypt_path = "A:/" # Lukas
-#veracrypt_path = "/Volumes/MARIENTHAL/" # Max
-
 outcomes_subpath = "jobguarantee/2021-09-municipal-data-processed/"
 data_path = paste(veracrypt_path, outcomes_subpath, sep = "")
 
