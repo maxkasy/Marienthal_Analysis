@@ -15,9 +15,9 @@ library(ggtext) # add annotations to figures
 
 
 home <- getwd()
-Lukas = T
+Lukas = F
 # Switch path for data-files
-if (Lukas) {veracrypt_path = "A:/"} else {veracrypt_path = "/Volumes/MARIENTHAL/"}
+if (Lukas) {veracrypt_path = "A:/"} else {veracrypt_path = "/Volumes/NO NAME/"}
 
 
 # 0 Data preparation ----
