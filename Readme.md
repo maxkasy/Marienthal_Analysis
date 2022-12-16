@@ -5,10 +5,8 @@ This complements the replication files for the experimental design, which can be
 
 ## Data access
 
-
-  
 Data protection regulations prohibit us from sharing any of the data directly.
-The AMS (Austrian labor market serrvice) has, however, agreed to handle data access requests. 
+The AMS (Austrian labor market service) has, however, agreed to handle data access requests. 
 Please address such requests to [statistik.niederoesterreich@ams.at](mailto:statistik.niederoesterreich@ams.at).
 Data will be shared in the form of an archive with sub-folders, as described below.
 
@@ -71,6 +69,24 @@ All of our empirical results can be produced from the raw data by running *maste
 ### Analysis comparing to control town individuals
 - *3b_i_Control-town_individuals_analysis_2021.R*
 - *3b_ii_Control-town_individuals_analysis_2022.R*
+
+
+## Reproducible environment using Docker
+
+To ensure future reproducibility of our analysis, we have included a *Docker* file.
+Executing the analysis in a *Docker* container will ensure exact reproduction of our results, on any machine, and independently of future updates to the software (*R*) and packages.
+
+To execute the analysis in such a container, execute the following steps:
+- Make sure *Docker* and *Docker Desktop* are installed on your machine.
+- Copy the data files (obtained from the *AMS*), in their respective folders, into a subfolder of the folder containing this code.
+- Change *veracrypt_path* on line 20 of *master.R* to point to this subfolder.
+- Open the terminal and set your path to the repository that contains the *Dockerfile*.
+- Execute the *docker build* command:  
+*docker build --tag marienthal_analysis:latest*  
+This may take several minutes but only needs to be done once.
+-  After the image has been built, execute the *docker run* command to start the container:  
+*docker run --rm -d -p 8787:8787 marienthal_analysis:latest* 
+- To access the running container, click on its port *8787:8787* hyperlink in *Docker Desktop* in the *Containers* tab. The browser will open a new tab with RStudio from where all files inside the container can be accessed and the analysis can be replicated.
 
 
 ## Pre-registration and code
