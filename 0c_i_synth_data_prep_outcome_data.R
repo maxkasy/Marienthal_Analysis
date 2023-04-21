@@ -929,11 +929,16 @@ pop_status_wide =
   group_by(GKZ, month) %>%
   left_join(pop_status_fine_wide, by = c("GKZ", "month")) 
 
-# replace NA with 0 to create a balanced panel since NAs indicate 0
-pop_status_wide = pop_status_wide %>%
-  mutate(AM = replace_na(AM, 0),
-         BE = replace_na(BE, 0),
-         AL = replace_na(AL, 0))
+# # replace NA with 0 to create a balanced panel since NAs indicate 0
+# pop_status_wide = pop_status_wide %>%
+#   mutate(AM = replace_na(AM, 0),
+#          BE = replace_na(BE, 0),
+#          AL = replace_na(AL, 0))
+# switch to Base R version to replace 0s, which is faster for computing
+pop_status_wide["AM"][is.na(pop_status_wide["AM"])] <- 0
+pop_status_wide["BE"][is.na(pop_status_wide["BE"])] <- 0
+pop_status_wide["AL"][is.na(pop_status_wide["AL"])] <- 0
+
 
 # sum up to total population working age
 pop_status_wide <- pop_status_wide %>%
@@ -950,14 +955,136 @@ pop_status_wide = pop_status_wide %>%
   )
 
 # replace NaN with 0 in few municipalities with 0 AM & 0 BE for balanced panel
-pop_status_wide = pop_status_wide %>%
-  mutate(UE_rate_U3 = replace_na(UE_rate_U3, 0),)
+# pop_status_wide = pop_status_wide %>%
+#   mutate(UE_rate_U3 = replace_na(UE_rate_U3, 0),)
+# switch to Base R version to replace 0s, which is faster for computing
+pop_status_wide["UE_rate_U3"][is.na(pop_status_wide["UE_rate_U3"])] <- 0
 
 # test for balanced panel - remaining GKZ have less than 5 observations
 unbalanced = pop_status_wide %>%
   group_by(GKZ) %>%
   summarize(n = n()) %>%
   filter(n < 10)
+
+
+##### Update 2023 - Pop - longitudinal ####
+
+read_data_NOE = function(path, filename) {
+  paste(path, filename, sep = "") %>%
+    read_delim(delim = ";",
+               locale = locale(encoding = "latin1", decimal_mark = ","))
+}
+
+data_path_2023 = paste0(veracrypt_path, "jobguarantee/2023-02-municipal-data-raw/")
+
+data_pop_2023 = read_data_NOE(data_path_2023, 
+                              "BEV_NOE/Bev_Uni_Status_GKZ_Stichtag.csv")
+
+
+data_pop_2023 = data_pop_2023 %>%
+  mutate(dateTime=as.Date(STICHTAG, format = "%Y-%m-%dT%H:%M:%S+0000")) %>%
+  select(-STICHTAG) %>% 
+  rename(status = PK_E_L3 ,
+         n = "SUM(XT.REEMPLOYEES)",
+         STICHTAG = dateTime)
+
+# create monthly averages
+data_pop_2023$month <- data_pop_2023$STICHTAG %>%
+  format("%Y-%m") 
+
+data_pop_2023 <- data_pop_2023 %>%
+  select("GKZ", "month", "status", "n")
+
+
+# aggregate status
+pop_status_summed_2023 <- data_pop_2023 %>%
+  mutate(
+    status_fine = status,
+    status = replace(status, status == "AQ", "AM"),
+    # AMS Qualifikation = AMS Vormerkung
+    status = replace(status, status == "AO", "AM"),
+    # Arbeitslos laut HV = AMS Vormerkung
+    status = replace(status, status == "AS", "AM"),
+    # sonstige AMS Vormerkung = AMS Vormerkung
+    status = replace(status, status == "AL", "AM"),
+    # Arbeitslos = AMS Vormerkung
+    status = replace(status, status == "NU", "BE"),
+    # Nicht gefÃ¶rderte UnselbststÃ¤ndige = BeschÃ¤ftigte
+    status = replace(status, status == "GU", "BE"),
+    # GefÃ¶rderte UnselbststÃ¤ndige = BeschÃ¤ftigte
+    status = replace(status, status == "SB", "BE"),
+    # SelbststÃ¤nidge = BeschÃ¤ftigte
+    status = replace(status, status == "GE", "SO"),
+    # Gesichert Erwerbsfern = Sonstige
+    status = replace(status, status == "GB", "BE"),
+    # GeringfÃ¼gige BeschÃ¤ftigung = BeschÃ¤ftigung
+    status = replace(status, status == "SE", "SO"),
+    # Sonstig erwerbsfern = Sonstige
+    status = replace(status, status == "UN", "SO") 
+    # Tod bzw. keine Daten = Sonstige
+  )
+
+# sum rows of same category
+pop_status_summed_2023 <- pop_status_summed_2023 %>%
+  group_by(GKZ, month, status) %>%
+  summarize(n = sum(n))
+
+# reshape dataset to wide
+pop_status_broad_wide_2023 = pop_status_summed_2023 %>%
+  spread(status, n)
+
+
+pop_status_fine_summed_2023 <- data_pop_2023 %>%
+  group_by(GKZ, month, status) %>%
+  summarize(n = sum(n))
+
+# reshape dataset to wide
+pop_status_fine_wide_2023 = pop_status_fine_summed_2023 %>%
+  spread(status, n)
+
+pop_status_wide_2023 =
+  pop_status_broad_wide_2023 %>%  # long & short term UE longitudinal LM status longitudinal
+  group_by(GKZ, month) %>%
+  left_join(pop_status_fine_wide_2023, by = c("GKZ", "month")) 
+
+# replace NA with 0 to create a balanced panel since NAs indicate 0
+# ## command takes very long, therefore switchted to Base R version below
+# pop_status_wide_2023 = pop_status_wide_2023 %>%
+#   mutate(AM = replace_na(AM, 0),
+#          BE = replace_na(BE, 0),
+#          AL = replace_na(AL, 0))
+# switch to Base R version to replace 0s, which is faster
+pop_status_wide_2023["AM"][is.na(pop_status_wide_2023["AM"])] <- 0
+pop_status_wide_2023["BE"][is.na(pop_status_wide_2023["BE"])] <- 0
+pop_status_wide_2023["AL"][is.na(pop_status_wide_2023["AL"])] <- 0
+
+# sum up to total population working age
+pop_status_wide_2023 <- pop_status_wide_2023 %>%
+  mutate(POP_workingage = AM + BE + SO)
+
+# compute rates
+pop_status_wide_2023 = pop_status_wide_2023 %>%
+  mutate(
+    UE_rate_U3 = AM / (BE + AM),
+    UE_rate_tot = AM / (BE + AM + SO),
+    EMP_rate_tot = BE / (BE + AM + SO),
+    Inactive_rate_tot = SO / (BE + AM + SO),
+    UE_rate_tot_AMS_definition = AL / (BE + AM + SO)
+  )
+
+# # replace NaN with 0 in few municipalities with 0 AM & 0 BE for balanced panel
+# pop_status_wide_2023 = pop_status_wide_2023 %>%
+#   mutate(UE_rate_U3 = replace_na(UE_rate_U3, 0),)
+# switch to Base R version to replace 0s, which is faster for computing
+pop_status_wide_2023["UE_rate_U3"][is.na(pop_status_wide_2023["UE_rate_U3"])] <- 0
+
+
+# test for balanced panel - remaining GKZ have less than 5 observations
+unbalanced = pop_status_wide_2023 %>%
+  group_by(GKZ) %>%
+  summarize(n = n()) %>%
+  filter(n < 10)
+
 
 
 #### 5) Wages - cross section  ####
@@ -1007,11 +1134,31 @@ mean_wage_POP <- mean_wage_POP %>%
 pop_status_wide <- pop_status_wide %>%
   mutate(GKZ = as.double(GKZ))
 
+pop_status_wide_2023 <- pop_status_wide_2023 %>% 
+  mutate(GKZ = as.double(GKZ))  
+
+# ## improvise
+# municipalities <- municipalities_outcomes
+# 
+# municipalities =
+#   group_by(GKZ, month) %>%
+#   left_join(pop_status_wide_2023, by = c("GKZ", "month")) # 2023 update - LM status longitudinal
+# 
+
+## drop monthly observations from older update
+# that exist in both datasets before merging
+# drop 2021-06, 2021-07 and 2021-08 from pop_status_wide
+pop_status_wide <- pop_status_wide %>%
+  filter(month < "2021-06")
+
+mean_LZBL_AL <- mean_LZBL_AL %>%
+  filter(month < "2021-06")
 
 municipalities =
   mean_LZBL_AL %>%  # long & short term UE longitudinal LM status longitudinal
   group_by(GKZ, month) %>%
   left_join(pop_status_wide, by = c("GKZ", "month")) %>% # LM status longitudinal
+#  full_join(pop_status_wide_2023, by = c("GKZ", "month")) %>% # 2023 update - LM status longitudinal
   left_join(mean_age_AL, by = c("GKZ", "month")) %>% # age AL cross-section
   left_join(edu_AL, by = c("GKZ", "month")) %>% # edu AL cross-section
   left_join(german_AL, by = c("GKZ", "month")) %>% # German AL cross-section
@@ -1027,14 +1174,15 @@ municipalities =
   left_join(care_POP, by = c("GKZ", "month")) %>%  # care responsibility POP cross-section  
   left_join(mean_wage_POP, by = c("GKZ", "month")) # mean wage cross-section for 2019 & 2020
 
+## Append 2023 update
+municipalities <- rbind(municipalities, pop_status_wide_2023)
 
 # drop Pop without GKZ (GKZ = 0)
 municipalities <- municipalities %>%
   filter(GKZ != 0)
 
 # export
- data_out = "A:/jobguarantee/2021-09-municipal-data-processed/" # Lukas
-# data_out = "/Volumes/MARIENTHAL/jobguarantee/2021-09-municipal-data-processed/" # Max
+data_out = paste0(veracrypt_path, "jobguarantee/2023-02-municipal-data-processed/")
 
 municipalities %>%
   write_csv(paste(data_out,

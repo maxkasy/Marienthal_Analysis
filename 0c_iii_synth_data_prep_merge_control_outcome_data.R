@@ -2,7 +2,8 @@
 design_subpath = "jobguarantee/2020-09-municipal-data-processed/"
 design_path = paste(veracrypt_path, design_subpath, sep = "")
 
-outcomes_subpath = "jobguarantee/2021-09-municipal-data-processed/"
+# outcomes_subpath = "jobguarantee/2021-09-municipal-data-processed/"
+outcomes_subpath = "jobguarantee/2023-02-municipal-data-processed/"
 outcomes_path = paste(veracrypt_path, outcomes_subpath, sep = "")
 
 
@@ -15,6 +16,7 @@ municipalities_outcomes =
   paste0(outcomes_path, "municipalities_merged_monthly_outcomes.csv") %>%
   read_csv(
     col_types = paste(c("innc", rep("n", 52)), collapse = '') )
+
 
 municipalities = bind_rows(municipalities_design, municipalities_outcomes)  %>%
      group_by(GKZ, month) %>%

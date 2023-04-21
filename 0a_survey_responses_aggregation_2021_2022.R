@@ -153,7 +153,7 @@ for (sample_group in c("Participants", "Control-towns")) {
     
   # keep only lamb and social_capital disaggregated
    responses_aggregated_detailed <- responses_aggregated_detailed  %>% 
-        select(PSTNR, contains("lamb"), contains("social_capital") )
+        select(PSTNR, contains("lamb"), contains("social_capital"), contains("social_inclusion"))
 
    responses_aggregated_detailed %>%
         write_csv(destination_file_detailed)

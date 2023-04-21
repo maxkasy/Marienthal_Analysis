@@ -1,4 +1,4 @@
-outcomes_subpath = "jobguarantee/2022-02-municipal-data-processed/"
+outcomes_subpath = "jobguarantee/2023-02-municipal-data-processed/"
 data_path = paste(veracrypt_path, outcomes_subpath, sep = "")
 
 Gramatneusiedl = 30731 # GKZ for treated town
@@ -9,12 +9,15 @@ outcomes = c("UE_rate_tot_sv_control", "UE_long_rate_tot_sv", "UE_short_rate_tot
 outcome_labels = c("Unemployment", "Long-term unemployment", "Short-term unemployment",
                    "Employment", "Inactivity rate")
 
+# previously used this file in 2022-02-municipal-data-processed/:
+# paste0(data_path, "municipalities_merged_monthly_outcomes.csv") %>%
 admin_data_towns =
-  paste0(data_path, "municipalities_merged_monthly_outcomes.csv") %>%
+  paste0(data_path, "municipalities_merged_monthly.csv") %>%
   read_csv( 
     col_types = paste(c("icc", rep("n", 81)), collapse = '')   ) %>% 
   mutate(month =  parse_date_time(month, "%Y-%m")) %>% 
-  filter(month >  parse_date_time("2019-01", "%Y-%m"))
+  filter(month >  parse_date_time("2019-01", "%Y-%m"),
+         month < parse_date_time("2022-10", "%Y-%m"))
 
 
 synthetic_control_weights =

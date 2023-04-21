@@ -983,11 +983,15 @@ pop_status_wide =
   group_by(GKZ, month) %>%
   left_join(pop_status_fine_wide, by = c("GKZ", "month")) 
 
-# replace NA with 0 to create a balanced panel since NAs indicate 0
-pop_status_wide = pop_status_wide %>%
-  mutate(AM = replace_na(AM, 0),
-         BE = replace_na(BE, 0),
-         AL = replace_na(AL, 0))
+# # replace NA with 0 to create a balanced panel since NAs indicate 0
+# pop_status_wide = pop_status_wide %>%
+#   mutate(AM = replace_na(AM, 0),
+#          BE = replace_na(BE, 0),
+#          AL = replace_na(AL, 0))
+# switch to Base R version to replace 0s, which is faster for computing
+pop_status_wide["AM"][is.na(pop_status_wide["AM"])] <- 0
+pop_status_wide["BE"][is.na(pop_status_wide["BE"])] <- 0
+pop_status_wide["AL"][is.na(pop_status_wide["AL"])] <- 0
 
 # sum up to total population working age
 pop_status_wide <- pop_status_wide %>%
@@ -1003,9 +1007,12 @@ pop_status_wide = pop_status_wide %>%
     UE_rate_tot_AMS_definition = AL / (BE + AM + SO)
   )
 
-# replace NaN with 0 in few municipalities with 0 AM & 0 BE for balanced panel
-pop_status_wide = pop_status_wide %>%
-  mutate(UE_rate_U3 = replace_na(UE_rate_U3, 0),)
+# # replace NaN with 0 in few municipalities with 0 AM & 0 BE for balanced panel
+# pop_status_wide = pop_status_wide %>%
+#   mutate(UE_rate_U3 = replace_na(UE_rate_U3, 0),)
+# switch to Base R version to replace 0s, which is faster for computing
+pop_status_wide["UE_rate_U3"][is.na(pop_status_wide["UE_rate_U3"])] <- 0
+
 
 # test for balanced panel - remaining GKZ have less than 5 observations
 unbalanced = pop_status_wide %>%
@@ -1098,6 +1105,7 @@ mean_wage_POP <- mean_wage_POP %>%
 pop_status_wide <- pop_status_wide %>%
   mutate(GKZ = as.double(GKZ))
 
+
 municipalities =
   pop_status_wide %>%  # LM status longitudinal
   group_by(GKZ, month) %>%
@@ -1132,9 +1140,8 @@ municipalities = municipalities %>%
          communal_tax_by_pop = communal_tax / POP_workingage)
 
 # export
- data_out = "A:/jobguarantee/2020-09-municipal-data-processed/" # Lukas
-# data_out = "/Volumes/MARIENTHAL/jobguarantee/2020-09-municipal-data-processed/" # Max
-
+data_out = paste0(veracrypt_path, "jobguarantee/2020-09-municipal-data-processed/")
+    
 municipalities %>%
   write_csv(paste(data_out,
                   "municipalities_merged_monthly_design.csv",

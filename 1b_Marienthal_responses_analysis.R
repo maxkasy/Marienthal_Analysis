@@ -100,7 +100,7 @@ for (c in 1:3){
     # Combined figure
     ggsave(paste0("Figures/Survey_combined_", suffix, ".png"),
            plot_combined(p_te, p_pv),
-           width = 10, height= 3)
+           width = 10, height= 4.5)
     # Confidence intervals  
     treatment_effects_CI_SE = responses_and_controls  |>  
         treatment_effects_lm_fun_SE(outcome_variables, unlist(control_tbl[[c,"controls"]])) 

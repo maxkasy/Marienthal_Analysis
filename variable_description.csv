@@ -68,7 +68,7 @@ Q103_First Click,Timing - First Click,32,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q103_Last Click,Timing - Last Click,33,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q103_Page Submit,Timing - Page Submit,34,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q103_Click Count,Timing - Click Count,35,0,0,meta,,,,,meta,,,,,,,,,,0,meta
-Q56,"Compared to 6 months ago before the start of MAGMA, would you say that you are doing better, the same, or worse?",36,1,-1,magma,ordinal,,,,wellbeing_direct,7,7,,social_outcomes,wellbeing,Wellbeing change, Wellbeing change,"1,2,3","4,5,6,7",1,wellbeing_direct
+Q56,"Compared to 6 months ago before the start of MAGMA, would you say that you are doing better, the same, or worse?",36,1,-1,magma,ordinal,,,,wellbeing_direct,7,7,,social_outcomes,wellbeing,Well-being change, Well-being change,"1,2,3","4,5,6,7",1,wellbeing_direct
 Q57,Can you mention in 1-2 sentences if there is anything you particularly like about the MAGMA programme?,37,0,0,magma,string,,,,magma,,,,,,,,,,0,magma
 Q84,Can you mention in 1-2 sentences if there is anything you particularly dislike about the MAGMA programme?,38,0,0,magma,string,,,,magma,,,,,,,,,,0,magma
 Q104_First Click,Timing - First Click,39,0,0,meta,,,,,meta,,,,,,,,,,0,meta
@@ -98,8 +98,8 @@ Q106_First Click,Timing - First Click,62,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q106_Last Click,Timing - Last Click,63,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q106_Page Submit,Timing - Page Submit,64,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q106_Click Count,Timing - Click Count,65,0,0,meta,,,,,meta,,,,,,,,,,0,meta
-Q18,How many new people have you met in the past month? Please type the approximate number.,66,0,1,social_inclusion,continuous,,,,social_inclusion,10,10,,social_outcomes,social_inclusion,Social inclusion,Social inclusion,>3,"1,2,3",1,social_inclusion
-Q19,Which of the following statements best describes your current relationship status?,67,0,-1,social_inclusion,ordinal,,,,social_inclusion,4,4,,social_outcomes,social_inclusion,Social inclusion,Social inclusion,"1,2","3,4",1,social_inclusion_relationship
+Q18,How many new people have you met in the past month? Please type the approximate number.,66,0,1,social_inclusion,continuous,,,social_inclusion_friends,social_inclusion,10,10,,social_outcomes,social_inclusion,Social inclusion,Social inclusion: contacts,>3,"1,2,3",1,social_inclusion
+Q19,Which of the following statements best describes your current relationship status?,67,0,-1,social_inclusion,ordinal,,,social_inclusion_relationship,social_inclusion,4,4,,social_outcomes,social_inclusion,Social inclusion,Social inclusion: relationship,"1,2","3,4",1,social_inclusion_relationship
 Q107_First Click,Timing - First Click,68,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q107_Last Click,Timing - Last Click,69,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q107_Page Submit,Timing - Page Submit,70,0,0,meta,,,,,meta,,,,,,,,,,0,meta
@@ -638,13 +638,13 @@ Q112_First Click,Timing - First Click,229,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q112_Last Click,Timing - Last Click,230,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q112_Page Submit,Timing - Page Submit,231,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q112_Click Count,Timing - Click Count,232,0,0,meta,,,,,meta,,,,,,,,,,0,meta
-Q32,"In general terms, most people can be trusted.",233,1,-1,social_capital_traits,ordinal,,,social_capital_traits,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: personality traits,"1,2,3","4,5,6,7",1,social_capital_traits_trust
-Q34,You are willing to give up something that is beneficial for you today in order to benefit more from it in the future.,234,1,-1,social_capital_traits,ordinal,,,social_capital_traits,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: personality traits,"1,2,3","4,5,6,7",1,social_capital_traits_patience
-Q36,When someone does me a favor I am willing to return it.,235,1,-1,social_capital_traits,ordinal,,,social_capital_traits,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: personality traits,"1,2,3","4,5,6,7",1,social_capital_traits_reciprocity_positive
-Q37,"If I am treated very unjustly, I will take revenge at the first occasion, even if there is a cost to do so.",236,1,1,social_capital_traits,ordinal,,,social_capital_traits,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: personality traits,"1,2,3","4,5,6,7",1,social_capital_traits_reciprocity_negative
-Q38,"I am willing to punish someone who treats me unfairly, even if there may be costs for me.",237,1,1,social_capital_traits,ordinal,,,social_capital_traits,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: personality traits,"1,2,3","4,5,6,7",1,social_capital_traits_reciprocity_negative
-Q39_1,"Imagine the following situation: Today you unexpectedly received 1,000 Euros. How much of this amount would you donate to a good cause?",238,0,1,social_capital_traits,continuous,,,social_capital_traits,social_capital,1000,1000,,social_capital,personality_traits,Preferences,Preferences: personality traits,0-10,>10,1,social_capital_traits_altruism
-Q41,"Generally, I am willing to give to a good causes without expecting anything in return.",239,1,-1,social_capital_traits,ordinal,,,social_capital_traits,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: personality traits,"1,2,3","4,5,6,7",1,social_capital_traits_altruism
+Q32,"In general terms, most people can be trusted.",233,1,-1,social_capital_traits,ordinal,,,social_capital_trust,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: trust,"1,2,3","4,5,6,7",1,social_capital_traits_trust
+Q34,You are willing to give up something that is beneficial for you today in order to benefit more from it in the future.,234,1,-1,social_capital_traits,ordinal,,,social_capital_time,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: time,"1,2,3","4,5,6,7",1,social_capital_traits_patience
+Q36,When someone does me a favor I am willing to return it.,235,1,-1,social_capital_traits,ordinal,,,social_capital_reciprocity,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: reciprocity,"1,2,3","4,5,6,7",1,social_capital_traits_reciprocity_positive
+Q37,"If I am treated very unjustly, I will take revenge at the first occasion, even if there is a cost to do so.",236,1,1,social_capital_traits,ordinal,,,social_capital_reciprocity,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: reciprocity,"1,2,3","4,5,6,7",1,social_capital_traits_reciprocity_negative
+Q38,"I am willing to punish someone who treats me unfairly, even if there may be costs for me.",237,1,1,social_capital_traits,ordinal,,,social_capital_reciprocity,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: reciprocity,"1,2,3","4,5,6,7",1,social_capital_traits_reciprocity_negative
+Q39_1,"Imagine the following situation: Today you unexpectedly received 1,000 Euros. How much of this amount would you donate to a good cause?",238,0,1,social_capital_traits,continuous,,,social_capital_altruism,social_capital,1000,1000,,social_capital,personality_traits,Preferences,Preferences: altruism,0-10,>10,1,social_capital_traits_altruism
+Q41,"Generally, I am willing to give to a good causes without expecting anything in return.",239,1,-1,social_capital_traits,ordinal,,,social_capital_altruism,social_capital,7,7,,social_capital,personality_traits,Preferences,Preferences: altruism,"1,2,3","4,5,6,7",1,social_capital_traits_altruism
 Q113_First Click,Timing - First Click,240,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q113_Last Click,Timing - Last Click,241,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q113_Page Submit,Timing - Page Submit,242,0,0,meta,,,,,meta,,,,,,,,,,0,meta
@@ -652,23 +652,23 @@ Q113_Click Count,Timing - Click Count,243,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q89_1,"The following statements relate to your well-being in the
 past two weeks. For each statement, please mark the number that you think best
 describes how you have felt over the past two weeks.
-In the last two weeks ... - â€¦ I was happy and in a good mood",244,1,-1,wellbeing,ordinal,"numbers are mixed up and not in oder. Currently: All the time (1)	Most of the time (4)	A little more than half the time (5)	About half the time (9)	A little less than half the time (6)	Now and then (7)	At no time (8)",,,wellbeing,7,7,,social_outcomes,wellbeing,Wellbeing scale,Wellbeing scale,"1,2,3","4,5,6,7",1,wellbeing
+In the last two weeks ... - â€¦ I was happy and in a good mood",244,1,-1,wellbeing,ordinal,"numbers are mixed up and not in oder. Currently: All the time (1)	Most of the time (4)	A little more than half the time (5)	About half the time (9)	A little less than half the time (6)	Now and then (7)	At no time (8)",,,wellbeing,7,7,,social_outcomes,wellbeing,Well-being scale,Well-being scale,"1,2,3","4,5,6,7",1,wellbeing
 Q89_2,"The following statements relate to your well-being in the
 past two weeks. For each statement, please mark the number that you think best
 describes how you have felt over the past two weeks.
-In the last two weeks ... - â€¦ I felt calm and relaxed",245,1,-1,wellbeing,ordinal,"numbers are mixed up and not in oder. Currently: All the time (1)	Most of the time (4)	A little more than half the time (5)	About half the time (9)	A little less than half the time (6)	Now and then (7)	At no time (8)",,,wellbeing,7,7,,social_outcomes,wellbeing,Wellbeing scale,Wellbeing scale,"1,2,3","4,5,6,7",1,wellbeing
+In the last two weeks ... - â€¦ I felt calm and relaxed",245,1,-1,wellbeing,ordinal,"numbers are mixed up and not in oder. Currently: All the time (1)	Most of the time (4)	A little more than half the time (5)	About half the time (9)	A little less than half the time (6)	Now and then (7)	At no time (8)",,,wellbeing,7,7,,social_outcomes,wellbeing,Well-being scale,Well-being scale,"1,2,3","4,5,6,7",1,wellbeing
 Q89_3,"The following statements relate to your well-being in the
 past two weeks. For each statement, please mark the number that you think best
 describes how you have felt over the past two weeks.
-In the last two weeks ... - ... I felt energetic and active",246,1,-1,wellbeing,ordinal,"numbers are mixed up and not in oder. Currently: All the time (1)	Most of the time (4)	A little more than half the time (5)	About half the time (9)	A little less than half the time (6)	Now and then (7)	At no time (8)",,,wellbeing,7,7,,social_outcomes,wellbeing,Wellbeing scale,Wellbeing scale,"1,2,3","4,5,6,7",1,wellbeing
+In the last two weeks ... - ... I felt energetic and active",246,1,-1,wellbeing,ordinal,"numbers are mixed up and not in oder. Currently: All the time (1)	Most of the time (4)	A little more than half the time (5)	About half the time (9)	A little less than half the time (6)	Now and then (7)	At no time (8)",,,wellbeing,7,7,,social_outcomes,wellbeing,Well-being scale,Well-being scale,"1,2,3","4,5,6,7",1,wellbeing
 Q89_4,"The following statements relate to your well-being in the
 past two weeks. For each statement, please mark the number that you think best
 describes how you have felt over the past two weeks.
-In the last two weeks ... - â€¦ I felt fresh and rested when I woke up",247,1,-1,wellbeing,ordinal,"numbers are mixed up and not in oder. Currently: All the time (1)	Most of the time (4)	A little more than half the time (5)	About half the time (9)	A little less than half the time (6)	Now and then (7)	At no time (8)",,,wellbeing,7,7,,social_outcomes,wellbeing,Wellbeing scale,Wellbeing scale,"1,2,3","4,5,6,7",1,wellbeing
+In the last two weeks ... - â€¦ I felt fresh and rested when I woke up",247,1,-1,wellbeing,ordinal,"numbers are mixed up and not in oder. Currently: All the time (1)	Most of the time (4)	A little more than half the time (5)	About half the time (9)	A little less than half the time (6)	Now and then (7)	At no time (8)",,,wellbeing,7,7,,social_outcomes,wellbeing,Well-being scale,Well-being scale,"1,2,3","4,5,6,7",1,wellbeing
 Q89_5,"The following statements relate to your well-being in the
 past two weeks. For each statement, please mark the number that you think best
 describes how you have felt over the past two weeks.
-In the last two weeks ... - â€¦ my everyday life was full of things that interest me",248,1,-1,wellbeing,ordinal,"numbers are mixed up and not in oder. Currently: All the time (1)	Most of the time (4)	A little more than half the time (5)	About half the time (9)	A little less than half the time (6)	Now and then (7)	At no time (8)",,,wellbeing,7,7,,social_outcomes,wellbeing,Wellbeing scale,Wellbeing scale,"1,2,3","4,5,6,7",1,wellbeing
+In the last two weeks ... - â€¦ my everyday life was full of things that interest me",248,1,-1,wellbeing,ordinal,"numbers are mixed up and not in oder. Currently: All the time (1)	Most of the time (4)	A little more than half the time (5)	About half the time (9)	A little less than half the time (6)	Now and then (7)	At no time (8)",,,wellbeing,7,7,,social_outcomes,wellbeing,Well-being scale,Well-being scale,"1,2,3","4,5,6,7",1,wellbeing
 Q114_First Click,Timing - First Click,249,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q114_Last Click,Timing - Last Click,250,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q114_Page Submit,Timing - Page Submit,251,0,0,meta,,,,,meta,,,,,,,,,,0,meta
