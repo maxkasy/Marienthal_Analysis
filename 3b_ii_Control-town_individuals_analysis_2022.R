@@ -56,8 +56,16 @@ outcome_variables = outcome_variables[-c(14)]
 
 Combined_responses =
     bind_rows(Marienthal_responses_aggregated, Control_responses_aggregated) |> 
-    mutate(town = factor(town)) %>% 
-    mutate(across(all_of(control_variables), ~.x - mean(.x, na.rm = T))) # Demean controls, so that regression main effects can be interpreted as sample averages
+    mutate(town = factor(town))
+# Calculate mean of control variables for Marienthal
+GN_means = Combined_responses  |> 
+    filter(town == "Marienthal") |> 
+    select(control_variables) |> 
+    summarise_all(mean)
+# Normalize control variables to mean 0 for Marienthal
+Combined_responses = Combined_responses  |> 
+    mutate(across(all_of(control_variables), ~.x - GN_means[[cur_column()]]))
+
 
 
 # Estimation, linear model -----
