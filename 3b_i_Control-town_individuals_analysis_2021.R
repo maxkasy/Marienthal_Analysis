@@ -3,7 +3,7 @@
 Marienthal_responses_aggregated =
     paste0(veracrypt_path, "jobguarantee/2021-02-survey-data-processed/MAGMA-Participants-Aggregated.csv") %>% 
     read_csv() %>%
-    mutate(town = "Marienthal")
+    mutate(town = "Gramatneusiedl")
 
 # Loading baseline covariates
 Marienthal_covariates =
@@ -55,12 +55,12 @@ outcome_variables = group_names$Outcome
 
 Combined_responses =
     bind_rows(Marienthal_responses_aggregated, Control_responses_aggregated) |> 
-    mutate(comparison_group = ifelse(town == "Marienthal", as.character(treatment_wave), "Control") |> 
+    mutate(comparison_group = ifelse(town == "Gramatneusiedl", as.character(treatment_wave), "Control") |> 
                factor(),
            town = factor(town)) 
 # Calculate mean of control variables for Marienthal
 GN_means = Combined_responses  |> 
-    filter(town == "Marienthal") |> 
+    filter(town == "Gramatneusiedl") |> 
     select(control_variables) |> 
     summarise_all(mean)
 # Normalize control variables to mean 0 for Marienthal
@@ -72,7 +72,7 @@ Combined_responses = Combined_responses  |>
 
 # Descriptives -----
 bind_rows(Marienthal_responses_aggregated, Control_responses_aggregated) %>%
-    mutate(control_town = (town != "Marienthal")) |> 
+    mutate(control_town = (town != "Gramatneusiedl")) |> 
     select(control_town, all_of(control_variables)) |> 
     pivot_longer(all_of(control_variables),
                  names_to = "Covariate") %>%
@@ -112,11 +112,11 @@ names(te_lm1) = c("Group_1", "Group_2", "Control_town")
 # Number of observations
 nobs_treated = map_int(outcome_variables,
                        ~ sum(!is.na(Combined_responses[[.x]]) & 
-                                 (Combined_responses$town == "Marienthal") & 
+                                 (Combined_responses$town == "Gramatneusiedl") & 
                                  (Combined_responses$treatment_wave == 1)))
 nobs_control = map_int(outcome_variables,
                        ~ sum(!is.na(Combined_responses[[.x]]) & 
-                                 (Combined_responses$town == "Marienthal")  & 
+                                 (Combined_responses$town == "Gramatneusiedl")  & 
                                  (Combined_responses$treatment_wave == 2)))
 nobs_controltown = map_int(outcome_variables,
                        ~ sum(!is.na(Combined_responses[[.x]]) & 

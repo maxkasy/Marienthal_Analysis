@@ -12,10 +12,13 @@ library(estimatr) # for robust standard errors
 library(kableExtra) # for table export
 library(patchwork) # for combining figures
 library(ggtext) # add annotations to figures
+library(data.table) # process csv files faster
+library(broom)
+library(ggtext)
 
 
 home <- getwd()
-Lukas = F
+Lukas = T
 # Switch path for data-files
 if (Lukas) {veracrypt_path = "A:/"} else {veracrypt_path = "/Volumes/NO NAME/"}
 
@@ -52,3 +55,16 @@ source("2b_synthetic_control_plots.R")
 # 3 Analysis comparing to control town individuals ----
 source("3b_i_Control-town_individuals_analysis_2021.R")
 source("3b_ii_Control-town_individuals_analysis_2022.R")
+
+# 4 Mechanisms: hazard rates ----
+# need to run 4a on WU virutal machine to merge AMDB data with AMS provided IDs for short-term unemployed
+source("4a-hazard_rates_prep_data.R")
+source("4b-hazard_rates_analysis.R")
+
+# 5 Cost comparison ----
+# need to run 5 on AMS computer where cost data is stored
+source("5-cost-comparison_analysis.R")
+
+# 5 Differential survey response analysis ----
+source("6-differential_response_analysis.R")
+

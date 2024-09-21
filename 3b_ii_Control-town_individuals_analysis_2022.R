@@ -3,7 +3,7 @@
 Marienthal_responses_aggregated =
     paste0(veracrypt_path, "jobguarantee/2022-02-survey-data-processed/MAGMA-Participants-Aggregated.csv") %>% 
     read_csv() %>%
-    mutate(town = "Marienthal") 
+    mutate(town = "Gramatneusiedl") 
 
 # Loading baseline covariates
 Marienthal_covariates =
@@ -59,7 +59,7 @@ Combined_responses =
     mutate(town = factor(town))
 # Calculate mean of control variables for Marienthal
 GN_means = Combined_responses  |> 
-    filter(town == "Marienthal") |> 
+    filter(town == "Gramatneusiedl") |> 
     select(control_variables) |> 
     summarise_all(mean)
 # Normalize control variables to mean 0 for Marienthal
@@ -79,13 +79,13 @@ te_lm2 =
     bind_rows()
 
 te_lm2 = te_lm2[,1:2]
-names(te_lm2) = c("Control_towns", "Marienthal")
+names(te_lm2) = c("Control_towns", "Gramatneusiedl")
 
 
 # Number of observations
 nobs_marienthal= map_int(outcome_variables,
                        ~ sum(!is.na(Combined_responses[[.x]]) & 
-                                 (Combined_responses$town == "Marienthal")))
+                                 (Combined_responses$town == "Gramatneusiedl")))
 nobs_controltown = map_int(outcome_variables,
                            ~ sum(!is.na(Combined_responses[[.x]]) & 
                                      (Combined_responses$town == "Control")))
@@ -93,14 +93,14 @@ nobs_controltown = map_int(outcome_variables,
 te_lm2 = te_lm2 %>% 
     mutate(Outcome = outcome_variables,
            nmt= nobs_marienthal, nct = nobs_controltown) %>% 
-    select(Outcome, Marienthal, Control_towns, nmt, nct)
+    select(Outcome, Gramatneusiedl, Control_towns, nmt, nct)
 
 
 # Estimation of treatment effects of Group 2 vs. control with standard errors
 
 Combined_responses =
     Combined_responses |> 
-    mutate(comparison_group = (town == "Marienthal"))
+    mutate(comparison_group = (town == "Gramatneusiedl"))
 
 regressors_2 = paste0(c("comparison_group", control_variables), collapse = " + ")
 
@@ -133,8 +133,8 @@ plot_treatment_effects = function(treatment_effects, filename_modifier = "") {
     
     p1 = treatment_effects %>%
           left_join(group_names, by = "Outcome") %>%
-          mutate(Name = fct_reorder(Name, Marienthal)) %>% 
-          ggplot(aes(x = Name, y = Marienthal)) +
+          mutate(Name = fct_reorder(Name, Gramatneusiedl)) %>% 
+          ggplot(aes(x = Name, y = Gramatneusiedl)) +
           geom_segment(aes(xend = Name, yend = Control_towns), color = line_col) +
           geom_point(aes(y = Control_towns), color = towns_col, shape = 21, size = 2) +
           geom_point(color = treat_col, size = 2) +
@@ -148,7 +148,7 @@ plot_treatment_effects = function(treatment_effects, filename_modifier = "") {
             x = "",
             y = "",
             title = "Outcomes for 2022",
-            subtitle = "<span style='color:firebrick;'>Marienthal</span> (all treated), and <span style='color:royalblue4;'>Control towns</span>."
+            subtitle = "<span style='color:firebrick;'>Gramatneusiedl</span> (all treated), and <span style='color:royalblue4;'>Control towns</span>."
           )
 
     
@@ -203,12 +203,12 @@ table_combined = function(treatment_effects,
     filename = paste0("Figures/Survey_table_2022_linear", filename_modifier, ".tex")
     
     treatment_effects |> 
-        select(Name, Marienthal, Control_towns, estimate, std.error, nmt, nct) |> 
-        arrange(-Marienthal) |>
+        select(Name, Gramatneusiedl, Control_towns, estimate, std.error, nmt, nct) |> 
+        arrange(-Gramatneusiedl) |>
         knitr::kable(
             col.names = c(
-                "Outcome", "Marienthal", "Control towns",
-                "Mt vs. Ct towns",
+                "Outcome", "Gramatneusiedl", "Control towns",
+                "Gn vs. Ct towns",
                 "SE",
                 "$n_{mt}$",
                 "$n_{ct}$"

@@ -12,6 +12,7 @@ for (year in c(2021, 2022)){
       startdate = "2020-09-30"
       enddate = "2022-02-28"
     }
+}
     
     filenames = c("Erwerbsbiographie_Kontrollgruppe.csv",
                  "Erwerbsbiographie_ProgrammteilnehmerInnen.csv",
