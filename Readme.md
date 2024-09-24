@@ -17,6 +17,8 @@ Data will be shared in the form of an archive with sub-folders, as described bel
     1. Survey data (Marienthal and Control towns): *jobguarantee/2021-02-survey-data-raw/*, *jobguarantee/2022-02-survey-data-raw/*.
     2. Admin data (Marienthal and Control towns): *jobguarantee/2021-09-admin-data-raw/*, *jobguarantee/2022-02-admin-data-raw/*.
     3. Aggregate data: */jobguarantee/2021-09-municipal-data-raw/* (outcomes), *jobguarantee/2020-09-municipal-data-raw/* (controls)
+    4. Hazard rates data: */jobguarantee/2024-04-hazard-rates-raw/* (provided by AMS), */jobguarantee/2024-04-hazard-rates-processed/* (merged with AMDB)
+
 2. Processed data: Also included in the archive, but not necessary for replication.  
     1. Survey data (Marienthal and Control towns): 
     *jobguarantee/2021-02-survey-data-processed*,
@@ -31,16 +33,14 @@ Data will be shared in the form of an archive with sub-folders, as described bel
     4. In the same folder as the code: 
       *synthetic_control_weights.csv* (synthetic control weights), *synthetic_permutation_weights.csv*,
       *variable_description.csv* (variable descriptions).
+
 3. Figures and tables:
     - Saved in subfolder */Figures* of code folder.
 
-
-
-
 ## Structure of code
 
-All of our empirical results can be produced from the raw data by running *master.R*.
-
+Our empirical results can be produced from the raw data by running *master.R*.
+Exceptions apply to *4a-hazard_rates_prep_data.R* and *5-cost-comparison_analysis.R*. *4a-hazard_rates_prep_data.R* is used to merge in data from the [Arbeitsmarktdatenbank (AMDB)](https://arbeitsmarktdatenbank.at/) and needs to be run in a computing environment with access to the data, which can be obtained for research purposes at [https://arbeitsmarktdatenbank.at](https://arbeitsmarktdatenbank.at). *5-cost-comparison_analysis.R* needs to be run in the AMS Niederösterreich computing environment where the protected person-level cost data are stored.
 
 ### Data preparation
 
@@ -53,6 +53,8 @@ All of our empirical results can be produced from the raw data by running *maste
     *0c_ii_synth_data_prep_control_data.R*,
     *0c_iii_synth_data_prep_merge_control_outcome_data.R*,
     *0c_iv_synth_data_prep_merge_new_lzbl.R*.
+1. Hazard rates data:
+    *4a-hazard_rates_prep_data.R*.
 
 
 ### Experimental analysis for Marienthal
@@ -63,13 +65,26 @@ All of our empirical results can be produced from the raw data by running *maste
 
 
 ### Synthetic control analysis
+
 - *2a_synthetic_control_analysis.R*
 - *2b_synthetic_control_plots.R*
 
 ### Analysis comparing to control town individuals
+
 - *3b_i_Control-town_individuals_analysis_2021.R*
 - *3b_ii_Control-town_individuals_analysis_2022.R*
 
+### Hazard rates analysis
+
+- *4b-hazard_rates_analysis.R*
+
+### Cost comparison analysis
+
+- *5-cost-comparison_analysis.R*
+
+### Differential survey response analysis
+
+- *6-differential_response_analysis.R*
 
 ## Reproducible environment using Docker
 
