@@ -8,9 +8,21 @@ library(janitor)
 
 ## Settings ----
 
-home <- getwd()
+AMS = F
+# Switch path for data-files between AMS and Lukas/Max computing environment
+if (AMS) {
+  home <- getwd()
+  
+  data_path = file.path(home, "cost_data")
+  
+  pstnr_data <- file.path(home, "pstnr_magma_control_towns.csv")
+  
+  } else {
 
-data_path = file.path(home, "cost_data")
+    data_path = file.path(dirname(home), "Cost_data", "cost_data")
+    
+    pstnr_data <- paste0(veracrypt_path, "jobguarantee/pstnr_magma_control_towns.csv")
+    }
 
 alv_data <- file.path(data_path, "alv.csv")
 
@@ -30,7 +42,6 @@ data_foer_traeger_control <- fread(foer_traeger_control_data)
 
 # filter for individuals in sample
 # Read the PSTNR of treat and control individuals
-pstnr_data <- file.path(home, "pstnr_magma_control_towns.csv")
 data_pstnr <- fread(pstnr_data)
 
 magma_pstnr <- data_pstnr$magma_pstnr
