@@ -738,40 +738,40 @@ much have you been bothered by any of the following problems? - sleep",286,1,-1,
 Q92_14,"During the past month, how
 much have you been bothered by any of the following problems? - energy",287,1,-1,health_physical_men,ordinal,,,,health_physical,3,3,,health,health_physical,Physical health,Physical health,1,"2,3",1,health_physical_men
 Q49_1,"Over the last 2 weeks, how
-much does the statement describe your feelings? - I feel I cannot shake off the blues, even with help from my family and my friends.",288,1,1,health_depression,ordinal,"numbers 2-10, are missing. scale consists of 1,11,12,13,14,15,16.",,,health_depression,7,7,,health,health_psychological,Depression symptoms (-),Depression symptoms (-),"1,2,3","4,5,6,7",1,health_depression
+much does the statement describe your feelings? - I feel I cannot shake off the blues, even with help from my family and my friends.",288,1,1,health_depression,ordinal,"numbers 2-10, are missing. scale consists of 1,11,12,13,14,15,16.",,,health_depression,7,7,,health,health_psychological,No depression symptoms,No depression symptoms,"1,2,3","4,5,6,7",1,health_depression
 Q49_2,"Over the last 2 weeks, how
-much does the statement describe your feelings? - I feel sad.",289,1,1,health_depression,ordinal,"numbers 2-10, are missing. scale consists of 1,11,12,13,14,15,16.",,,health_depression,7,7,,health,health_psychological,Depression symptoms (-),Depression symptoms (-),"1,2,3","4,5,6,7",1,health_depression
+much does the statement describe your feelings? - I feel sad.",289,1,1,health_depression,ordinal,"numbers 2-10, are missing. scale consists of 1,11,12,13,14,15,16.",,,health_depression,7,7,,health,health_psychological,No depression symptoms,No depression symptoms,"1,2,3","4,5,6,7",1,health_depression
 Q49_3,"Over the last 2 weeks, how
-much does the statement describe your feelings? - I feel happy.",290,1,-1,health_depression,ordinal,"numbers 2-10, are missing. scale consists of 1,11,12,13,14,15,16.",,,health_depression,7,7,,health,health_psychological,Depression symptoms (-),Depression symptoms (-),"1,2,3","4,5,6,7",1,health_depression
+much does the statement describe your feelings? - I feel happy.",290,1,-1,health_depression,ordinal,"numbers 2-10, are missing. scale consists of 1,11,12,13,14,15,16.",,,health_depression,7,7,,health,health_psychological,No depression symptoms,No depression symptoms,"1,2,3","4,5,6,7",1,health_depression
 Q49_4,"Over the last 2 weeks, how
-much does the statement describe your feelings? - I feel life is not worth living.",291,1,1,health_depression,ordinal,"numbers 2-10, are missing. scale consists of 1,11,12,13,14,15,16.",,,health_depression,7,7,,health,health_psychological,Depression symptoms (-),Depression symptoms (-),"1,2,3","4,5,6,7",1,health_depression
+much does the statement describe your feelings? - I feel life is not worth living.",291,1,1,health_depression,ordinal,"numbers 2-10, are missing. scale consists of 1,11,12,13,14,15,16.",,,health_depression,7,7,,health,health_psychological,No depression symptoms,No depression symptoms,"1,2,3","4,5,6,7",1,health_depression
 Q49_5,"Over the last 2 weeks, how
-much does the statement describe your feelings? - I feel depressed.",292,1,1,health_depression,ordinal,"numbers 2-10, are missing. scale consists of 1,11,12,13,14,15,16.",,,health_depression,7,7,,health,health_psychological,Depression symptoms (-),Depression symptoms (-),"1,2,3","4,5,6,7",1,health_depression
-Q50_1,"Over the last 2 weeks, how often have you been bothered by the following problems? - Feeling nervous, anxious or on edge",293,1,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,Anxiety symptoms (-),Anxiety symptoms (-),1,"2,3,4",1,health_anxiety
-Q50_2,"Over the last 2 weeks, how often have you been bothered by the following problems? - Not being able to stop or control worrying",294,2,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,Anxiety symptoms (-),Anxiety symptoms (-),1,"2,3,4",1,health_anxiety
-Q50_3,"Over the last 2 weeks, how often have you been bothered by the following problems? - Worrying too much about different things",295,3,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,Anxiety symptoms (-),Anxiety symptoms (-),1,"2,3,4",1,health_anxiety
-Q50_4,"Over the last 2 weeks, how often have you been bothered by the following problems? - Trouble relaxing",296,4,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,Anxiety symptoms (-),Anxiety symptoms (-),1,"2,3,4",1,health_anxiety
-Q50_5,"Over the last 2 weeks, how often have you been bothered by the following problems? - Being so restless that it is hard to sit still",297,5,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,Anxiety symptoms (-),Anxiety symptoms (-),1,"2,3,4",1,health_anxiety
-Q50_6,"Over the last 2 weeks, how often have you been bothered by the following problems? - Becoming easily annoyed or irritable",298,6,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,Anxiety symptoms (-),Anxiety symptoms (-),1,"2,3,4",1,health_anxiety
-Q50_7,"Over the last 2 weeks, how often have you been bothered by the following problems? - Feeling afraid as if something awful might happen",299,7,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,Anxiety symptoms (-),Anxiety symptoms (-),1,"2,3,4",1,health_anxiety
+much does the statement describe your feelings? - I feel depressed.",292,1,1,health_depression,ordinal,"numbers 2-10, are missing. scale consists of 1,11,12,13,14,15,16.",,,health_depression,7,7,,health,health_psychological,No depression symptoms,No depression symptoms,"1,2,3","4,5,6,7",1,health_depression
+Q50_1,"Over the last 2 weeks, how often have you been bothered by the following problems? - Feeling nervous, anxious or on edge",293,1,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,No anxiety symptoms,No anxiety symptoms,1,"2,3,4",1,health_anxiety
+Q50_2,"Over the last 2 weeks, how often have you been bothered by the following problems? - Not being able to stop or control worrying",294,2,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,No anxiety symptoms,No anxiety symptoms,1,"2,3,4",1,health_anxiety
+Q50_3,"Over the last 2 weeks, how often have you been bothered by the following problems? - Worrying too much about different things",295,3,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,No anxiety symptoms,No anxiety symptoms,1,"2,3,4",1,health_anxiety
+Q50_4,"Over the last 2 weeks, how often have you been bothered by the following problems? - Trouble relaxing",296,4,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,No anxiety symptoms,No anxiety symptoms,1,"2,3,4",1,health_anxiety
+Q50_5,"Over the last 2 weeks, how often have you been bothered by the following problems? - Being so restless that it is hard to sit still",297,5,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,No anxiety symptoms,No anxiety symptoms,1,"2,3,4",1,health_anxiety
+Q50_6,"Over the last 2 weeks, how often have you been bothered by the following problems? - Becoming easily annoyed or irritable",298,6,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,No anxiety symptoms,No anxiety symptoms,1,"2,3,4",1,health_anxiety
+Q50_7,"Over the last 2 weeks, how often have you been bothered by the following problems? - Feeling afraid as if something awful might happen",299,7,-1,health_anxiety,ordinal,,,,health_anxiety,4,4,,health,health_psychological,No anxiety symptoms,No anxiety symptoms,1,"2,3,4",1,health_anxiety
 Q116_First Click,Timing - First Click,300,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q116_Last Click,Timing - Last Click,301,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q116_Page Submit,Timing - Page Submit,302,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q116_Click Count,Timing - Click Count,303,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q52_1,"Please tell us whether the following statements apply to
-you. - Thinking about the coronavirus (COVID-19) makes me feel threatened.",304,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,Covid stress (-),Covid stress (-),0-20,20-100,1,covid
+you. - Thinking about the coronavirus (COVID-19) makes me feel threatened.",304,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,No covid stress,No covid stress,0-20,20-100,1,covid
 Q52_2,"Please tell us whether the following statements apply to
-you. - I am afraid of the coronavirus (COVID-19).",305,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,Covid stress (-),Covid stress (-),0-20,20-100,1,covid
+you. - I am afraid of the coronavirus (COVID-19).",305,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,No covid stress,No covid stress,0-20,20-100,1,covid
 Q52_3,"Please tell us whether the following statements apply to
-you. - I am stressed around other people because I worry Iâ€™ll catch the coronavirus (COVID-19).",306,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,Covid stress (-),Covid stress (-),0-20,20-100,1,covid
+you. - I am stressed around other people because I worry Iâ€™ll catch the coronavirus (COVID-19).",306,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,No covid stress,No covid stress,0-20,20-100,1,covid
 Q52_4,"Please tell us whether the following statements apply to
-you. - The Coronavirus (COVID-19) has impacted me negatively from a financial point of view.",307,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,Covid stress (-),Covid stress (-),0-20,20-100,1,covid
+you. - The Coronavirus (COVID-19) has impacted me negatively from a financial point of view.",307,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,No covid stress,No covid stress,0-20,20-100,1,covid
 Q52_5,"Please tell us whether the following statements apply to
-you. - I have lost job-related income due to the Coronavirus (COVID-19).",308,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,Covid stress (-),Covid stress (-),0-20,20-100,1,covid
+you. - I have lost job-related income due to the Coronavirus (COVID-19).",308,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,No covid stress,No covid stress,0-20,20-100,1,covid
 Q52_6,"Please tell us whether the following statements apply to
-you. - I have become depressed because of the Coronavirus (COVID-19).",309,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,Covid stress (-),Covid stress (-),0-20,20-100,1,covid
+you. - I have become depressed because of the Coronavirus (COVID-19).",309,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,No covid stress,No covid stress,0-20,20-100,1,covid
 Q52_7,"Please tell us whether the following statements apply to
-you. - The Coronavirus (COVID-19) outbreak has impacted my psychological health negatively.",310,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,Covid stress (-),Covid stress (-),0-20,20-100,1,covid
+you. - The Coronavirus (COVID-19) outbreak has impacted my psychological health negatively.",310,0,-1,covid,continuous,,,,covid,100,100,,covid,covid,No covid stress,No covid stress,0-20,20-100,1,covid
 Q117_First Click,Timing - First Click,311,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q117_Last Click,Timing - Last Click,312,0,0,meta,,,,,meta,,,,,,,,,,0,meta
 Q117_Page Submit,Timing - Page Submit,313,0,0,meta,,,,,meta,,,,,,,,,,0,meta
@@ -852,12 +852,12 @@ defaultData,defaultData,369,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ult
 saveData,saveData,370,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
 randomPercent,randomPercent,371,0,0,ultimatum_game,,,,,ultimatum_game,,,,,,,,,,0,ultimatum_game
 benefit_level_post_intervention,Average level of benefits after JG start,,0,1,income_admin,continuous,,,,benefits,61,61,,economic_outcomes,benefit_level_post_intervention,Benefits,Benefits,,,0,income_admin
-days_unemployed_sv,Days in unemployment since program start (SV data),,0,-1,unemployment_admin_sv,continuous,,,,unemployment_sv,151,516,,economic_outcomes,days_unemployed_sv,Unemployment (sv) (-),Unemployment (sv) (-),,,0,unemployment_admin_sv
+days_unemployed_sv,Days in unemployment since program start (SV data),,0,-1,unemployment_admin_sv,continuous,,,,unemployment_sv,151,516,,economic_outcomes,days_unemployed_sv,Not unemployed (sv),Not unemployed (sv),,,0,unemployment_admin_sv
 days_employed_sv,Days in employment since program start (SV data),,0,1,employment_admin_sv,continuous,,,,employment_sv,151,516,,economic_outcomes,days_employed_sv,Employment (sv),Employment (sv),,,0,employment_admin_sv
 spells_unemployed_sv,Number of unemployment spells since program start (SV data),,0,-1,unemployment_spells_admin_sv,continuous,,,,unemployment_spells,6,6,,economic_outcomes,spells_unemployed_sv,Unemployment spells,Unemployment spells,,,0,unemployment_spells_admin_sv
 employment_days_since_2020_ams,Days in employment since program start (AMS data),,0,1,employment_admin_ams,continuous,,,,employment_ams,151,516,,economic_outcomes,employment_days_since_2020_ams,Employment,Employment,,,1,employment_admin_ams
 non_employment_days_since_2020_ams,Days not in employment since program start (AMS data),,0,-1,non_employment_admin_ams,continuous,,,,non_employment_ams,151,516,,economic_outcomes,non_employment_days_since_2020_ams,Non employment,Non employment,,,0,non_employment_admin_ams
-unemployment_registered_days_since_2020_ams,Days in registered unemployment since program start (AMS data),,0,-1,unemployment_registered_admin_ams,continuous,,,,unemployment_ams,151,516,,economic_outcomes,unemployment_registered_days_since_2020_ams,Unemployment (-),Unemployment (-),,,1,unemployment_registered_admin_ams
+unemployment_registered_days_since_2020_ams,Days in registered unemployment since program start (AMS data),,0,-1,unemployment_registered_admin_ams,continuous,,,,unemployment_ams,151,516,,economic_outcomes,unemployment_registered_days_since_2020_ams,Not unemployed,Not unemployed,,,1,unemployment_registered_admin_ams
 TAGE_BESCHAEFTIGUNG_GEF,Days in subsidized employment since program start (AMS data),,0,1,employment_subsidized_admin_ams,continuous,,,,subsidized_employment,151,516,,economic_outcomes,TAGE_BESCHAEFTIGUNG_GEF,Subsidized employment,Subsidized employment,,,0,employment_subsidized_admin_ams
 TAGE_BESCHAEFTIGUNG_UNGEF,Days in unsubsidized (regular) employment since program start (AMS data),,0,1,employment_regular_admin_ams,continuous,,,,dependent_regular_employment,151,516,,economic_outcomes,TAGE_BESCHAEFTIGUNG_UNGEF,Dependent regular employment,Dependent regular employment,,,0,employment_regular_admin_ams
 TAGE_BESCHAEFTIGUNG_SELBST,Days in self-employment since program start (AMS data),,0,1,employment_selfemployed_admin_ams,continuous,,,,self_employment,151,516,,economic_outcomes,TAGE_BESCHAEFTIGUNG_SELBST,Self employment,Self employment,,,0,employment_selfemployed_admin_ams

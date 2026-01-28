@@ -32,8 +32,8 @@ Control_covariates =
 # merging outcomes and covariates
 Control_responses_aggregated = Control_responses_aggregated %>% 
     right_join(Control_covariates, by = "PSTNR") |> 
-    filter(UE_DAYS < 4000, # to balance unemployment duration across the two samples))
-           !is.na(survey_mode)) # dropping non-respondents
+    filter(UE_DAYS < 4000) # to balance unemployment duration across the two samples))
+           
 
 
 
@@ -269,3 +269,61 @@ te |>
 te |>
     filter(!(Outcome %in% economic_variables)) |>
     table_combined("_nonecon")
+
+
+
+
+# Robustness check: Lee bounds for control vs control towns ----
+# Load helper function that trims sample to get Lee bounds
+source("3c_leebounds.R")
+
+# Get upper and lower bounds
+te_lm_upper = 
+    map(outcome_variables,
+        function(outcome) 
+            lm(formula = as.formula(paste0(
+                outcome, "~", regressors_2)), 
+                trimmed_responses(outcome, control_variables, 
+                  data = Combined_responses, upper = T))$coefficients
+        ) %>% bind_rows()
+
+te_lm_lower = 
+    map(outcome_variables,
+        function(outcome) 
+            lm(formula = as.formula(paste0(
+                outcome, "~", regressors_2)), 
+                trimmed_responses(outcome, control_variables, 
+                  data = Combined_responses, upper = F))$coefficients
+        ) %>% bind_rows()
+
+bound_estimates = te_lm_se |> 
+    select(-std.error) |> 
+    mutate(lower_bound = te_lm_lower[["comparison_groupTRUE"]],
+                upper_bound = te_lm_upper[["comparison_groupTRUE"]])
+
+
+table_bounds = function(estimates, filename){
+    estimates |> 
+        left_join(group_names, by = "Outcome") |> 
+        select(Name, estimate, lower_bound, upper_bound) |> 
+        knitr::kable(
+            col.names = c(
+                "Outcome", "Gn vs. Ct towns",
+                "Lower bound", "Upper bound"
+            ),
+            row.names = F,
+            digits = 3,
+            format = "latex",
+            booktabs = TRUE,
+            escape = F
+        ) %>%
+        write(filename)
+}
+
+bound_estimates |> 
+    filter(Outcome %in% economic_variables) |> 
+    table_bounds("Figures/Survey_leebounds_2022_econ.tex")
+
+bound_estimates |> 
+    filter(!(Outcome %in% economic_variables)) |> 
+    table_bounds("Figures/Survey_leebounds_2022_nonecon.tex")

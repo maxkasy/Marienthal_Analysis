@@ -142,7 +142,10 @@ transition_rates_data <- transition_rates_data %>%
 
 # calculate the transition rate
 transition_rates_data <- transition_rates_data %>%
-  mutate(transition_rate = transitions / stock) %>%  # Calculate transition rate) %>%  # Count the number of transitions
+  mutate(transition_rate = transitions / stock,# Calculate transition rate
+         transition_se = sqrt(transition_rate / stock),# calculate standard error  
+         lower = transition_rate - 1.96 * transition_se,
+         upper = transition_rate + 1.96 * transition_se) %>% 
   ungroup()
 
 # Filter to include only the first 18 months
@@ -155,6 +158,9 @@ p <- ggplot(transitions_summary_filtered, aes(x = spell_duration, y = transition
   annotate("rect", xmin = 9, xmax = 18, ymin = -Inf, ymax = Inf, fill = "gray90", alpha = 0.5) +  # Add shaded rectangle
   geom_line() +
   scale_color_manual(values = c("1" = "firebrick", "0" = "grey65")) +
+  geom_ribbon(data=transitions_summary_filtered, 
+              aes(ymin=lower,ymax=upper, fill = as.factor(treat), alpha=0.2), colour = NA) +
+  scale_fill_manual(values = c("1" = "firebrick", "0" = "grey65")) +
   labs(
     # title = "Transition Rates by Duration (in Months)",
     subtitle = "<span style='color:firebrick;'>Gramatneusiedl</span>, and <span style='color:grey50;'>synthetic control</span>.",
@@ -171,7 +177,7 @@ p <- ggplot(transitions_summary_filtered, aes(x = spell_duration, y = transition
 
 p
 
-output_filename <- file.path(output_path, "transition_rates_ue.png", sep = "")
+output_filename <- file.path(output_path, "transition_rates_ue_bands.png", sep = "")
 ggsave(output_filename, plot = p, width = 5, height = 3)
 
 # # export data frame to csv
@@ -180,3 +186,50 @@ ggsave(output_filename, plot = p, width = 5, height = 3)
 transition_rates_data %>% 
   write.csv(file = output_csv, row.names = FALSE)
 
+
+
+#### Addition: Count short-term unemployed (spillover group) for R&R ----
+# Definition: short term unemployed in treatment location
+# Definition consistent with your plot shading: short term means months 0 to 8 of the unemployment spell.
+# If your paper defines the threshold differently, change spillover_max_month accordingly.
+spillover_max_month <- 8  # 0 to 8 inclusive corresponds to duration < 9 months
+
+# Optional: define the program window in calendar time.
+# If you leave these as NULL, the code uses the full observed period in spell_duration_long.
+program_start <- NULL  # for example ymd("1933-01-01")
+program_end   <- NULL  # for example ymd("1934-12-01")
+
+spillover_long <- spell_duration_long %>%
+  filter(
+    treat == 1,
+    spell_duration_running >= 0,
+    spell_duration_running <= spillover_max_month
+  ) %>%
+  # month_sequence is already a Date (first day of month) from your seq call
+  mutate(cal_month = as.Date(month_sequence)) %>%
+  {
+    if (!is.null(program_start)) filter(., cal_month >= program_start) else .
+  } %>%
+  {
+    if (!is.null(program_end)) filter(., cal_month <= program_end) else .
+  }
+
+# 1) Headline number: unique individuals ever in the spillovers group during the window
+n_spillover_unique <- spillover_long %>%
+  summarise(n_unique = n_distinct(penr)) %>%
+  pull(n_unique)
+
+message("Unique individuals in spillovers group (treat == 1, duration < 9 months) in window: ",
+        n_spillover_unique)
+
+# 2) Monthly stock: unique individuals in spillovers group by calendar month
+spillover_stock_by_month <- spillover_long %>%
+  group_by(cal_month) %>%
+  summarise(
+    spillover_unique = n_distinct(penr),
+    spillover_obs = n(),
+    .groups = "drop"
+  ) %>%
+  arrange(cal_month)
+
+print(spillover_stock_by_month)

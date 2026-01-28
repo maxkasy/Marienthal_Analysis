@@ -1,0 +1,21 @@
+
+\begin{tabular}{lrrr}
+\toprule
+Outcome & Ct vs. Ct towns & Lower bound & Upper bound\\
+\midrule
+covid & 0.087 & -0.034 & 0.214\\
+health_anxiety & 0.088 & -0.051 & 0.276\\
+health_depression & 0.037 & -0.058 & 0.186\\
+health_physical & 0.059 & 0.008 & 0.194\\
+health_subjective & 0.065 & -0.011 & 0.243\\
+\addlinespace
+lamb & 0.130 & 0.035 & 0.199\\
+social_capital & 0.026 & -0.004 & 0.075\\
+social_inclusion & 0.065 & -0.146 & 0.257\\
+social_network & 0.015 & -0.001 & 0.035\\
+status & 0.132 & 0.044 & 0.195\\
+\addlinespace
+wellbeing_direct & 0.178 & 0.065 & 0.228\\
+number_of_contacts & -0.065 & -0.373 & 0.214\\
+\bottomrule
+\end{tabular}

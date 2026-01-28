@@ -14,13 +14,17 @@ library(patchwork) # for combining figures
 library(ggtext) # add annotations to figures
 library(data.table) # process csv files faster
 library(broom)
-library(ggtext)
 
 
 home <- getwd()
-Lukas = T
-# Switch path for data-files
-if (Lukas) {veracrypt_path = "A:/"} else {veracrypt_path = "/Volumes/NO NAME/"}
+
+# Lukas = T
+# # Switch path for data-files
+# if (Lukas) {veracrypt_path = "A:/"} else {veracrypt_path = "/Volumes/NO NAME/"}
+
+Windows = F
+# Switch path for data-files T (Windows) or F (Mac)
+if (Windows) {veracrypt_path = "A:/"} else {veracrypt_path = "/Volumes/NO NAME/"}
 
 
 # 0 Data preparation ----
@@ -55,6 +59,7 @@ source("2b_synthetic_control_plots.R")
 # 3 Analysis comparing to control town individuals ----
 source("3b_i_Control-town_individuals_analysis_2021.R")
 source("3b_ii_Control-town_individuals_analysis_2022.R")
+source("3c_leebounds.R")
 
 # 4 Mechanisms: hazard rates ----
 # need to run 4a on WU virutal machine to merge AMDB data with AMS provided IDs for short-term unemployed
