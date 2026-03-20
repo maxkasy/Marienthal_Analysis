@@ -12,8 +12,10 @@ for (year in c(2021, 2022)){
       startdate = "2020-09-30"
       enddate = "2022-02-28"
     }
-}
-    
+# INSTRUCTION: remove the curly bracket below to run the entire loop for each periods (2021 and until 2022), 
+# or keep the curly bracket and run the script to produce results until end of 2022 only
+  # } 
+
     filenames = c("Erwerbsbiographie_Kontrollgruppe.csv",
                  "Erwerbsbiographie_ProgrammteilnehmerInnen.csv",
                  "Leistungsbezug_Kontrollgruppe.csv",
@@ -24,7 +26,12 @@ for (year in c(2021, 2022)){
 
     data_list_raw = map(file_paths, function(path) read_delim(path, delim=";",
                                                              locale = locale(encoding = "latin1", decimal_mark = ",")))
-    
+  
+    # We drop two individuals who had wrongly been included in our initial sample of eligible job seekers
+    # We excluded them from the study prior to program start because they were not actually eligible: had already found employment before the program began and thus were not long-term unemployed.
+    excluded_participants <- read_csv(paste0(veracrypt_path, "jobguarantee/excluded_participants.csv")) %>%
+      pull(PSTNR) 
+      
     ### 1. benefit receipt (TAGSATZLEIST) ---------------------------------
     
     # reading in benefits file from source data
@@ -242,12 +249,12 @@ for (year in c(2021, 2022)){
     participants_survey_aggregated =
       read_delim(survey_file_path, delim=",",
                  locale = locale(encoding = "latin1", decimal_mark = "."))
-    
+
+
+# to drop 2 individuals that were excluded from study before study started because they had found jobs before the program started (and before they could even learn about the program)
     participants_merged_admin_survey <- participants_normalized_selected %>% 
       left_join(participants_survey_aggregated, by = "PSTNR") %>% 
-      filter(PSTNR != 1920209,
-             PSTNR != 76914426)  # drop 2 individuals that were excluded from study before study started
-    
+      filter(!PSTNR %in% excluded_participants)
     
     participants_merged_admin_survey %>% 
       write_csv(paste0(survey_path, "MAGMA-Participants-Aggregated.csv"))

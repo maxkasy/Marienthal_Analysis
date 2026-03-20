@@ -161,7 +161,9 @@ plot_confidence_intervals = function(treatment_effects_with_SEs,
             yend = estimate + 1.65 * std.error
         ), color = line_col, size = 1) +
         geom_point(color = treat_col, size = 2) +
-        ylim(c(-.6, .8)) +
+      scale_y_continuous(
+        limits = function(x) c(min(x, na.rm=T) * 1.1, max(x, na.rm=T) * 1.1)
+      ) +
         coord_flip() +
         theme_minimal() +
         theme(plot.margin = margin(.1,.2,.1,.1, unit = "in")) +

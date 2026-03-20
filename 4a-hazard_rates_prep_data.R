@@ -1,6 +1,11 @@
 # 4a-hazard_rates_prep_data
+
+# prepares the data for Figure 9: Hazard rates out of unemployment
+
 # merge AMDB spell data with the AMS data on all PENR in short-term unemployment (<12 months) for treatment and control towns by GKZ
 # Code runs only on WU Virtual Machine with access to original AMDB data
+
+# keep packages to run on WU VM
 library(tidyverse)
 library(readr)
 library(data.table)

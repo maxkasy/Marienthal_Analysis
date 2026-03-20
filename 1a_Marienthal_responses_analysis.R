@@ -1,5 +1,5 @@
-source("1b_i_Inference_functions.R")
-source("1b_ii_plot_functions.R")
+source("1a_i_Inference_functions.R")
+source("1a_ii_plot_functions.R")
 
 # set up parallel computing
 future::plan(multisession)
@@ -66,9 +66,6 @@ pairwise_matches_rand_inf =
     paste0(veracrypt_path, "/jobguarantee/2020-09-admin-data-processed/Pairwise_matches_for_randomization_inference.csv") %>%
     read_csv() %>%
     as.data.frame()
-
-
-
 
 
 # Sample descriptives -----
@@ -142,6 +139,7 @@ for (c in 1:3){
         p_pv = pvaluesnonec |> 
              plot_p_values(non_econ_suffix)
         p_comb2 = plot_combined(p_te, p_pv)
+
         p_ccf2 = treatment_effects_CI_SE |> 
             filter(!(Outcome %in% economic_variables)) |> 
             plot_confidence_intervals(non_econ_suffix, title = "Other outcomes")

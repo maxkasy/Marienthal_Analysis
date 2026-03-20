@@ -1179,7 +1179,7 @@ municipalities <- rbind(municipalities, pop_status_wide_2023)
 
 # drop Pop without GKZ (GKZ = 0)
 municipalities <- municipalities %>%
-  filter(GKZ != 0)
+  filter(GKZ != 0, !is.na(GKZ))
 
 # export
 data_out = paste0(veracrypt_path, "jobguarantee/2023-02-municipal-data-processed/")

@@ -19,9 +19,9 @@ for (sample_group in c("Participants", "Control-towns")) {
     
     # reading survey data
     responses = read_csv(source_file)[-1, ] %>% 
+        mutate(PSTNR = as.numeric(PSTNR) ) %>%
         drop_na('PSTNR') |>  # dropping surveys that were not from sample (could not be inked to PSTNR)
-        filter(as.numeric(`Duration..in.seconds.`) > 100) %>%  # dropping surveys that were no actually responded to
-        mutate(PSTNR = as.numeric(PSTNR) ) 
+        filter(as.numeric(`Duration..in.seconds.`) > 100)  # dropping surveys that were no actually responded to
     
     
         # reading variable descriptions
@@ -117,7 +117,9 @@ for (sample_group in c("Participants", "Control-towns")) {
         filter(grouping_variable == "social_network", variable_type == "string") %>% 
         pull(variable_name)
     responses_aggregated$number_of_contacts =
-            rowSums((responses[, contact_names] %>% na_if(".") )!= "-99", na.rm = F)
+      rowSums((responses[, contact_names] %>%
+                 mutate(across(everything(), as.character)) %>%
+                 mutate(across(everything(), ~na_if(., ".")))) != "-99", na.rm = F)
     responses_aggregated = responses_aggregated %>% 
         mutate(number_of_contacts = 0.2 *number_of_contacts)
     

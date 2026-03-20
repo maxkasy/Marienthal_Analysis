@@ -1,5 +1,9 @@
 # 6-differential_response_analysis
-# Balance table to assess differential survey response rates
+# This script produces balance tables of survey respondents to assess differential survey response rates
+
+# Produces Table A.3: Covariate balance for survey respondents in Gramatneusiedl, 2021
+# Table A.4: Covariate balance for survey respondents in our control town sample, 2021
+# Table A.5: Covariate balance for survey respondents in our control town sample, 2022
 
 ## Settings ----
 
@@ -18,8 +22,8 @@ data_path_treat_2022 <- file.path(data_path_2022, "MAGMA-Participants-Aggregated
 data_path_control_2021 <- file.path(data_path_2021, "MAGMA-Control-towns-Aggregated.csv")
 data_path_control_2022 <- file.path(data_path_2022, "MAGMA-Control-towns-Aggregated.csv")
 
-# Start code ####
-### load data #####
+
+## Load data #####
 # treat
 data_treat_2021 <- fread(data_path_treat_2021)
 data_treat_2022 <- fread(data_path_treat_2022)
@@ -39,7 +43,8 @@ data_control_baseline =
   paste0(veracrypt_path, "jobguarantee/2020-12-control-admin-data-processed/control_participants_for_survey.csv") %>% 
   read_csv() 
 
-### create dummy for survey response ####
+## Prep data ####
+## Create dummy for survey response
 # treat 2021
 data_treat_response_2021 <- data_treat_2021 %>% 
   mutate(response2021 = if_else(!is.na(wellbeing_direct), 1, 0)) %>% 
@@ -60,7 +65,7 @@ data_control_response_2022 <- data_control_2022 %>%
   mutate(response2022 = if_else(!is.na(wellbeing_direct), 1, 0)) %>% 
   select(PSTNR, response2022) # drop outcomes
 
-### merge ####
+## Merge
 ## outcomes and baseline
 # treat 2021
 merged_treat <- data_treat_baseline %>%
@@ -97,15 +102,13 @@ merged_control <- merged_control %>%
 
 merged <- bind_rows(merged_treat, merged_control)
 
-#### Balance table ####
-## Export LaTeX table ####
 # balance table for respondents only
 merged_respondents_2021  <- merged %>% 
   filter(response2021 == 1)
 
-## 2021 Group wise balance tables----
-
-### Experimental ----
+##Group wise balance tables----
+### 2021 Experimental: Table A.3 ----
+# Table A.3: Covariate balance for survey respondents in Gramatneusiedl, 2021
 ## Comparison of experimental treatment and control group (wave 1 and wave 2)
 merged_respondents_2021_experimental <- merged_respondents_2021 %>%
   filter(group != 3)
@@ -144,7 +147,8 @@ merged_respondents_2021_experimental %>%
   write(file.path(data_out, "balance_respondents_2021_experimental_ttests.tex"))
 
 
-### Control towns ----
+### 2021 Control towns: Table A.4 ----
+# Table A.4: Covariate balance for survey respondents in our control town sample, 2021
 ## Comparison of non-experimental treatment and control groups (Gramatneusiedl and Control towns)
 merged_respondents_2021_control_towns <- merged_respondents_2021 %>%
   mutate(group = if_else(group == 2, 1, group))
@@ -184,8 +188,8 @@ merged_respondents_2021_control_towns %>%
   write(file.path(data_out, "balance_respondents_2021_control_towns_ttests.tex"))
 
 
-
-### 2022 -----
+### 2022 Control towns: Table A.5 -----
+# Table A.5: Covariate balance for survey respondents in our control town sample, 2022
 # 2022 only for Gramatneusiedl vs. control towns
 # balance table for respondents only
 merged_respondents_2022  <- merged %>% 

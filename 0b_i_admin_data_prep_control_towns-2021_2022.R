@@ -12,7 +12,9 @@ for (year in c(2021, 2022)){
         startdate = "2020-09-30"
         enddate = "2022-02-28"
     }
-}
+  # INSTRUCTION: remove the curly bracket below to run the entire loop for each periods (2021 and until 2022), 
+  # or keep the curly bracket and run the script to produce results until end of 2022 only
+  # } 
     
 
     filenames = c("Erwerbsbiographie_Kontrollgruppe.csv",
@@ -108,9 +110,6 @@ for (year in c(2021, 2022)){
             unemployment_registered_days_since_2020_ams = TAGE_AMS_VORMERKUNG
         )
     
-    
-    # To do: 
-    # 2022-02-28 - 1990-01-31
     
     ### 3. Main covariate file -------------------------------
     # reading in participant file from source data 2022-02

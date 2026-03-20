@@ -1,4 +1,7 @@
 # 4b-hazard_rates_analysis
+
+# produces Figure 9: Hazard rates out of unemployment
+
 # calculate transition rates from unemployment to employment by month of unemployment spell duration
 
 ## Settings ####
@@ -146,19 +149,30 @@ transition_rates_data <- transition_rates_data %>%
          transition_se = sqrt(transition_rate / stock),# calculate standard error  
          lower = transition_rate - 1.96 * transition_se,
          upper = transition_rate + 1.96 * transition_se) %>% 
-  ungroup()
-
-# Filter to include only the first 18 months
-transitions_summary_filtered <- transition_rates_data %>%
+  ungroup() %>%
   filter(spell_duration <= 18,
          spell_duration > 0)
 
+transition_rates_differences = transition_rates_data |> 
+  select(spell_duration, treat, transition_rate, transition_se) |> 
+  pivot_wider(
+    names_from = treat,
+    values_from = c(transition_rate, transition_se)
+  ) |> 
+  mutate(
+    difference = transition_rate_1 - transition_rate_0,
+    difference_se = sqrt(transition_se_1^2 + transition_se_0^2),
+    lower = difference - 1.96 * difference_se,
+    upper = difference + 1.96 * difference_se,
+  )
+         
+
 #### Plot transition rates ####
-p <- ggplot(transitions_summary_filtered, aes(x = spell_duration, y = transition_rate, color = as.factor(treat))) +
+p1 <- ggplot(transition_rates_data, aes(x = spell_duration, y = transition_rate, color = as.factor(treat))) +
   annotate("rect", xmin = 9, xmax = 18, ymin = -Inf, ymax = Inf, fill = "gray90", alpha = 0.5) +  # Add shaded rectangle
   geom_line() +
   scale_color_manual(values = c("1" = "firebrick", "0" = "grey65")) +
-  geom_ribbon(data=transitions_summary_filtered, 
+  geom_ribbon(data=transition_rates_data, 
               aes(ymin=lower,ymax=upper, fill = as.factor(treat), alpha=0.2), colour = NA) +
   scale_fill_manual(values = c("1" = "firebrick", "0" = "grey65")) +
   labs(
@@ -175,10 +189,33 @@ p <- ggplot(transitions_summary_filtered, aes(x = spell_duration, y = transition
   scale_y_continuous(limits = c(0, NA), expand = c(0, 0))  # Start y-axis at 0 and expand up to the max value
   #  annotate("text", x = 11, y = 0.05, label = "Job guarantee eligibility starts", size = 3, angle = 0, vjust = -0.5) +  # Add text annotation at x = 9
 
-p
+p1
 
-output_filename <- file.path(output_path, "transition_rates_ue_bands.png", sep = "")
-ggsave(output_filename, plot = p, width = 5, height = 3)
+output_filename <- file.path(output_path, "transition_rates_ue_bands.png")
+ggsave(output_filename, plot = p1, width = 5, height = 3)
+
+
+p2 = transition_rates_differences |> 
+  ggplot(aes(x = spell_duration, y = difference)) +
+  annotate("rect", xmin = 9, xmax = 18, ymin = -Inf, ymax = Inf, fill = "gray90", alpha = 0.5) +  # Add shaded rectangle
+  geom_line() +
+  geom_ribbon(data=transition_rates_differences, 
+              aes(ymin=lower,ymax=upper, alpha=0.1), colour = NA) +
+  labs(
+    subtitle = "Difference.",
+    x = "Duration (months)",
+    y = "Difference of transition rates",
+  ) +
+  theme_minimal() +
+  theme(plot.subtitle = element_markdown(),
+        legend.position="none") +
+  scale_x_continuous(breaks = 0:20)  +  # Ensure x-axis has breaks for each month up to 18
+  scale_y_continuous(expand = c(0, 0))  # Start y-axis at 0 and expand up to the max value
+  #  annotate("text", x = 11, y = 0.05, label = "Job guarantee eligibility starts", size = 3, angle = 0, vjust = -0.5) +  # Add text annotation at x = 9
+
+p2
+
+
 
 # # export data frame to csv
  output_csv <- file.path(output_path, "transition_rates_data_ue.csv")

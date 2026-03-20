@@ -27,5 +27,7 @@ furrr \
 estimatr \
 kableExtra \
 patchwork \
-ggtext
-
+ggtext \
+data.table \
+broom \
+zoo

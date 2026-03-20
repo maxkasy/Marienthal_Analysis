@@ -1,9 +1,15 @@
+# 7a-cumulative_employment_prep.R
+
+# This script prepares the data to produce Figure 7: Cumulative days per person.
+
 # run after 0b_i_admin_data_prep_2021_2024_periods.R
 
 # Define paths
 startdate <- "2020-09-30"  
+# adjust start date since only 29 Sept is available in 2024 delivery of this data file.
+# 30 Sept can be used if analysis is conducted for earlier years.
+startdate <- "2020-09-29"
 data_path <- paste0(veracrypt_path, "jobguarantee/2024-02-admin-data-raw/")
-# survey_path = paste0(veracrypt_path, "jobguarantee/2024-02-survey-data-processed/") # no survey data for 2024
 admin_out <- paste0(veracrypt_path, "jobguarantee/2024-02-admin-data-processed/")
 enddate <- "2024-02-28"    
 output_path = "Figures/Employment_periods/"
@@ -29,9 +35,6 @@ outcomes_work_history = c("TAGE_BESCHAEFTIGUNG_GESAMT",
                           "TAGE_OUT_OF_LABOUR_FORCE")
 
 
-# adjust start date since only 29 Sept is available in 2024 delivery of this data file
-startdate <- "2020-09-29"
-
 outcomes_work_history_start = paste0(outcomes_work_history, "_", startdate)
 
 outcomes_work_history_end = paste0(outcomes_work_history, "_", enddate)
@@ -49,10 +52,6 @@ work_history_ams_raw <-
     STICHTAG = as.Date(STICHTAG, format = "%d.%m.%Y")  # Adjust format as needed
   )
 
-
-library(lubridate)
-library(tidyverse)
-
 # 1. Convert all dates to year-month and filter the relevant period
 work_history_monthly <- work_history_ams_raw %>%
   mutate(month = floor_date(STICHTAG, "month")) %>%
@@ -68,13 +67,10 @@ work_history_monthly <- work_history_ams_raw %>%
   arrange(PSTNR, month) %>%
   
   # 4. Calculate month-to-month differences
-  group_by(PSTNR) %>%
+group_by(PSTNR) %>%
   mutate(across(
     all_of(outcomes_work_history),
-    list(
-      diff = ~ . - lag(.),  # Difference from previous month
-      cumsum = ~ cumsum(ifelse(is.na(lag(.)), 0, . - lag(.)))  # Cumulative difference
-    ),
+    list(diff = ~ pmax(0, . - lag(.))),
     .names = "{.col}_{.fn}"
   )) %>%
   ungroup() %>%
@@ -87,23 +83,8 @@ work_history_monthly <- work_history_ams_raw %>%
   pivot_wider(
     id_cols = PSTNR,
     names_from = month_label,
-    values_from = ends_with(c("_diff", "_cumsum")),
+    values_from = ends_with("_diff"),
     names_glue = "{.value}_month_{month_label}"
-  )
-
-# 7. Create summary metrics
-work_history_monthly <- work_history_monthly %>%
-  mutate(
-    across(
-      contains("TAGE_BESCHAEFTIGUNG_GESAMT_diff"),
-      list(employment_monthly = ~ .),
-      .names = "{str_replace(.col, 'TAGE_BESCHAEFTIGUNG_GESAMT_diff', 'employment_days_change')}"
-    ),
-    across(
-      contains("TAGE_BESCHAEFTIGUNG_GESAMT_cumsum"),
-      list(employment_cumulative = ~ .),
-      .names = "{str_replace(.col, 'TAGE_BESCHAEFTIGUNG_GESAMT_cumsum', 'employment_days_total')}"
-    )
   )
 
 ## now create a new df with the average value for each column
@@ -137,9 +118,8 @@ monthly_diff <- monthly_averages_long %>%
   filter(calculation == "diff") %>%
   select(-calculation)
 
-monthly_cumsum <- monthly_averages_long %>%
-  filter(calculation == "cumsum") %>%
-  select(-calculation)
+monthly_cumsum <- monthly_diff %>%
+  mutate(across(-month, cumsum))
 
 
 ## Write data
@@ -163,9 +143,6 @@ work_history_ams_raw <-
     STICHTAG = as.Date(STICHTAG, format = "%d.%m.%Y")  # Adjust format as needed
   )
 
-library(lubridate)
-library(tidyverse)
-
 # 1. Convert all dates to year-month and filter the relevant period
 work_history_monthly <- work_history_ams_raw %>%
   mutate(month = floor_date(STICHTAG, "month")) %>%
@@ -184,10 +161,7 @@ work_history_monthly <- work_history_ams_raw %>%
   group_by(PSTNR) %>%
   mutate(across(
     all_of(outcomes_work_history),
-    list(
-      diff = ~ . - lag(.),  # Difference from previous month
-      cumsum = ~ cumsum(ifelse(is.na(lag(.)), 0, . - lag(.)))  # Cumulative difference
-    ),
+    list(diff = ~ pmax(0, . - lag(.))),
     .names = "{.col}_{.fn}"
   )) %>%
   ungroup() %>%
@@ -200,23 +174,8 @@ work_history_monthly <- work_history_ams_raw %>%
   pivot_wider(
     id_cols = PSTNR,
     names_from = month_label,
-    values_from = ends_with(c("_diff", "_cumsum")),
+    values_from = ends_with("_diff"),
     names_glue = "{.value}_month_{month_label}"
-  )
-
-# 7. Create summary metrics
-work_history_monthly <- work_history_monthly %>%
-  mutate(
-    across(
-      contains("TAGE_BESCHAEFTIGUNG_GESAMT_diff"),
-      list(employment_monthly = ~ .),
-      .names = "{str_replace(.col, 'TAGE_BESCHAEFTIGUNG_GESAMT_diff', 'employment_days_change')}"
-    ),
-    across(
-      contains("TAGE_BESCHAEFTIGUNG_GESAMT_cumsum"),
-      list(employment_cumulative = ~ .),
-      .names = "{str_replace(.col, 'TAGE_BESCHAEFTIGUNG_GESAMT_cumsum', 'employment_days_total')}"
-    )
   )
 
 ## now create a new df with the average value for each column
@@ -250,9 +209,8 @@ monthly_diff <- monthly_averages_long %>%
   filter(calculation == "diff") %>%
   select(-calculation)
 
-monthly_cumsum <- monthly_averages_long %>%
-  filter(calculation == "cumsum") %>%
-  select(-calculation)
+monthly_cumsum <- monthly_diff %>%
+  mutate(across(-month, cumsum))
 
 
 ## Write data

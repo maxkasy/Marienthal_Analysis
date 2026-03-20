@@ -1,11 +1,12 @@
 # 5-cost-comparison
-library(tidyverse)
-library(readr)
-library(ggtext)
-library(janitor)
 
+# This script produces the plot for Figure 12: Expenditures per person and month, comparing program costs and benefit payments for Gramatneusiedl and control towns.
+
+## Load data ----
 
 data_raw_figure <- read.csv("magma_costs_table_for_figure.csv", sep = ",")
+
+## Format data ----
 
 ## format data_raw_figure to create the gglopt below
 # Read and adjust data
@@ -40,6 +41,7 @@ data_totals =
     group_by(treat, period_factor) |> 
     summarise(total = sum(cost))
 
+## Plot Figure ----
 
 ggplot(data_long, aes(
         x = period_factor,
@@ -151,6 +153,13 @@ ggsave(
   width = 8,
   height = 3.5,
   dpi = 300
+)
+
+# Save as PDF
+ggsave(
+  filename = "Figures/cost_comparison_stacked_bar_faceted_RR.pdf",
+  width = 6,
+  height = 3.5
 )
 
 

@@ -1064,11 +1064,11 @@ data_tax_long_sep = data_tax_long_sep %>%
 
 # change year to month for merging
 data_tax_long_sep = data_tax_long_sep %>%
-  mutate(monthproxy = "7")
+  mutate(monthproxy = 7L)  # integer, not string
 
 #combine year and month into 1 variable
 data_tax_long_sep = data_tax_long_sep %>%
-  mutate(month = make_datetime(year, monthproxy))
+  mutate(month = make_datetime(as.integer(year), monthproxy))
 
 #drop day that was erroneously created
 data_tax_long_sep$month <- data_tax_long_sep$month %>%

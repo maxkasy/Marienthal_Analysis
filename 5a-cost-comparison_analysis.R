@@ -1,24 +1,41 @@
 # 5-cost-comparison
+
+# This script computes the costs of the program for the treatment and control group, based on the ALV data and the FOER data. It computes total costs as well as costs per person and month, which are used in the cost comparison plot (Figure 12) and in Table 7, Table A.8 and Table A.9.
+
+# keep packages here to run script on AMS computer
 library(tidyverse)
 library(readr)
 library(data.table)
 library(ggtext)
 library(janitor)
+library(lubridate)
+library(knitr)
+library(stringr)
+
+## Functinos ----
+parse_number_robust <- function(x) {
+  x <- as.character(x)
+  x <- gsub("\\s", "", x)
+  x <- gsub("[^0-9,.-]", "", x)
+  has_comma <- grepl(",", x, fixed = TRUE)
+  has_dot <- grepl("\\.", x)
+  x <- ifelse(has_comma & has_dot, gsub("\\.", "", x), x)
+  x <- ifelse(has_comma, gsub(",", ".", x), x)
+  as.numeric(x)
+}
 
 ## Settings ----
-
-home <- dirname(getwd())
-# home <- getwd() 
-
-Windows = F
+rm(list = ls())
+Windows = T
 # Switch path for data-files T or F
 if (Windows) {veracrypt_path = "A:/"} else {veracrypt_path = "/Volumes/NO NAME/"}
 
-AMS = F
+AMS = T
 # Switch path for data-files between AMS and Lukas/Max computing environment
 if (AMS) {
   
-  setwd("V:/AES/03_Forschung/0_Projekte/2020/1_MAGMA/!Uni Oxford/5_Daten/202401 Kosten/Cost_Calculation")
+  setwd("V:/AES/03_Forschung/0_Projekte/2020/1_MAGMA/!Uni Oxford/5_Daten/202401 - Kosten/Cost_Calculation")
+  home <- getwd()
   
   data_path = file.path(home, "cost_data")
   
@@ -27,6 +44,7 @@ if (AMS) {
 } else {
   
   data_path = file.path(dirname(home), "Cost_data", "cost_data")
+  home <- getwd()
   
   pstnr_data <- paste0(veracrypt_path, "jobguarantee/pstnr_magma_control_towns.csv")
 }
@@ -50,10 +68,10 @@ data_foer_individual_control <- fread(foer_individual_control_data)
 data_foer_traeger_treat <- fread(foer_traeger_treat_data)
 data_foer_traeger_control <- fread(foer_traeger_control_data)
 
-magma_pstnr <- fread("pstnr_magma.csv")
-control_pstnr <- fread("pstnr_control_towns.csv")
+magma_pstnr <- fread(file.path(home, "pstnr_magma.csv"))[[1]]
+control_pstnr <- fread(file.path(home, "pstnr_control_towns.csv"))[[1]]
 
-# # Daniel extra code for AMS computer
+# USE FOR REAL DATA (AMS)
 # magma_pstnr <- magma_pstnr$magma_pstnr
 # control_pstnr <- control_pstnr$control_pstnr
 
@@ -63,9 +81,10 @@ data_alv <- data_alv %>%
   mutate(treat = ifelse(PST_KEY %in% magma_pstnr, 1, 0),
          control = ifelse(PST_KEY %in% control_pstnr, 1, 0))
 
+# USE FOR REAL DATA (AMS)
 # Filter out rows that are neither treat == 1 nor control == 1
-data_alv <- data_alv %>%
-  filter(treat == 1 | control == 1)
+# data_alv <- data_alv %>%
+#   filter(treat == 1 | control == 1)
 
 
 # add treatment dummy: foer
@@ -95,16 +114,17 @@ data_foer_traeger <- bind_rows(data_foer_traeger_treat, data_foer_traeger_contro
 ### FOER calculation ----
 # separately for Individualfoerderung and Traegerfoerderung
 
-## filter for treat and control individuals ----
-# Filter out rows that are neither treat == 1 nor control == 1
-data_foer_individual <- data_foer_individual %>%
-  filter(pst_key %in% c(magma_pstnr, control_pstnr))
+# USE FOR REAL DATA (AMS)
+# ## filter for treat and control individuals 
+# # Filter out rows that are neither treat == 1 nor control == 1
+# data_foer_individual <- data_foer_individual %>%
+#   filter(pst_key %in% c(magma_pstnr, control_pstnr))
 
-data_foer_traeger <- data_foer_traeger %>%
-  filter(pst_key %in% c(magma_pstnr, control_pstnr))
+# data_foer_traeger <- data_foer_traeger %>%
+#   filter(pst_key %in% c(magma_pstnr, control_pstnr))
 
 
-## Exclude / shorten spells that started before 01.01.2020 ----
+## Exclude / shorten spells that started before 01.01.2020 
 # Convert BEGINN and ENDE columns to Date format
 data_foer_individual <- data_foer_individual %>%
   mutate(
@@ -135,14 +155,14 @@ data_foer_traeger <- data_foer_traeger %>%
   mutate(START = pmax(foerderung_von, as.Date("2020-10-01")))
 
 
-# Exclude rows where BEGINN is after 31.03.2024 (ADDED)
+# Exclude rows where BEGINN is after 31.03.2024
 data_foer_individual <- data_foer_individual %>%
   filter(foerderung_von <= as.Date("2024-03-31"))
  
 data_foer_traeger <- data_foer_traeger %>%
   filter(foerderung_von <= as.Date("2024-03-31"))
 
-# Set ENDE after 31.03.2024 to 31.03.2024 (ADDED)
+# Set ENDE after 31.03.2024 to 31.03.2024
 data_foer_individual <- data_foer_individual %>%
   mutate(ENDE = pmin(foerderung_bis, as.Date("2024-03-31")))
 
@@ -150,7 +170,7 @@ data_foer_traeger <- data_foer_traeger %>%
   mutate(ENDE = pmin(foerderung_bis, as.Date("2024-03-31")))
 
 
-# Calculate days since program start (2020-10-01) (ADDED or MODIFIED see START)
+# Calculate days since program start (2020-10-01)
 data_foer_individual <- data_foer_individual %>%
   mutate(DAYS = as.numeric(difftime(ENDE, START, units = "days")),
          DAYS = DAYS + 1, # to include the end day as well
@@ -166,7 +186,7 @@ data_foer_traeger <- data_foer_traeger %>%
          DAYS_unadjusted = DAYS_unadjusted + 1) # to include the end day as well) 
 
 
-## Drop rows that appear twice ----
+## Drop rows that appear twice 
 # with same gesamtbewilligung, foerderung_von, foerderung_bis
 data_foer_individual <- data_foer_individual %>%
   group_by(gesamtbewilligung, foerderung_von, foerderung_bis) %>%
@@ -182,7 +202,7 @@ data_foer_traeger <- data_foer_traeger %>%
   ungroup()
 
 
-## Calculate daily cost for foer ----
+## Calculate daily cost for foer 
 
 # Convert 'gesamtbewilligung' to numeric
 data_foer_individual <- data_foer_individual %>%
@@ -193,9 +213,9 @@ data_foer_individual <- data_foer_individual %>%
 # Convert 'kosten_pro_tn_tag' to numeric
 data_foer_traeger <- data_foer_traeger %>%
   mutate(
-#    kosten_pro_tn_tag = str_replace_all(kosten_pro_tn_tag, ",", ""), # Remove commas
-    kosten_pro_tn_tag = as.numeric(kosten_pro_tn_tag), # Convert to numeric
-    kosten_pro_tn_tag_inkl_mitfinanzierungen = as.numeric(kosten_pro_tn_tag_inkl_mitfinanzierungen))                # Convert to numeric
+    kosten_pro_tn_tag = parse_number_robust(kosten_pro_tn_tag),
+    kosten_pro_tn_tag_inkl_mitfinanzierungen = parse_number_robust(kosten_pro_tn_tag_inkl_mitfinanzierungen)
+  )
 
 
 # create daily cost variable
@@ -225,7 +245,7 @@ total_cost_foer_traeger <- data_foer_traeger %>%
   summarize(total_foer_cost = sum(foer_cost, na.rm = TRUE))
 
 
-## Divide total cost by number of people in treatment and control group ----
+## Divide total cost by number of people in treatment and control group 
 ## count nr of persons: number of unique PST_KEY values
 n_foer_individual <- data_foer_individual %>%
   group_by(treat) %>%
@@ -241,7 +261,7 @@ total_cost_foer_individual <- total_cost_foer_individual %>%
   left_join(n_foer_individual, by = "treat")
 
 total_cost_foer_traeger <- total_cost_foer_traeger %>%
-  left_join(n_foer_individual, by = "treat")
+  left_join(n_foer_traeger, by = "treat")
 
 
 total_cost_foer_individual <- total_cost_foer_individual %>%
@@ -260,7 +280,7 @@ total_cost_foer_traeger <- total_cost_foer_traeger %>%
   mutate(person_foer_cost = total_foer_cost / n_people_start)
 
 
-## sum foer individual and traeger costs ----
+## sum foer individual and traeger costs 
 # merge
 total_cost_foer <- bind_rows(total_cost_foer_individual, total_cost_foer_traeger)
   
@@ -273,20 +293,22 @@ group_by(treat) %>%
 
 ### ALV calculation ----
 
-## Exclude / shorten spells that started before 01.01.2020 ----
+# ALV data is in MM-DD-YYYY (contrary to foer data)
+## Exclude / shorten spells that started before 01.01.2020 
 # Convert BEGINN and ENDE columns to Date format
-# data_alv <- data_alv %>%
-#   mutate(
-#     BEGINN = as.Date(BEGINN, format = "%m/%d/%Y"),
-#     ENDE = as.Date(ENDE, format = "%m/%d/%Y")
-#   )
-
-#CODE REQUIRED FOR DANIEL since data seems to be read in differently on his computer
 data_alv <- data_alv %>%
   mutate(
-    BEGINN = as.Date(BEGINN, format = "%m.%d.%Y"),
-    ENDE = as.Date(ENDE, format = "%m.%d.%Y")
+    BEGINN = as.Date(BEGINN, format = "%m/%d/%Y"),
+    ENDE = as.Date(ENDE, format = "%m/%d/%Y")
   )
+
+# USE FOR REAL DATA (AMS)
+# CODE REQUIRED FOR DANIEL since data is loaded differently on AMS computer
+# data_alv <- data_alv %>%
+#   mutate(
+#     BEGINN = as.Date(BEGINN, format = "%m.%d.%Y"),
+#     ENDE = as.Date(ENDE, format = "%m.%d.%Y")
+#   )
 
 # Exclude rows where ENDE is before 01.10.2020
 data_alv <- data_alv %>%
@@ -305,7 +327,7 @@ data_alv <- data_alv %>%
   mutate(ENDE = pmin(ENDE, as.Date("2024-03-31")))
 
 
-## Exclude rows that appear erroneously twice ----
+## Exclude rows that appear erroneously twice 
 # Adjust the Enddatum for overlapping periods
 data_alv <- data_alv %>%
   group_by(PST_KEY) %>%
@@ -325,7 +347,7 @@ data_alv <- data_alv %>%
   mutate(DAYS = as.numeric(difftime(ENDE, START, units = "days")),
          DAYS = DAYS + 1) # to include the end day as well
 
-## Adjust alv for indirect costs (social insurance: health & pension) ----
+## Adjust alv for indirect costs (social insurance: health & pension) 
 # add amount to tagsatz varied by level of bemessungsgrundlage (in EUR per month)
 # bemessungsgrundlage in steps of EUR 500
 # e.g.:
@@ -396,7 +418,7 @@ data_alv <- data_alv %>%
   mutate(benefit_cost_day = TAGSATZLEIST + kv_cost + pv_cost)
 
 
-## Calculate total cost for alv + components ----
+## Calculate total cost for alv + components
 data_alv <- data_alv %>%
   mutate(benefit_cost = benefit_cost_day * DAYS,
          benefits_net = TAGSATZLEIST * DAYS,
@@ -427,7 +449,7 @@ total_cost_alv <- bind_rows(
 )
 
 
-## Divide total cost by number of people in treatment and control group ----
+## Divide total cost by number of people in treatment and control group 
 ## count nr of persons: number of unique PST_KEY values
 n_alv <- data_alv %>%
   group_by(treat) %>%
@@ -457,7 +479,7 @@ total_cost_alv <- total_cost_alv %>%
          person_benefits_pension_si = total_benefits_pension_si / n_people_start)
 
 
-## sum foer and alv costs ----
+## Table 7: sum foer and alv costs ----
 # rename variables
 total_cost_foer <- total_cost_foer %>%
   rename(total_cost = total_foer_cost,
@@ -509,21 +531,31 @@ write.csv(total_cost_alv, "magma_costs_alv.csv", row.names = FALSE)
 
 write.csv(total_cost_foer, "magma_costs_foer.csv", row.names = FALSE)
 
-## addition: costs per month for different periods ----
-library(lubridate)
+
+## Figure 12: 6-month periods comparison ----
+
+make_6m_seq <- function(start, end) {
+  start <- as.Date(start[1])
+  end <- as.Date(end[1])
+  if (is.na(start) || is.na(end) || end < start) {
+    return(as.Date(character(0)))
+  }
+  seq(floor_date(start, "6 months"), floor_date(end, "6 months"), by = "6 months")
+}
 
 ## foer
 ## traeger
 # Expand the dataset into 6-month periods
 data_foer_traeger_expanded <- data_foer_traeger %>%
-  rowwise() %>%
-  mutate(period_sequence = list(seq(floor_date(START, "6 months"),
-                                    floor_date(ENDE, "6 months"), 
-                                    by = "6 months"))) %>%
+  mutate(period_sequence = purrr::map2(START, ENDE, make_6m_seq)) %>%
   unnest(period_sequence) %>%
-  ungroup()
+  mutate(
+    START = as.Date(START),
+    ENDE = as.Date(ENDE),
+    period_sequence = as.Date(period_sequence)
+  )
 
-## NEW (2025-03-26): Define period specific start and end dates to calculate days within period
+## Define period specific start and end dates to calculate days within period
 data_foer_traeger_expanded <- data_foer_traeger_expanded %>%
   mutate(
     START_period = pmax(START, period_sequence), # Set BEGINN 
@@ -544,14 +576,15 @@ n_foer_traeger_periods <- data_foer_traeger_expanded %>%
 
 ## individual
 data_foer_individual_expanded <- data_foer_individual %>%
-  rowwise() %>%
-  mutate(period_sequence = list(seq(floor_date(START, "6 months"),
-                                    floor_date(ENDE, "6 months"), 
-                                    by = "6 months"))) %>%
+  mutate(period_sequence = purrr::map2(START, ENDE, make_6m_seq)) %>%
   unnest(period_sequence) %>%
-  ungroup()
+  mutate(
+    START = as.Date(START),
+    ENDE = as.Date(ENDE),
+    period_sequence = as.Date(period_sequence)
+  )
 
-## NEW (2025-03-26): Define period specific start and end dates to calculate days within period
+## Define period specific start and end dates to calculate days within period
 data_foer_individual_expanded <- data_foer_individual_expanded %>%
   mutate(
     START_period = pmax(START, period_sequence), # Set BEGINN 
@@ -579,12 +612,12 @@ total_cost_foer_individual_periods <- total_cost_foer_individual_periods %>%
 total_cost_foer_traeger_periods <- total_cost_foer_traeger_periods %>%
   left_join(n_foer_traeger_periods, by = c("treat", "period_sequence"))
 
-## set original number of people (ADDED)
+## set original number of people
 total_cost_foer_individual_periods <- total_cost_foer_individual_periods %>%
   group_by(treat) %>%
   mutate(n_people_start = ifelse(treat == 1, 62, 211))
 
-## set original number of people (ADDED)
+## set original number of people
 total_cost_foer_traeger_periods <- total_cost_foer_traeger_periods %>%
   group_by(treat) %>%
   mutate(n_people_start = ifelse(treat == 1, 62, 211))
@@ -597,7 +630,7 @@ total_cost_foer_traeger_periods <- total_cost_foer_traeger_periods %>%
   mutate(person_foer_cost = total_foer_cost / n_people_start)
 
 
-## sum foer individual and traeger costs ----
+## sum foer individual and traeger costs
 # merge
 total_cost_foer_periods <- bind_rows(total_cost_foer_individual_periods, total_cost_foer_traeger_periods)
 
@@ -615,57 +648,85 @@ data_alv_expanded <- data_alv %>%
 
 # Step 2: Expand the data to cover each 6-month period between START and ENDE
 data_alv_expanded <- data_alv_expanded %>%
-  rowwise() %>%
-  mutate(period_sequence = list(seq(floor_date(START, "6 months"),
-                                    floor_date(ENDE, "6 months"),
-                                    by = "6 months"))) %>%
+  mutate(period_sequence = purrr::map2(START, ENDE, make_6m_seq)) %>%
   unnest(period_sequence) %>%
-  ungroup()
+  mutate(
+    START = as.Date(START),
+    ENDE = as.Date(ENDE),
+    period_sequence = as.Date(period_sequence)
+  )
 
-# Step 3: Calculate the start and end of each period
+# Step 3: period-specific start/end inside each 6-month bin
 data_alv_expanded <- data_alv_expanded %>%
-  mutate(period_start = START,
-         period_end = if_else(period_sequence == floor_date(ENDE, "6 months"), ENDE, period_start + months(6) - days(1)),
-         period_end = pmin(period_end, ENDE))  # Ensure the period_end doesn't exceed ENDE
+  mutate(
+    period_start = pmax(START, period_sequence),
+    period_end   = pmin(
+      ENDE,
+      period_sequence %m+% months(6) - days(1)
+    ),
+    DAYS_in_period = as.numeric(difftime(period_end, period_start, units = "days")) + 1
+  )
 
 # Step 4: Calculate the days within each 6-month period
 data_alv_expanded <- data_alv_expanded %>%
   mutate(DAYS_in_period = as.numeric(difftime(period_end, period_start, units = "days")) + 1)  # Add 1 to include the last day
 
-# Step 5: Summarize the days for each 6-month period by treatment or any other grouping variable
-days_alv_by_period <- data_alv_expanded %>%
-  group_by(treat, period_sequence) %>%
-  summarize(total_days = sum(DAYS_in_period), .groups = 'drop')
-
-# calculate alv cost by days per period
-# Step 5: Calculate benefit cost per 6-month period
+# Step 5: Calculate ALV costs per 6-month period (total + components)
 data_alv_period_cost <- data_alv_expanded %>%
-  mutate(benefit_cost_period = benefit_cost_day * DAYS_in_period)  # Multiply by days in each period
+  mutate(
+    benefit_total_period       = benefit_cost_day * DAYS_in_period,
+    benefits_net_period        = TAGSATZLEIST   * DAYS_in_period,
+    benefits_health_si_period  = kv_cost        * DAYS_in_period,
+    benefits_pension_si_period = pv_cost        * DAYS_in_period
+  )
 
-# Step 6: Summarize the total cost for each 6-month period by treatment or any other grouping variable
+# Step 6: Summarize the total cost per 6-month period by treatment
 total_cost_alv_periods <- data_alv_period_cost %>%
   group_by(treat, period_sequence) %>%
-  summarize(total_cost = sum(benefit_cost_period, na.rm = TRUE), .groups = 'drop')
+  summarize(
+    total_cost                = sum(benefit_total_period,       na.rm = TRUE),
+    total_benefits_net        = sum(benefits_net_period,        na.rm = TRUE),
+    total_benefits_health_si  = sum(benefits_health_si_period,  na.rm = TRUE),
+    total_benefits_pension_si = sum(benefits_pension_si_period, na.rm = TRUE),
+    .groups = "drop"
+  )
 
-## Incorporate nr of people per period
-
-# Step 7: Count distinct people (PST_KEY) per 6-month period and treatment group
+# Step 7: Count distinct people per 6-month period and treatment group
 n_people_alv_by_period <- data_alv_expanded %>%
   group_by(treat, period_sequence) %>%
-  summarize(n_people = n_distinct(PST_KEY), .groups = 'drop')
+  summarize(n_people = n_distinct(PST_KEY), .groups = "drop")
 
 # Step 8: Merge the total cost and number of people by period and treatment group
 total_cost_alv_periods <- total_cost_alv_periods %>%
   left_join(n_people_alv_by_period, by = c("treat", "period_sequence"))
 
-## set original number of people (ADDED)
+# Step 9: Use original (fixed) denominators and compute per-person costs
 total_cost_alv_periods <- total_cost_alv_periods %>%
   group_by(treat) %>%
-  mutate(n_people_start = ifelse(treat == 1, 62, 211))
+  mutate(
+    n_people_start = ifelse(treat == 1, 62, 211),
+    
+    person_cost                 = total_cost / n_people_start,
+    person_benefits_net         = total_benefits_net / n_people_start,
+    person_benefits_health_si   = total_benefits_health_si / n_people_start,
+    person_benefits_pension_si  = total_benefits_pension_si / n_people_start
+  ) %>%
+  ungroup()
 
-# Step 9: Calculate the average cost per person for each 6-month period
+# Step 10: Convert period totals to monthly (3-month bins at start/end, otherwise 6 months)
 total_cost_alv_periods <- total_cost_alv_periods %>%
-  mutate(person_cost = total_cost / n_people_start)
+  mutate(
+    months_in_bin = ifelse(
+      period_sequence == as.Date("2020-07-01") | period_sequence == as.Date("2024-01-01"),
+      3L, 6L
+    ),
+    
+    person_cost_month                 = person_cost / months_in_bin,
+    person_benefits_net_month         = person_benefits_net / months_in_bin,
+    person_benefits_health_si_month   = person_benefits_health_si / months_in_bin,
+    person_benefits_pension_si_month  = person_benefits_pension_si / months_in_bin
+  ) %>%
+  select(-months_in_bin)
 
 
 ## create cost per month
@@ -684,16 +745,16 @@ total_cost_foer_periods <- total_cost_foer_periods %>%
 total_cost_foer_periods <- total_cost_foer_periods %>%
   arrange(period_sequence)
 
-# alv
-total_cost_alv_periods <- total_cost_alv_periods %>%
-  group_by(treat, period_sequence) %>%
-  mutate(
-    person_cost_month = ifelse(
-      period_sequence == as.Date("2020-07-01") | period_sequence == as.Date("2024-01-01"),
-      person_cost / 3,
-      person_cost / 6
-    )
-  )
+# # alv
+# total_cost_alv_periods <- total_cost_alv_periods %>%
+#   group_by(treat, period_sequence) %>%
+#   mutate(
+#     person_cost_month = ifelse(
+#       period_sequence == as.Date("2020-07-01") | period_sequence == as.Date("2024-01-01"),
+#       person_cost / 3,
+#       person_cost / 6
+#     )
+#   )
 
 total_cost_foer_periods <- total_cost_foer_periods %>%
   arrange(period_sequence)
@@ -727,442 +788,216 @@ write.csv(total_cost_alv_periods, "magma_costs_alv_periods.csv", row.names = FAL
 
 write.csv(total_cost_foer_periods, "magma_costs_foer_periods.csv", row.names = FALSE)
 
-## Figure ----
-## NEW ADDED BY LUKAS 2025-05-02
-## Create a stacked bar chart with results
 
-data_raw_figure <- read.csv("magma_costs_table_for_figure.csv", sep = ",")
+## --- Create magma_costs_table_for_figure.csv 
 
-## format data_raw_figure to create the gglopt below
-# Read and adjust data
-data_long <- data_raw_figure %>%
-  mutate(
-    period_sequence = as.Date(period_sequence, format = "%d/%m/%Y"),
-    # Change first date while keeping others
-    period_sequence = if_else(
-      period_sequence == as.Date("2020-07-01"),
-      as.Date("2020-10-01"),
-      period_sequence
-    )
-  ) %>%
-  # Create ordered factor for consistent spacing
-  mutate(
-    period_factor = as.numeric(factor(period_sequence, levels = unique(sort(period_sequence))))
-  ) %>%
-  pivot_longer(
-    cols = c(foer_person_cost_month, alv_person_cost_month),
-    names_to = "cost_type",
-    values_to = "cost"
+magma_costs_table_for_figure <- total_cost_foer_periods %>%
+  select(treat, period_sequence, person_cost_month) %>%
+  rename(foer_person_cost_month = person_cost_month) %>%
+  full_join(
+    total_cost_alv_periods %>%
+      select(treat, period_sequence, person_cost_month) %>%
+      rename(alv_person_cost_month = person_cost_month),
+    by = c("treat", "period_sequence")
   ) %>%
   mutate(
-    treat = factor(treat, levels = c(1, 0), labels = c("Treatment", "Control")),
-    cost_type = factor(cost_type,
-                       levels = c("foer_person_cost_month", "alv_person_cost_month"),
-                       labels = c("Programs", "Social Benefits"))
-  )
+    foer_person_cost_month = tidyr::replace_na(foer_person_cost_month, 0),
+    alv_person_cost_month  = tidyr::replace_na(alv_person_cost_month, 0),
+    # Match the plotting code expectation: DD/MM/YYYY strings (e.g. "01/07/2020")
+    period_sequence = format(as.Date(period_sequence), "%d/%m/%Y")
+  ) %>%
+  arrange(treat, as.Date(period_sequence, format = "%d/%m/%Y"))
 
-# Bar dimensions
-bar_width <- 0.4  # Relative width (0-1)
-spacing <- 0.8      # Base spacing unit
-
-# Calculate positions using period_factor instead of dates
-plot_data <- data_long %>%
-  mutate(
-    group_pos = ifelse(
-      treat == "Treatment",
-      period_factor - spacing/4,  # Treatment left
-      period_factor + spacing/4   # Control right
-    )
-  )
-
-# Define alpha values
-treat_alpha <- 1      # Opaque for Treatment
-control_alpha <- 0.6  # Transparent for Control
-
-# Plot without patterns
-ggplot(plot_data, aes(
-  x = group_pos,
-  y = cost,
-  fill = cost_type,
-  alpha = treat,
-  group = interaction(treat, period_sequence)
-)) +
-  geom_col(position = "stack", width = bar_width) +
-  # Add text labels for first period
-  geom_text(
-    data = subset(plot_data, period_sequence == min(period_sequence)),
-    aes(
-      x = group_pos,
-      y = max(cost) * 0.6,  # Position slightly above highest bar
-      label = ifelse(treat == "Treatment", "Gramatneusiedl", "Control towns"),
-      angle = 90,  # Vertical text
-      hjust = 0    # Align to bottom of text
-    ),
-    vjust = 0,  # Align text at bottom of position
-    size = 3.5,
-    color = "black",
-    alpha = 1,  # Override alpha for text
-    inherit.aes = FALSE
-  ) +
-  scale_x_continuous(
-    breaks = unique(plot_data$period_factor),
-    labels = function(x) format(unique(sort(data_long$period_sequence))[x], "%b %Y")
-  ) +
-  scale_fill_manual(values = c(
-    "Programs" = "#005E87",  # other colour options: steelblue, #005E87, 1F77B4
-    "Social Benefits" = "#E35205" # darkorange, #E35205, #FF7F0E
-  )) + 
-  scale_alpha_manual(
-    values = c("Treatment" = treat_alpha, "Control" = control_alpha),
-    guide = "none"  # Hide alpha legend
-  ) +
-  labs(
-    title = "",
-    x = "",
-    y = "Monthly cost per person in EUR",
-    fill = ""
-  ) +
-  theme_minimal() +
-  theme(
-    panel.grid = element_blank(),
-    axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
-    axis.title.y = element_text(size = 11, margin = margin(r = 10)),
-    legend.position = "top",
-    legend.text = element_text(size = 10),
-    plot.title = element_text(face = "bold", size = 12)
-  )
-# Note:
-# Programs refer to Active labor market policy
-# Social Benefits to Passive labor market policy
-
-# Save the plot
-ggsave(
-  filename = "cost_comparison_stacked_bar.png",
-  width = 10,
-  height = 6,
-  dpi = 300
+write.csv(
+  magma_costs_table_for_figure,
+  "magma_costs_table_for_figure.csv",
+  row.names = FALSE
 )
 
 
+## Appendix table: short-term vs long-term (AMS) costs vs benefits ----
+# Table A.8 and Table A.9
 
-# Plot with firebrick style for manuscript
-# Create a custom legend
+# --- Robust bin anchors (first bin starts at program launch: 2020-10-01)
+period_sequence_vec <- as.Date(c(
+  "2020-10-01", # Oct–Dec 2020 (3 months)
+  "2021-01-01", # Jan–Jun 2021 (6 months)
+  "2021-07-01", # Jul–Dec 2021
+  "2022-01-01", # Jan–Jun 2022
+  "2022-07-01", # Jul–Dec 2022
+  "2023-01-01", # Jan–Jun 2023
+  "2023-07-01", # Jul–Dec 2023
+  "2024-01-01"  # Jan–Mar 2024 (3 months, truncated)
+))
 
-# Main plot without legend
-#main_plot <- 
-ggplot(plot_data, aes(
-  x = group_pos,
-  y = cost,
-  fill = treat,
-  alpha = cost_type,
-  group = interaction(treat, period_sequence)
-)) +
-  geom_col(position = "stack", width = bar_width) +
-  # Add text labels for first period
-  geom_text(
-    data = subset(plot_data, period_sequence == min(period_sequence)),
-    aes(
-      x = group_pos,
-      y = max(cost) * 0.6,
-      label = ifelse(treat == "Treatment", "Gramatneusiedl", "Control towns"),
-      angle = 90,
-      hjust = 0
-    ),
-    vjust = 0,
-    size = 3.5,
-    color = "black",
-    alpha = 1,
-    inherit.aes = FALSE
-  ) +
-  scale_x_continuous(
-    breaks = unique(plot_data$period_factor),
-    labels = function(x) {
-      dates <- unique(sort(data_long$period_sequence))[x]
-      # Format with month and year on separate lines
-      paste0(format(dates, "%b"), "\n", format(dates, "%Y"))
-    }
-  ) +
-  scale_fill_manual(
-    values = c(
-      "Treatment" = "firebrick",
-      "Control" = "grey50"
-    ),
-    guide = "none"  # Hide fill legend
-  ) + 
-  scale_alpha_manual(
-    values = c(
-      "Programs" = 0.9,
-      "Social Benefits" = 0.6
-    ),
-    guide = "none"  # Hide alpha legend
-  ) +
-  labs(
-    title = "",
-    x = "",
-    y = "Monthly cost per person in EUR"
-  ) +
-  theme_minimal() +
-  theme(
-    panel.grid = element_blank(),
-    axis.text.x = element_text(angle = 0, hjust = 0.5, size = 10),  # Center the labels
-    axis.text.y = element_text(angle = 0, hjust = 0.5, size = 10),
-    axis.title.y = element_text(size = 11, margin = margin(r = 10)),
-    plot.title = element_text(face = "bold", size = 12)
+# compute bin end dates and months/days in bin from anchors
+bins_df <- tibble(period_sequence = period_sequence_vec) %>%
+  mutate(
+    bin_start = period_sequence,
+    # bin_end is the day before the next anchor, except for last anchor use Mar 31 2024
+    bin_end = lead(period_sequence, default = as.Date("2024-04-01")) - days(1),
+    months_in_bin = as.integer(interval(bin_start, bin_end + days(1)) %/% months(1)),
+    days_in_bin   = as.integer(bin_end - bin_start) + 1L
   )
 
-# Save the plot
-ggsave(
-  filename = "cost_comparison_stacked_bar_firebrick.png",
-  width = 7.5,
-  height = 4.2,
-  dpi = 300
+# lookup months in bin for any date within a bin (not just the anchor)
+months_in_bin <- function(d) {
+  d <- as.Date(d)
+  vapply(
+    d,
+    function(di) {
+      idx <- which(bins_df$bin_start <= di & di <= bins_df$bin_end)
+      if (length(idx) == 0) {
+        NA_integer_
+      } else {
+        bins_df$months_in_bin[[idx[1]]]
+      }
+    },
+    integer(1)
+  )
+}
+
+# horizon mapping by interval membership (robust to exact anchor values)
+horizon_map_from_date <- function(d) {
+  case_when(
+    d >= as.Date("2020-10-01") & d <= as.Date("2022-06-30") ~ "Short-term (Oct 2020–Jun 2022)",
+    d >= as.Date("2022-07-01") & d <= as.Date("2024-03-31") ~ "Long-term (Jul 2022–Mar 2024)",
+    TRUE ~ NA_character_
+  )
+}
+
+# --- Add ALV benefit subcomponents to short/long comparison
+
+alv_components <- c(
+  "person_cost_month",                 # total benefit payments (existing)
+  "person_benefits_net_month",
+  "person_benefits_health_si_month",
+  "person_benefits_pension_si_month"
 )
 
-
-
-
-
-
-# Clearer annotation
-# Create modified data for alpha reversal
-# Reverse period order and create modified alpha values
-plot_data_rev <- plot_data %>% 
-  mutate(
-    cost_type_alpha = case_when(
-      treat == "Treatment" ~ cost_type,
-      treat == "Control" & cost_type == "Programs" ~ "Social Benefits",
-      treat == "Control" & cost_type == "Social Benefits" ~ "Programs"
+# Stack program costs (FOER) and benefit payments (ALV) at bin level
+ams_bins <- bind_rows(
+  # FOER (program costs)
+  total_cost_foer_periods %>%
+    transmute(
+      treat,
+      period_sequence = as.Date(period_sequence),
+      component = "Program costs",
+      person_cost_month
     ),
-    # Reverse the order of periods by reordering factor levels
-    period_factor = factor(
-      period_factor,
-      levels = rev(unique(period_factor[order(period_sequence)])),  # REVERSE HERE
-      labels = rev(format(unique(period_sequence[order(period_sequence)]), "%b %Y"))
-    )
-  )
-
-
-p <- ggplot(plot_data_rev, aes(
-  x = period_factor,
-  y = cost,
-  fill = treat,
-  alpha = cost_type_alpha,
-  group = interaction(treat, period_sequence)
-)) +
-  geom_col(position = "stack", width = 0.7) +
-  facet_wrap(~treat, ncol = 1, 
-             labeller = labeller(treat = c("Treatment" = "Gramatneusiedl", 
-                                           "Control" = "Control towns"))) +
   
-  # MANUALLY ADJUSTED ANNOTATIONS
-  geom_text(
-    data = data.frame(
-      label = c("Total Cost", "Program Cost", "Benefits"),
-      x = c("Oct 2020", "Oct 2020", "Oct 2020"),  # Same period for all (adjust as needed)
-      y = c(1500, 800, 200),  # Exact EUR values for positioning
-      treat = "Treatment"  # Ensure annotations appear only in the Treatment facet
-    ),
-    aes(x = x, y = y, label = label),
-    inherit.aes = FALSE,
-    size = 3.5,
-    color = "black",
-    hjust = 0  # Left-align text (adjust if needed)
-  ) +
-  
-  # Rest of the plot code...
-  scale_fill_manual(values = c("Treatment" = "firebrick", "Control" = "grey50"), guide = "none") + 
-  scale_alpha_manual(values = c("Programs" = 0.9, "Social Benefits" = 0.3), guide = "none") +
-  labs(x = "", y = "Monthly cost per person in EUR") +
-  theme_minimal() +
-  theme(
-    panel.grid = element_blank(),
-    axis.text.y = element_text(size = 10),
-    axis.title.y = element_text(size = 11, margin = margin(r = 10)),
-    strip.text = element_text(size = 11, face = "bold"),
-    panel.spacing = unit(1, "lines")
-  ) +
-  coord_flip()
+  # ALV (benefits): total + subcomponents
+  total_cost_alv_periods %>%
+    transmute(
+      treat,
+      period_sequence = as.Date(period_sequence),
+      # keep a clear "total" column name before pivoting
+      benefit_total_month = person_cost_month,
+      person_benefits_net_month,
+      person_benefits_health_si_month,
+      person_benefits_pension_si_month
+    ) %>%
+    pivot_longer(
+      cols      = c(benefit_total_month,
+                    person_benefits_net_month,
+                    person_benefits_health_si_month,
+                    person_benefits_pension_si_month),
+      names_to  = "component_raw",
+      values_to = "person_cost_month"
+    ) %>%
+    mutate(
+      component = recode(
+        component_raw,
+        benefit_total_month              = "Benefit payments (total)",
+        person_benefits_net_month        = "Benefit payments (net)",
+        person_benefits_health_si_month  = "Benefit payments (health SI)",
+        person_benefits_pension_si_month = "Benefit payments (pension SI)"
+      )
+    ) %>%
+    select(treat, period_sequence, component, person_cost_month)
+) %>%
+  mutate(
+    horizon        = horizon_map_from_date(period_sequence),
+    months_in_bin  = months_in_bin(period_sequence),
+    treat_label    = if_else(treat == 1, "Gramatneusiedl", "Control towns")
+  ) %>%
+  filter(!is.na(horizon))
 
-print(p)
+# Weighted (by months) mean monthly cost per person within horizon
+ams_short_long_components <- ams_bins %>%
+  group_by(horizon, component, treat_label) %>%
+  summarize(
+    value = weighted.mean(person_cost_month, w = months_in_bin, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  pivot_wider(names_from = treat_label, values_from = value) %>%
+  mutate(Difference = Gramatneusiedl - `Control towns`)
 
-# Save the plot
-ggsave(
-  filename = "cost_comparison_stacked_bar_firebrick_facet.png",
-  width = 8,
-  height = 4.5,
-  dpi = 300
+# Add totals (Program + TOTAL benefits only; do NOT sum benefit subcomponents)
+ams_short_long_total <- ams_short_long_components %>%
+  filter(component %in% c("Program costs", "Benefit payments (total)")) %>%
+  group_by(horizon) %>%
+  summarize(
+    component      = "Total costs for AMS",
+    Gramatneusiedl  = sum(Gramatneusiedl, na.rm = TRUE),
+    `Control towns` = sum(`Control towns`, na.rm = TRUE),
+    Difference     = Gramatneusiedl - `Control towns`,
+    .groups = "drop"
+  )
+
+ams_short_long_table <- bind_rows(ams_short_long_components, ams_short_long_total) %>%
+  mutate(
+    component = factor(
+      component,
+      levels = c(
+        "Program costs",
+        "Benefit payments (total)",
+        "Benefit payments (net)",
+        "Benefit payments (health SI)",
+        "Benefit payments (pension SI)",
+        "Total costs for AMS"
+      )
+    )
+  ) %>%
+  arrange(horizon, component) %>%
+  mutate(across(c(Gramatneusiedl, `Control towns`, Difference)))
+
+
+# --- Export CSV for appendix material
+write_csv(ams_short_long_table, "magma_costs_ams_short_long.csv")
+
+# --- Export LaTeX (two panels) and also save panel kables separately
+tab_short <- ams_short_long_table %>%
+  filter(horizon == "Short-term (Oct 2020–Jun 2022)") %>%
+  select(component, Gramatneusiedl, `Control towns`, Difference) %>%
+  kable(format = "latex", booktabs = TRUE, align = "lrrr",
+        col.names = c("", "Gramatneusiedl", "Control towns", "Difference"))
+
+tab_long <- ams_short_long_table %>%
+  filter(horizon == "Long-term (Jul 2022–Mar 2024)") %>%
+  select(component, Gramatneusiedl, `Control towns`, Difference) %>%
+  kable(format = "latex", booktabs = TRUE, align = "lrrr",
+        col.names = c("", "Gramatneusiedl", "Control towns", "Difference"))
+
+# write full two-panel table
+readr::write_lines(
+  c(
+    "% Appendix version of Table 12: AMS costs vs benefits by horizon",
+    "\\begin{tabular}{lrrr}",
+    "\\toprule",
+    "\\multicolumn{4}{c}{\\textit{Short-term (Oct 2020--Jun 2022)}}\\\\",
+    "\\midrule",
+    tab_short %>% str_split("\n") %>% unlist() %>% .[!str_detect(., "^\\\\begin\\{|^\\\\end\\{|^\\\\toprule|^\\\\bottomrule|^\\\\midrule$")],
+    "\\midrule",
+    "\\multicolumn{4}{c}{\\textit{Long-term (Jul 2022--Mar 2024)}}\\\\",
+    "\\midrule",
+    tab_long %>% str_split("\n") %>% unlist() %>% .[!str_detect(., "^\\\\begin\\{|^\\\\end\\{|^\\\\toprule|^\\\\bottomrule|^\\\\midrule$")],
+    "\\bottomrule",
+    "\\end{tabular}"
+  ),
+  "cost_comparison_ams_short_long.tex"
 )
 
-
-
-# Added 2025-06-12
-## addition: beihilfe types ----------------
-# Compute total sum by beihilfe type
-total_cost_foer_individual_by_type <- data_foer_individual %>%
-  mutate(beihilfe_type = case_when(
-    beihilfe %in% c("0KK", "BEM", "DLU", "FKS", "KBH", "KNK") ~ "Training",
-    beihilfe %in% c("0EB", "0GB", "KOM") ~ "Employment subsidies",
-    TRUE ~ "Other"
-  )) %>%
-  group_by(beihilfe_type, treat) %>%
-  summarize(
-    total_foer_cost = sum(foer_cost, na.rm = TRUE),
-    n_people = n(),
-    .groups = "drop"
-  )
-
-total_cost_foer_traeger_by_type <- data_foer_traeger %>%
-  mutate(beihilfe_type = case_when(
-    beihilfe %in% c("BBE") ~ "Coaching",
-    beihilfe %in% c("BFA", "BMN") ~ "Training",
-    beihilfe %in% c("KUA", "UGP") ~ "Employment subsidies",
-    beihilfe %in% c("GBP", "SÖB") ~ "Direct job creation",
-    TRUE ~ "Other"
-  )) %>%
-  group_by(beihilfe_type, treat) %>%
-  summarize(total_foer_cost = sum(foer_cost, na.rm = TRUE), 
-            n_people = n(),
-            .groups = "drop")
-
-
-
-total_cost_foer_individual_by_type <- total_cost_foer_individual_by_type %>%
-  group_by(treat) %>%
-  mutate(n_people_start = ifelse(treat == 1, 62, 211))
-
-total_cost_foer_traeger_by_type <- total_cost_foer_traeger_by_type %>%
-  group_by(treat) %>%
-  mutate(n_people_start = ifelse(treat == 1, 62, 211))
-
-# divide total cost by nr of individuals by treatment and control group
-total_cost_foer_individual_by_type <- total_cost_foer_individual_by_type %>%
-  mutate(person_foer_cost = total_foer_cost / n_people_start)
-
-total_cost_foer_traeger_by_type <- total_cost_foer_traeger_by_type %>%
-  mutate(person_foer_cost = total_foer_cost / n_people_start)
-
-
-## sum foer individual and traeger costs ----
-# merge
-total_cost_foer_by_type <- bind_rows(total_cost_foer_individual_by_type, total_cost_foer_traeger_by_type)
-
-# sum
-total_cost_foer_by_type <- total_cost_foer_by_type %>% 
-  group_by(treat, beihilfe_type) %>%
-  summarize(total_foer_cost = sum(total_foer_cost, na.rm = TRUE),
-            person_foer_cost = sum(person_foer_cost, na.rm = TRUE), )
-
-# reshape to have beihilfe_type as columns
-# drop total cost first
-
-total_cost_foer_by_type <- total_cost_foer_by_type %>%
-  select(-total_foer_cost) 
-
-# create cost per month and per year
-total_cost_foer_by_type <- total_cost_foer_by_type %>%
-  group_by(treat) %>%
-  mutate(person_cost_month = person_foer_cost / 42) %>%
-  select(-person_foer_cost)
-
-total_cost_foer_by_type_wide <- total_cost_foer_by_type %>%
-  pivot_wider(
-    names_from = beihilfe_type,
-    values_from = c(person_cost_month),
-    names_glue = "{beihilfe_type}" 
-#    names_glue = "{.value}_{beihilfe_type}" 
-  )
-
-
-# Export to CSV
-write.csv(total_cost_foer_by_type_wide, "magma_costs_foer_by_type_and_person.csv", row.names = FALSE)
-
-
-# Added 2025-06-18
-## addition: beihilfe types per period ----------------
-
-# Compute costs per category and time period for individual benefits
-cost_foer_individual_type_period <- data_foer_individual_expanded %>%
-  mutate(beihilfe_type = case_when(
-    beihilfe %in% c("0KK", "BEM", "DLU", "FKS", "KBH", "KNK") ~ "Training",
-    beihilfe %in% c("0EB", "0GB", "KOM") ~ "Employment subsidies",
-    TRUE ~ "Other"
-  )) %>%
-  group_by(treat, period_sequence, beihilfe_type) %>%
-  summarize(
-    total_foer_cost = sum(foer_cost_period, na.rm = TRUE),
-    n_people = n_distinct(pst_key),
-    .groups = "drop"
-  ) %>%
-  group_by(treat) %>%
-  mutate(n_people_start = ifelse(treat == 1, 62, 211)) %>%
-  mutate(person_foer_cost = total_foer_cost / n_people_start)
-
-# Compute costs per category and time period for traeger benefits
-cost_foer_traeger_type_period <- data_foer_traeger_expanded %>%
-  mutate(beihilfe_type = case_when(
-    beihilfe %in% c("BBE") ~ "Coaching",
-    beihilfe %in% c("BFA", "BMN") ~ "Training",
-    beihilfe %in% c("KUA", "UGP") ~ "Employment subsidies",
-    beihilfe %in% c("GBP", "SÖB") ~ "Direct job creation",
-    TRUE ~ "Other"
-  )) %>%
-  group_by(treat, period_sequence, beihilfe_type) %>%
-  summarize(
-    total_foer_cost = sum(foer_cost_period, na.rm = TRUE),
-    n_people = n_distinct(pst_key),
-    .groups = "drop"
-  ) %>%
-  group_by(treat) %>%
-  mutate(n_people_start = ifelse(treat == 1, 62, 211)) %>%
-  mutate(person_foer_cost = total_foer_cost / n_people_start)
-
-# Combine individual and traeger benefits
-total_cost_foer_type_period <- bind_rows(cost_foer_individual_type_period, 
-                                         cost_foer_traeger_type_period) %>%
-  group_by(treat, period_sequence, beihilfe_type) %>%
-  summarize(
-    total_foer_cost = sum(total_foer_cost, na.rm = TRUE),
-    person_foer_cost = sum(person_foer_cost, na.rm = TRUE),
-    .groups = "drop"
-  )
-
-# Calculate monthly costs (adjusting for partial periods)
-total_cost_foer_type_period <- total_cost_foer_type_period %>%
-  mutate(
-    person_cost_month = ifelse(
-      period_sequence == as.Date("2020-07-01") | period_sequence == as.Date("2024-01-01"),
-      person_foer_cost / 3,  # 3-month period
-      person_foer_cost / 6   # 6-month period
-    )
-  )
-
-# Create wide format for easier analysis
-total_cost_foer_type_period_wide <- total_cost_foer_type_period %>%
-  select(-total_foer_cost, -person_foer_cost) %>%
-  pivot_wider(
-    names_from = beihilfe_type,
-    values_from = person_cost_month,
-    values_fill = 0
-  )
-
-# Add total_programs column that sums the main 4 program categories
-total_cost_foer_type_period_wide <- total_cost_foer_type_period_wide %>%
-  mutate(
-    total_programs = select(., 
-                            "Coaching", 
-                            "Training", 
-                            "Employment subsidies", 
-                            "Direct job creation") %>% 
-      rowSums(na.rm = TRUE)
-  )
-
-# Export results
-write.csv(total_cost_foer_type_period_wide, "magma_costs_foer_by_type_and_period_wide.csv", row.names = FALSE)
-
-
-
-
-
-
-
-
+# save panel-level .tex files for transparency/audit
+write_lines(tab_short, "table_ams_short_term.tex")
+write_lines(tab_long,  "table_ams_long_term.tex")

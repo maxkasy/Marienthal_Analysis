@@ -1,3 +1,7 @@
+# Produces:
+# Table A.6: Lee bounds, economic outcomes
+# Table A.7: Lee bounds, other outcomes
+
 trimmed_responses = function(outcome, control_variables, data, upper = T){
   # Missingness indicator
   S = !is.na(data[[outcome]])

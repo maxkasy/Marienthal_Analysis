@@ -18,6 +18,7 @@ Data will be shared in the form of an archive with sub-folders, as described bel
     2. Admin data (Marienthal and Control towns): *jobguarantee/2021-09-admin-data-raw/*, *jobguarantee/2022-02-admin-data-raw/*.
     3. Aggregate data: */jobguarantee/2021-09-municipal-data-raw/* (outcomes), *jobguarantee/2020-09-municipal-data-raw/* (controls)
     4. Hazard rates data: */jobguarantee/2024-04-hazard-rates-raw/* (provided by AMS), */jobguarantee/2024-04-hazard-rates-processed/* (merged with AMDB)
+    5. Earnings analysis data for Figure 8 / and earnings for cost comparison (AMDB-based): *jobguarantee/2025-10-admin-earnings-raw/*, *jobguarantee/2025-10-admin-earnings-processed/*
 
 2. Processed data: Also included in the archive, but not necessary for replication.  
     1. Survey data (Marienthal and Control towns): 
@@ -26,7 +27,7 @@ Data will be shared in the form of an archive with sub-folders, as described bel
     2. Admin data (Marienthal and Control towns): *jobguarantee/2020-09-admin-data-processed/*, *jobguarantee/2020-12-control-admin-data-processed*,
     *jobguarantee/2021-09-admin-data-processed*,
     *jobguarantee/2022-02-admin-data-processed*
-    3. Aggregate data: 
+    3. Aggregate (municipal) data: 
     *jobguarantee/2020-09-municipal-data-processed*,
     *jobguarantee/2021-09-municipal-data-processed*,
     *jobguarantee/2022-02-municipal-data-processed*.
@@ -39,8 +40,9 @@ Data will be shared in the form of an archive with sub-folders, as described bel
 
 ## Structure of code
 
-Our empirical results can be produced from the raw data by running *master.R*.
-Exceptions apply to *4a-hazard_rates_prep_data.R* and *5-cost-comparison_analysis.R*. *4a-hazard_rates_prep_data.R* is used to merge in data from the [Arbeitsmarktdatenbank (AMDB)](https://arbeitsmarktdatenbank.at/) and needs to be run in a computing environment with access to the data, which can be obtained for research purposes at [https://arbeitsmarktdatenbank.at](https://arbeitsmarktdatenbank.at). *5-cost-comparison_analysis.R* needs to be run in the AMS Niederösterreich computing environment where the protected person-level cost data are stored.
+Our empirical results can be produced from the raw data by running *master.R*, after setting the data root path.
+
+
 
 ### Data preparation
 
@@ -73,6 +75,7 @@ Exceptions apply to *4a-hazard_rates_prep_data.R* and *5-cost-comparison_analysi
 
 - *3b_i_Control-town_individuals_analysis_2021.R*
 - *3b_ii_Control-town_individuals_analysis_2022.R*
+- *3c_leebounds.R*
 
 ### Hazard rates analysis
 
@@ -80,11 +83,45 @@ Exceptions apply to *4a-hazard_rates_prep_data.R* and *5-cost-comparison_analysi
 
 ### Cost comparison analysis
 
-- *5-cost-comparison_analysis.R*
+- *5-cost-comparison_analysis.R* (in AMS computing environment)
+- *5b-cost-comparison_plot.R*
 
 ### Differential survey response analysis
 
 - *6-differential_response_analysis.R*
+
+### Employment status analysis
+
+- *7a-cumulative_employment_prep.R*
+- *7b-cumulative_employment_analysis.R*
+
+### Earnings analysis (restricted environment for extraction)
+
+- *8a-admin-earnings_prep_costs.R*
+
+### Notes on restricted-computing steps
+
+- *4a-hazard_rates_prep_data.R* merges AMS-provided short-term unemployment IDs with AMDB spell data. This must be run in a computing environment with access to [Arbeitsmarktdatenbank (AMDB)](https://arbeitsmarktdatenbank.at/), which can be obtained for research purposes at [https://arbeitsmarktdatenbank.at](https://arbeitsmarktdatenbank.at). The output is a processed CSV used by 4b-hazard_rates_analysis.R.
+
+- *5-cost-comparison.R* uses protected person-level cost data and must be run in the AMS Niederösterreich computing environment where those files are stored.
+
+- *8a-admin-earnings_prep_costs.R* contains an extraction step that requires access to [Arbeitsmarktdatenbank (AMDB)](https://arbeitsmarktdatenbank.at/)  earnings data; the script is structured as a “VM PART” (extraction of relevant AMDB data) and “LOCAL PART” (analysis). The output is then used for Figure 8 and the cost-related tables.
+
+## How to run
+
+1. Open *master.R* and set the data root path:
+  - Edit veracrypt_path
+
+2. Ensure all required packages are installed (see “Software and packages” below).
+
+3. Run *master.R* from the code directory (so relative source() paths work).
+
+4. Outputs (figures/tables) will be written to Figures/.
+
+## Software and packages
+
+The analysis is written in R and uses the following packages:
+`tidyverse`, `readr`, `lubridate`, `readxl`, `nbpMatching`, `furrr`, `estimatr`, `kableExtra`, `patchwork`, `ggtext`, `data.table`, `broom`, `zoo`.
 
 ## Reproducible environment using Docker
 
